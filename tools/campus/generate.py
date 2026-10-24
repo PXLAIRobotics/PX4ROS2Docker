@@ -15,6 +15,7 @@ from geometry import box, element, extrude, material, roof_function, save_xml
 from details import add_arena, add_landscape, add_office_bands, add_corda5, add_sawtooth
 
 from optimize import compact_static
+from landing_deck import add_landing_deck
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = Path(__file__).resolve().parent
@@ -95,25 +96,17 @@ def generate(output):
         if int(oid) == site['launch']['building_oidn']:
             launch_polygon,launch_roof = polygon,roof
     add_landscape(campus,site,forward,meshes,report,SOURCE)
-    launch = site['launch']; x,y,size = launch['east_m'],launch['north_m'],launch['pad_size_m']
-    corners = np.asarray([[x-size/2,y-size/2],[x+size/2,y-size/2],[x+size/2,y+size/2],[x-size/2,y+size/2]])
-    if launch_polygon is None or not launch_polygon.contains(Polygon(corners).buffer(1)):
-        raise ValueError('Launch platform is not safely inside the selected roof')
-    pad_top = float(launch_roof(corners).max()+launch['pad_clearance_m'])
-    box(campus,'simulation_launch_platform',(x,y,pad_top-.075),(size,size,.15),'0.18 0.25 0.32 1')
-    for i,(cx,cy) in enumerate(corners):
-        bottom=float(launch_roof(np.asarray([[cx,cy]]))[0]); length=pad_top-.15-bottom
-        if length > 0:
-            box(campus,f'launch_support_{i}',(cx,cy,bottom+length/2),(.08,.08,length),'0.3 0.3 0.3 1',False)
-    for name,dx,dy,sx,sy in [('left',-.5,0,.12,1.4),('right',.5,0,.12,1.4),('bar',0,0,1,.12)]:
-        box(campus,'launch_mark_'+name,(x+dx,y+dy,pad_top+.008),(sx,sy,.012),'0.95 0.95 0.95 1',False)
+    launch = site['launch']; x,y=launch['east_m'],launch['north_m']
+    if launch_polygon is None:raise ValueError('Launch building missing from generated scene')
+    pad_top,platform=add_landing_deck(campus,launch_polygon,launch_roof,launch,meshes)
+    report['landing_deck']=platform
     if site.get('performance',{}).get('batch_static_visuals'):
         report['performance']=compact_static(campus,meshes)
     referenced={uri.text.rsplit('/',1)[-1] for uri in sdf.iter('uri') if uri.text and uri.text.endswith('.stl')}
     # This directory contains generated meshes; remove obsolete generated parts
     # so in-place regeneration matches a fresh output folder.
     for path in meshes.glob('*.stl'):
-        if path.name.startswith(('building_','parking_','water_tower_','batch_')) and path.name not in referenced:
+        if path.name.startswith(('building_','parking_','water_tower_','batch_','platform_')) and path.name not in referenced:
             path.unlink()
     save_xml(models/'model.sdf',sdf)
     config=ET.Element('model');element(config,'name','corda_campus');element(config,'version','1.0')

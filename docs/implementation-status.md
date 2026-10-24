@@ -6,7 +6,7 @@ Implemented 2026-10-23 by this Codex chat. Changes are local; no commit or publi
 
 Linux amd64 with Ubuntu 24.04, ROS 2 Jazzy, Gazebo Harmonic, PX4 v1.17.0, matching px4_msgs, XRCE Agent v2.4.3 and QGC v5.1.5. Both native and VNC images build. PX4 source and compiled outputs are in host `Projects/PX4-Autopilot`; ROS source/build outputs are in `Projects/ros2_workspace`.
 
-Implemented: numbered build/run/attach/stop/remove wrappers; persistent mounts; UID/GID mapping; scoped Xauthority forwarding; software/NVIDIA/DRI selection; pinned editor configuration; source setup that preserves edits; PX4/ROS rebuild helpers; agent, simulator, GUI and QGC orchestration in tmux; telemetry, opt-in flight, interruption recovery, bag recording and diagnostics; static/image/desktop/flight tests and opt-in CI.
+Implemented: numbered build/run/attach/stop/remove wrappers; persistent mounts; UID/GID mapping; scoped Xauthority forwarding; software/NVIDIA/DRI selection; pinned editor configuration; source setup that preserves edits; PX4/ROS rebuild helpers; agent, simulator, GUI and QGC orchestration in tmux; telemetry, opt-in flight, interruption recovery, bag recording and diagnostics; local static/image/desktop/flight tests.
 
 ## Verification evidence
 
@@ -58,7 +58,7 @@ Evidence logs/screenshots are under ignored `Data/evidence/`, with raw service o
 
 ## Follow-up scope
 
-Unchecked TODO entries are expanded validation or optional features; their completion is not implied by baseline checks. Hardware GPU acceleration (NVIDIA/Intel/AMD), ARM64, Docker Desktop, every destructive lifecycle alias, injected component crashes, CI execution, image-only source population, an independent reviewer walkthrough and measured peak build resources remain unverified.
+Unchecked TODO entries are expanded validation or optional features; their completion is not implied by baseline checks. Hardware GPU acceleration (NVIDIA/Intel/AMD), ARM64, Docker Desktop, every destructive lifecycle alias, injected component crashes, image-only source population, an independent reviewer walkthrough and measured peak build resources remain unverified.
 
 Full Gazebo-time flight control, external host QGC/ROS routing, multi-vehicle, firmware flashing/HITL and experimental Lyrical/Jetty remain extensions. QGC text-to-speech has no configured speech backend; its visual vehicle/flight functions are verified. Apt and some transitive dependency versions evolve; package and Python inventories are recorded inside the images rather than claiming a bit-identical snapshot.
 
@@ -97,7 +97,7 @@ The default world is now `corda_campus`: 29 runtime buildings from 82 mapped GRB
 
 The full source height snapshot contains 48 positive exact-ID 3D GRB matches; architectural constraints, visual overrides and generic fallbacks for the retained runtime buildings are recorded individually in campus.json. The ID-based source refresh recovered ten usable heights outside the older geometry-based download. Every source/estimate is recorded in the generated `simulation/campus.json`. Height attributes use stable-ID joins independently of footprint geometry; the native-grid correction below resolves the earlier geographic-coordinate mismatch. No erroneous spatial height transfer is applied. `tools/campus/SOURCES.md` details data dates, attribution and accuracy limits; its attribution is also installed inside the campus model.
 
-The original approximate GPS point was east of Corda 1. The default spawn is now on its actual footprint, at local East/North (-11,-10) m, approximately 50.9516471 N / 5.3522555 E. A synthetic 4×4 m level launch platform sits above the sloping roof. Its top is 23.613 m above assumed ground; the disarmed vehicle rests around 73.853 m AMSL with the retained 50 m ground datum. Terrain and detailed roof geometry are not surveyed. The launch platform is not a real campus helipad.
+The original approximate GPS point was east of Corda 1. The default spawn is now on its actual footprint, at local East/North (-11,-10) m, approximately 50.9516471 N / 5.3522555 E. A synthetic 6×6 m chamfered landing deck sits above the sloping roof. Its top is 23.974 m above assumed ground; the disarmed vehicle rests around 74.214 m AMSL with the retained 50 m ground datum. Terrain and detailed roof geometry are not surveyed. The launch platform is not a real campus helipad.
 
 Verified on Linux amd64/software rendering:
 
@@ -121,10 +121,12 @@ The orthophoto comparison exposed the source of the earlier geometry offset: the
 
 Validation: `campus-landmarks-geometry.log` checks the independent native-grid control point, open entrance ray, colliding glass and roof, tower placement, parking and mesh validity. `campus-landmarks-check.log` verifies stable support at the corrected Corda 1 position and live RGB-D/lidar payloads.
 
-The complete rooftop arm/takeoff/hold/landing/disarm and restored Hold passed after the native-grid correction (`campus-landmarks-flight.log`), followed by stable rooftop support. Both Docker images were rebuilt with the final landmark assets; offline mesh regeneration matches a clean output directory byte for byte (`campus-landmarks-regenerate.log`). Geometry checks and regeneration now also run in the static CI job with isolated GIS dependencies.
+The complete rooftop arm/takeoff/hold/landing/disarm and restored Hold passed after the native-grid correction (`campus-landmarks-flight.log`), followed by stable rooftop support. Both Docker images were rebuilt with the final landmark assets; offline mesh regeneration matches a clean output directory byte for byte (`campus-landmarks-regenerate.log`). Geometry checks and regeneration run locally with isolated GIS dependencies; GitHub Actions has been removed.
 
 Performance/building refinement: the full 82-building native snapshot remains available; 53 small peripheral buildings are excluded by the configurable 350 m² / 160 m rule. Batched static geometry reduces the campus from 686 links / 690 visuals to 37 links / 66 visuals, with all retained collision shapes and poses preserved. Corda 8 has nine physical sawtooth wedges with clerestory strips (8/10.5 m approximate valley/ridge); Corda 5 now has separate 11.5 m office wings, a 7.5 m curved hall and a 13.5 m entrance drum. Dimensions are approximate, guided by official maps/orthophotography.
 
 Twenty-second desktop observations with software rendering and the original 10 Hz sensor settings recorded elapsed simulation/wall-time ratios of 0.645 before and 0.888 after (`campus-performance-before.jsonl`, `campus-performance-after.jsonl`). View position/desktop geometry differed, so these are indicative observations, not a controlled speedup or fixed-FPS guarantee. Scene-count reductions are deterministic. `campus-optimized-check.log` confirms stable rooftop support and unchanged RGB-D/lidar dimensions and finite returns. Geometry regression checks now cover culling, batching, the Corda 5 partition and actual sawtooth collision roofs.
 
 The new `--no-gazebo-gui` mode passed startup, rooftop stability, unchanged sensor payloads, full takeoff/hold/land/disarm and restored Hold (`campus-optimized-no-viewer.log`); its separate 20-second sample recorded an elapsed factor of 0.943 with QGroundControl still running. These remain local observations, not a hardware-independent benchmark. Full offline regeneration and structural checks are recorded in `campus-optimized-regenerate.log`.
+
+Landing deck refinement: replaced the slab and thin posts with a six-metre chamfered deck, roof-conforming closed plinth, edge fascia, support ribs, matte teal finish, white circle/H/boundary, amber corner brackets and flush green marker lenses. The flight surface has no raised obstacles; paint/lenses are visual-only. Platform and plinth have two closed collision meshes. Batched campus totals are now 37 links, 72 visuals and 297 collisions. The source point is unchanged; updated deck/spawn elevations are generated automatically. GitHub Actions has been removed at the user’s request; all verification remains local.

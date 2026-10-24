@@ -3325,48 +3325,126 @@
         </visual>
       </link>
     </model>
-    <link name="body">
-      <collision name="simulation_launch_platform">
-        <geometry>
-          <box>
-            <size>4 4 0.15</size>
-          </box>
-        </geometry>
-        <pose>-11.0 -10.0 23.53750156997854 0.0 0.0 0.0</pose>
-      </collision>
-      <visual name="material_0">
-        <geometry>
-          <mesh>
-            <uri>model://corda_campus/meshes/batch_corda_campus_0.stl</uri>
-          </mesh>
-        </geometry>
-        <material>
-          <ambient>0.18 0.25 0.32 1</ambient>
-          <diffuse>0.18 0.25 0.32 1</diffuse>
-        </material>
-      </visual>
-      <visual name="material_1">
-        <geometry>
-          <mesh>
-            <uri>model://corda_campus/meshes/batch_corda_campus_1.stl</uri>
-          </mesh>
-        </geometry>
-        <material>
-          <ambient>0.3 0.3 0.3 1</ambient>
-          <diffuse>0.3 0.3 0.3 1</diffuse>
-        </material>
-      </visual>
-      <visual name="material_2">
-        <geometry>
-          <mesh>
-            <uri>model://corda_campus/meshes/batch_corda_campus_2.stl</uri>
-          </mesh>
-        </geometry>
-        <material>
-          <ambient>0.95 0.95 0.95 1</ambient>
-          <diffuse>0.95 0.95 0.95 1</diffuse>
-        </material>
-      </visual>
-    </link>
+    <model name="rooftop_landing_deck">
+      <static>true</static>
+      <pose>0 0 0 0 0 0</pose>
+      <link name="body">
+        <collision name="roof_conforming_plinth">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/platform_plinth.stl</uri>
+            </mesh>
+          </geometry>
+          <pose>-11.0 -10.0 0.0 0.0 0.0 0.0</pose>
+        </collision>
+        <collision name="deck">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/platform_deck.stl</uri>
+            </mesh>
+          </geometry>
+          <pose>-11.000000000000002 -10.0 0.0 0.0 0.0 0.0</pose>
+        </collision>
+        <visual name="material_0">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/batch_rooftop_landing_deck_0.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.25 0.29 0.31 1</ambient>
+            <diffuse>0.25 0.29 0.31 1</diffuse>
+          </material>
+        </visual>
+        <visual name="material_1">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/batch_rooftop_landing_deck_1.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.58 0.63 0.65 1</ambient>
+            <diffuse>0.58 0.63 0.65 1</diffuse>
+          </material>
+        </visual>
+        <visual name="material_2">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/batch_rooftop_landing_deck_2.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.12 0.17 0.19 1</ambient>
+            <diffuse>0.12 0.17 0.19 1</diffuse>
+          </material>
+        </visual>
+        <visual name="material_3">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/batch_rooftop_landing_deck_3.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.43 0.48 0.50 1</ambient>
+            <diffuse>0.43 0.48 0.50 1</diffuse>
+          </material>
+        </visual>
+        <visual name="material_4">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/batch_rooftop_landing_deck_4.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.12 0.20 0.23 1</ambient>
+            <diffuse>0.12 0.20 0.23 1</diffuse>
+          </material>
+        </visual>
+        <visual name="material_5">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/batch_rooftop_landing_deck_5.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.94 0.95 0.91 1</ambient>
+            <diffuse>0.94 0.95 0.91 1</diffuse>
+          </material>
+        </visual>
+        <visual name="material_6">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/batch_rooftop_landing_deck_6.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.93 0.62 0.13 1</ambient>
+            <diffuse>0.93 0.62 0.13 1</diffuse>
+          </material>
+        </visual>
+        <visual name="material_7">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/batch_rooftop_landing_deck_7.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.49 0.54 0.56 1</ambient>
+            <diffuse>0.49 0.54 0.56 1</diffuse>
+          </material>
+        </visual>
+        <visual name="material_8">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/batch_rooftop_landing_deck_8.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.20 0.76 0.53 1</ambient>
+            <diffuse>0.20 0.76 0.53 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
   </model>
 </sdf>

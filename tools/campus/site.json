@@ -133,9 +133,12 @@
     "building_oidn": 6766058,
     "east_m": -11,
     "north_m": -10,
-    "pad_size_m": 4,
-    "pad_clearance_m": 0.2,
-    "yaw_rad": 0
+    "pad_size_m": 6,
+    "pad_clearance_m": 0.3,
+    "yaw_rad": 0,
+    "deck_chamfer_m": 0.65,
+    "deck_thickness_m": 0.24,
+    "landing_circle_radius_m": 1.9
   },
   "notes": [
     "Flat approximate terrain, not a surveyed reconstruction.",

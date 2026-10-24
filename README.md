@@ -154,11 +154,11 @@ Build scripts forward Docker build options. Run scripts accept Docker options be
 
 The default `corda_campus` world contains **29 buildings selected from 82 actual GRB footprints**, with angled/concave outlines, rounded facades and courtyards preserved as triangulated meshes. Visual and collision geometry match. Corda 1, its companion, Corda 2 and Corda 3 have sloping wedge roofs; Corda Arena and nearby offices retain their mapped outlines. Other roofs are mostly flat. Corda 1/2/3 have separate green roof and blue-grey/light/warm-grey facade materials. Their roof slopes are approximated from campus references; full closed collision meshes match the combined visual surfaces.
 
-For performance, 53 small peripheral buildings are omitted and static visuals are batched by material, reducing 690 visuals to 66. The source snapshot remains intact, and omitted IDs are recorded in `simulation/campus.json`. Camera/lidar resolution and rate remain unchanged.
+For performance, 53 small peripheral buildings are omitted and static visuals are batched by material, reducing 690 visuals to 72. The source snapshot remains intact, and omitted IDs are recorded in `simulation/campus.json`. Camera/lidar resolution and rate remain unchanged.
 
 Heights use available 3D GRB values matched by stable building IDs, architectural dimensions where available and explicit estimates for missing data. Corda 1's 30 m maximum comes from the architect; the detailed roof plane remains approximate. All sources, licences, data dates and approximation rules are documented in [tools/campus/SOURCES.md](tools/campus/SOURCES.md). The Arena now has a hollow roofed hall, glazed entrance, open simulation doors, simple internal galleries and projecting cube facade detail. The 35 m Philips water tower has open lattice supports, stairs and a saucer tank. Six traced parking areas have illustrative bay markings; Corda 4 has window bands; Corda 5 has separate office wings, a lower curved hall and a round entrance drum. Corda 8 has nine sawtooth roof sections and clerestory strips. These are untextured approximations: detailed interiors, terrain, trees, cars and surveyed rooftop structures are omitted.
 
-A **synthetic level 4×4 m launch platform** sits above Corda 1's sloping roof so the drone can stand and land stably. It is marked with an H; it is not a real helipad. The generator verifies the platform lies inside the roof footprint. The spawn is at approximately 50.9516471 N, 5.3522555 E. Footprints and the tower use native EPSG:3812 coordinates transformed locally, correcting an offset in the WFS geographic-coordinate response.
+A **synthetic level 6×6 m chamfered landing deck** sits above Corda 1's sloping roof so the drone can stand and land stably. It has a roof-conforming plinth, metal edge trim, a white H/circle, perimeter markings and inset marker lenses. Its landing area is clear and level; it is not a real helipad. The generator verifies the platform lies inside the roof footprint. The spawn is at approximately 50.9516471 N, 5.3522555 E. Footprints and the tower use native EPSG:3812 coordinates transformed locally, correcting an offset in the WFS geographic-coordinate response.
 
 For an existing container/workspace, install the new assets and restart:
 
@@ -250,7 +250,7 @@ bash /opt/px4-tests/sensors.sh
 bash /opt/px4-tests/campus.sh
 ```
 
-The flight test starts headless SITL and a local test GCS heartbeat, then asserts arm/takeoff/hold/land/disarm. It does not replace the manual QGC visual/flight test. The CI image job is opt-in through workflow dispatch because full builds are large. See `docs/implementation-status.md` for actual results.
+The flight test starts headless SITL and a local test GCS heartbeat, then asserts arm/takeoff/hold/land/disarm. It does not replace the manual QGC visual/flight test. GitHub Actions is not used. Run validation locally with the scripts above. See `docs/implementation-status.md` for actual results.
 
 - **No ROS telemetry:** check XRCE agent logs, PX4 client startup, matching message definitions and `ROS_DOMAIN_ID`; inspect QoS and version suffixes. Use `px4_doctor`.
 - **No QGC vehicle:** confirm PX4 is running and QGC's UDP autoconnect is enabled; another listener on 14550 can interfere. Host QGC requires a different routing setup.

@@ -909,16 +909,61 @@
       "layout": "approximate 2.6 x 5 m bays with 6 m aisles"
     }
   ],
+  "landing_deck": {
+    "name": "rooftop_landing_deck",
+    "size_m": 6,
+    "chamfer_m": 0.65,
+    "deck_thickness_m": 0.24,
+    "landing_circle_radius_m": 1.9,
+    "outline_enu_m": [
+      [
+        -13.35,
+        -13.0
+      ],
+      [
+        -8.65,
+        -13.0
+      ],
+      [
+        -8.0,
+        -12.35
+      ],
+      [
+        -8.0,
+        -7.65
+      ],
+      [
+        -8.65,
+        -7.0
+      ],
+      [
+        -13.35,
+        -7.0
+      ],
+      [
+        -14.0,
+        -7.65
+      ],
+      [
+        -14.0,
+        -12.35
+      ]
+    ],
+    "plinth": "closed solid following the existing roof plane",
+    "markings": "flush white H/circle/boundary, amber corner brackets, inset green marker lenses",
+    "surface_collision": "single level closed deck; paint and lenses visual only",
+    "synthetic_level_platform": true
+  },
   "performance": {
     "before_batching": {
-      "link": 548,
-      "visual": 561,
-      "collision": 296
+      "link": 567,
+      "visual": 580,
+      "collision": 297
     },
     "after_batching": {
       "link": 37,
-      "visual": 66,
-      "collision": 296
+      "visual": 72,
+      "collision": 297
     },
     "cylinder_visual_segments": 16,
     "collisions": "Original analytic/mesh collisions retained; link transforms baked into collider poses"
@@ -929,16 +974,16 @@
     "latitude": 50.95164711011486,
     "longitude": 5.352255462304736,
     "roof_height_m": 22.832061790466355,
-    "platform_top_m": 23.61250156997854,
-    "model_spawn_z_m": 23.892501569978542,
+    "platform_top_m": 23.97396927841248,
+    "model_spawn_z_m": 24.25396927841248,
     "world_ground_altitude_m": 50.0,
     "yaw_rad": 0,
     "synthetic_level_platform": true
   },
   "input_sha256": {
-    "site.json": "afd615c34db78dc2ca1e39e49164f8d064e53521708fae56d3dace6e56bb0fa3",
+    "site.json": "823734a4085feddf85439061da2153f361b78aa28428588f5f4662b0a847b160",
     "gui.config.in": "deb29ba9051999d7405bd7d2bc8963ef1a7cf0957e0102f493ccf02876b44ed4",
-    "SOURCES.md": "2bb4ba3ee9ed9c5693cbd16dcc519bc10d66fd52d7cbc68c2b52accf943e27d2",
+    "SOURCES.md": "5ba409f7ee9a3e2ee6b16181adcb2b6ce009aa5cf99fe393504205d63f43bf3a",
     "data/buildings.geojson": "8fbeb882d79ad2cc6d0855f61b9cc205e9582bdbfe8131d74e173375dc95541e",
     "data/heights.json": "d694f4c3da6576146f2483e0b5972d5552fb5e2fde1eb384f20500bde37beb87",
     "data/landmarks.geojson": "7206806c0ba7d145b187c289cee4a9ca4b96ac1d3a389f1dbb509dabbdb23e93",

@@ -59,7 +59,7 @@ Each checkbox is a discrete task ID. Claim an entire phase or a bounded group of
 | E: host lifecycle | Launcher agent | A; B/D for integration | numbered scripts, mode directories, GPU/X11 helper |
 | F: simulation orchestration | Simulation agent | C, D, E | simulation helpers, tmux session, network documentation |
 | G: ROS demonstrations | ROS agent | C, F | ROS packages, launch/config files, PX4 examples |
-| H: verification | Test agent | B–G | tests and CI |
+| H: verification | Test agent | B–G | local validation scripts |
 | I: documentation and acceptance | Integration agent | H | README, final status and evidence |
 
 After A, source preparation and host launcher work can proceed alongside image work. Avoid concurrent edits to shared Dockerfile, version manifest, README, and this checklist; nominate one integration owner. These are suggested future assignments, not agents already dispatched.
@@ -152,7 +152,7 @@ Create this exact root command family (unless A10 records a replacement):
 - [x] E08 Consolidate GPU selection for both modes; support explicit `auto`, NVIDIA, DRI and software choices. Preserve numeric render-device group access and useful diagnostics when the NVIDIA runtime is absent.
 - [x] E09 Avoid privileged mode, host PID namespace and unnecessary devices. QGC extracted execution should not need FUSE; hardware USB/serial passthrough is outside baseline SITL.
 - [x] E10 No `setup_nvidia_docker.sh` is retained. Host NVIDIA toolkit setup is a documented external prerequisite and never runs from build/run scripts.
-- [x] E11 Add a headless entry point that requires neither DISPLAY nor desktop ports; make it usable without TTY for CI.
+- [x] E11 Add a headless entry point that requires neither DISPLAY nor desktop ports; make it usable without TTY for local automated tests.
 
 ## F — SITL launch, process lifecycle and communications
 
@@ -185,7 +185,7 @@ Exit gate: ROS receives telemetry and executes a complete, observable simulated 
 - [x] G08 Add `record_px4_rosbag` with explicit topic selection and persistent output; document PX4 ULog collection and replay/inspection basics.
 - [x] G09 Replace the reference lesson content with concise PX4 walkthroughs: telemetry, QGC flight, ROS offboard flight, modifying/rebuilding PX4, and adding a ROS node. Do not import unrelated teaching assets.
 
-## H — Verification and CI
+## H — Local verification
 
 Exit gate: reproducible automated evidence plus manual evidence for supported graphical modes.
 
@@ -201,7 +201,7 @@ Exit gate: reproducible automated evidence plus manual evidence for supported gr
 - [x] H10 Test persistence through container removal/recreation: edited PX4/ROS source, settings, flight logs and bags remain intact and host-owned.
 - [ ] H11 Test every lifecycle alias from outside the repo and from a path with spaces; test extra Docker argument handling, conflicting names/ports and unavailable daemon.
 - [x] H12 Verify coexistence with ROSLyricalDocker using alternate desktop ports and independent names; confirm reference repository status/checksums are unchanged.
-- [x] H13 Add CI for static/image/headless checks with bounded runtimes and failure artifacts. Make GUI/GPU checks an explicit manual matrix, not silently skipped green checks.
+- [x] H13 Provide local static/image/headless checks with bounded runtimes and failure artifacts. GitHub Actions is intentionally not used; GUI/GPU checks remain an explicit manual matrix.
 - [x] H14 Test offline runtime after preparation; distinguish required online build/model setup from optional QGC map tiles. Document any remaining network dependency.
 - [x] H15 Publish a tested host/architecture/rendering matrix. Validate ARM64 and Docker Desktop separately if claiming support; otherwise clearly scope baseline to Linux amd64.
 
@@ -237,3 +237,5 @@ Optional work after baseline acceptance: experimental Lyrical/Jetty, multi-vehic
 
 - [x] J10 Omit distant small buildings, batch static visuals while retaining collisions, and add a QGC/sensors mode without the Gazebo GUI.
 - [x] J11 Add the Corda 8 sawtooth roof and separate Corda 5 office wings, curved hall and entrance drum; extend geometry regression checks.
+
+- [x] J12 Replace the simple launch slab/posts with a chamfered rooftop landing deck, continuous support plinth and flush markings; keep the flight area unobstructed.

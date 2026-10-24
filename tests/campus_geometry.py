@@ -116,3 +116,22 @@ for collider in sdf.findall("./model/model[@name='corda_8']/link/collision"):
     z_ranges.append((min(top),max(top)))
 assert len(z_ranges)==9 and all(lo<8.01 and hi>10.49 for lo,hi in z_ranges)
 print('PASS: peripheral culling, batched scene size, Corda 5 sections and nine physical sawtooth ridges')
+
+platform=sdf.find("./model/model[@name='rooftop_landing_deck']")
+assert platform is not None and platform.findtext('static')=='true'
+assert len(platform.findall('link/collision'))==2, 'Deck and roof-conforming plinth are the only physical platform parts'
+assert report['landing_deck']['size_m']==6 and report['landing_deck']['deck_thickness_m']==.24
+assert report['landing_deck']['landing_circle_radius_m']==1.9
+outline=__import__('shapely').geometry.Polygon(report['landing_deck']['outline_enu_m'])
+assert len(outline.exterior.coords)==9 and outline.contains(__import__('shapely').geometry.Point(-11,-10))
+assert outline.area>35
+# The colliding flight surface must be level, with no raised markings or railings.
+uri=platform.find("link/collision[@name='deck']/geometry/mesh/uri").text
+data=(ASSETS/'models/corda_campus/meshes'/uri.rsplit('/',1)[1]).read_bytes()
+upper=[]
+for off in range(84,len(data),50):
+    row=struct.unpack_from('<12fH',data,off)
+    if row[2]>.9:upper.extend(row[5:12:3])
+assert max(upper)-min(upper)<.0001
+assert abs(upper[0]-report['launch']['platform_top_m'])<.0001
+print('PASS: chamfered six-metre deck, level collision surface and continuous roof support')

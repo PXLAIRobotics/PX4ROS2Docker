@@ -50,7 +50,7 @@ def extrude(polygon, roof, path, split_visual=False, base_z=0):
             triangles[i] = triangle[::-1]
     centre = np.asarray([polygon.centroid.x, polygon.centroid.y])
     n = len(xy)
-    vertices = np.vstack([np.column_stack([xy-centre, np.full(n,base_z)]),
+    vertices = np.vstack([np.column_stack([xy-centre, base_z(xy) if callable(base_z) else np.full(n,base_z)]),
                           np.column_stack([xy-centre, roof(xy)])])
     faces = [t[::-1].tolist() for t in triangles] + [(t+n).tolist() for t in triangles]
     start = 0
