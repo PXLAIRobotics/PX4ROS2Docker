@@ -1,0 +1,72 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "KNW.36480",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              719217.79116625,
+              682881.60198999
+            ],
+            [
+              719209.70349118,
+              682878.39936313
+            ],
+            [
+              719212.93162751,
+              682870.23566685
+            ],
+            [
+              719220.92177377,
+              682873.37428207
+            ],
+            [
+              719217.79116625,
+              682881.60198999
+            ]
+          ]
+        ]
+      },
+      "geometry_name": "SHAPE",
+      "properties": {
+        "UIDN": 9753,
+        "OIDN": 9709,
+        "VERSIE": 1,
+        "BEGINDATUM": "2008-12-08",
+        "VERSDATUM": "2008-12-08",
+        "TYPE": 4,
+        "LBLTYPE": "hoogspanningsmast / openbare TV mast",
+        "VORM": 1,
+        "LBLVORM": "enkelvoudig",
+        "OPNDATUM": "2006-05-05",
+        "BGNINV": 1,
+        "LBLBGNINV": "GRB aanmaak"
+      },
+      "bbox": [
+        719209.70349118,
+        682870.23566685,
+        719220.92177377,
+        682881.60198999
+      ]
+    }
+  ],
+  "totalFeatures": "unknown",
+  "numberReturned": 1,
+  "timeStamp": "2026-10-24T15:19:37.922Z",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:EPSG::3812"
+    }
+  },
+  "bbox": [
+    719209.70349118,
+    682870.23566685,
+    719220.92177377,
+    682881.60198999
+  ]
+}

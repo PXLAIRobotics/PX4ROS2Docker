@@ -230,3 +230,7 @@ Optional work after baseline acceptance: experimental Lyrical/Jetty, multi-vehic
 - [x] J04 Integrate the default campus world, alternate empty world, pose overrides, GUI resource paths and selected-world sensor clock.
 - [x] J05 Validate rendered sensor payloads and a full rooftop takeoff/hold/landing/disarm; verify offline and sensor-free compatibility.
 - [x] J06 Provide reproducible source refresh/regeneration tools, data/GUI licences, documentation and a Gazebo scene screenshot.
+
+- [x] J07 Correct WFS datum conversion using native EPSG:3812; validate against independent map imagery and move the roof spawn with its building.
+- [x] J08 Replace the Arena extrusion with a roofed hollow shell, glazed facade, open simulation entrance and schematic galleries.
+- [x] J09 Add the mapped Philips water tower, traced parking areas, bay markings and Corda 4/5 facade bands; verify geometry and sensor output.

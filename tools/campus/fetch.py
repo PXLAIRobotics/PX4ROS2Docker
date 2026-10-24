@@ -33,11 +33,15 @@ def main():
     site=json.loads((SOURCE/'site.json').read_text())
     geo=site['origin']
     crs=f'+proj=aeqd +lat_0={geo["latitude"]} +lon_0={geo["longitude"]} +datum=WGS84 +units=m'
-    project=Transformer.from_crs('EPSG:4326',crs,always_xy=True)
+    project=Transformer.from_crs('EPSG:3812',crs,always_xy=True)
+    to_native=Transformer.from_crs(crs,'EPSG:3812',always_xy=True)
+    west,south,east,north=site['bounds_m']
+    corners=[to_native.transform(x,y) for x,y in [(west,south),(west,north),(east,south),(east,north)]]
+    bbox=','.join(map(str,[min(x for x,y in corners),min(y for x,y in corners),max(x for x,y in corners),max(y for x,y in corners)]))+',EPSG:3812'
     data,url=get_json('https://geo.api.vlaanderen.be/GRB/wfs',{
         'service':'WFS','version':'2.0.0','request':'GetFeature','typeNames':'GRB:GBG',
-        'srsName':'urn:ogc:def:crs:OGC:1.3:CRS84',
-        'bbox':'5.3475,50.9485,5.3575,50.9550,urn:ogc:def:crs:OGC:1.3:CRS84',
+        'srsName':'EPSG:3812',
+        'bbox':bbox,
         'outputFormat':'application/json','count':1000})
     total = str(data.get('totalFeatures', 'unknown'))
     if len(data['features']) >= 1000 or (total.isdigit() and int(total) > 1000):
@@ -50,13 +54,17 @@ def main():
     data['features']=sorted(features,key=lambda f:f['properties']['OIDN'])
     data.pop('bbox',None);data['numberReturned']=data['totalFeatures']=len(features)
     (args.destination/'buildings.geojson').write_text(json.dumps(data,indent=2)+'\n')
+    landmarks,landmark_url=get_json('https://geo.api.vlaanderen.be/GRB/wfs', {
+        'service':'WFS','version':'2.0.0','request':'GetFeature','typeNames':'GRB:KNW',
+        'srsName':'EPSG:3812','resourceId':'KNW.36480','outputFormat':'application/json'})
+    (args.destination/'landmarks.geojson').write_text(json.dumps(landmarks,indent=2)+'\n')
     context=ssl.create_default_context()
     if args.globalsign_intermediate:
         issuer='https://secure.globalsign.com/cacert/gsgccr46ovtlsca2025.crt'
         with urlopen(issuer,timeout=30) as response: certificate=response.read()
         context.load_verify_locations(cadata=ssl.DER_cert_to_PEM_cert(certificate))
     ids=[f['properties']['OIDN'] for f in features]
-    heights=[];urls=[url]
+    heights=[];urls=[url,landmark_url]
     for start in range(0,len(ids),100):
         result,url=get_json('https://geo.limburg.be/arcgis/rest/services/GRB/MapServer/6/query',{
             'f':'json','where':'GRB_OIDN IN ('+','.join(map(str,ids[start:start+100]))+')',

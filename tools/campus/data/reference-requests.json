@@ -1,0 +1,20 @@
+{
+  "orthophoto": {
+    "url": "https://geo.api.vlaanderen.be/OMWRGBMRVL/wms?service=WMS&version=1.1.1&request=GetMap&layers=Ortho&styles=&srs=EPSG%3A3857&bbox=595319.8215257684%2C6612507.014575145%2C596351.6088367845%2C6613332.444423958&width=1625&height=1300&format=image%2Fpng",
+    "bbox": [
+      595319.8215257684,
+      6612507.014575145,
+      596351.6088367845,
+      6613332.444423958
+    ],
+    "enu_approx": [
+      -320,
+      -160,
+      330,
+      360
+    ]
+  },
+  "arena_render": "https://www.cordacampus.com/wp-content/uploads/2024/04/Corda-Arena-Render-1.jpg",
+  "mobility_map": "https://www.cordacampus.com/wp-content/uploads/2024/05/Mobility-Map_2K.png",
+  "native_control": "GRB:GBG GBG.8678128, EPSG:3812 (719254.1736499,682989.33212675) -> WGS84 (5.35440837,50.95296239)"
+}

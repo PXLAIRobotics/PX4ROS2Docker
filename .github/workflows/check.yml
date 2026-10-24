@@ -7,6 +7,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: ./tests/static.sh
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify offline campus geometry and reproducible assets
+        run: |
+          pip install -r tools/campus/requirements.txt
+          python tests/campus_geometry.py
+          python tools/campus/generate.py --output /tmp/campus-rebuilt
+          for asset in campus.json campus.env campus.gui.config Gazebo-GUI-LICENSE models/corda_campus worlds/corda_campus.sdf; do
+            diff -r "/tmp/campus-rebuilt/$asset" "Projects/ros2_workspace/src/px4_dev_examples/simulation/$asset"
+          done
       - name: Lint Dockerfile (apt updates and resolved Python dependencies are intentional)
         run: docker run --rm -i hadolint/hadolint:v2.12.0 hadolint --ignore DL3008 --ignore DL3013 - < Dockerfile
   image:

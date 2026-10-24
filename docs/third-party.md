@@ -11,3 +11,5 @@
 
 - Campus footprints and derived building meshes use GRB open data. Attribution: **Bron: Grootschalig Referentie Bestand Vlaanderen, Digitaal Vlaanderen**. Height attributes are distributed by the province of Limburg. See `tools/campus/SOURCES.md` and the model's installed `ATTRIBUTION.md`; the environment MIT licence does not replace their source-data terms.
 - `tools/campus/gui.config.in` adapts Gazebo Sim 8's standard GUI configuration under Apache-2.0. Its licence is included in `tools/campus/Gazebo-GUI-LICENSE` and installed beside the runtime assets.
+
+- Parking outlines were manually traced from Digitaal Vlaanderen winter orthophotography and checked against the campus mobility map. Attribution: **Bron: Digitaal Vlaanderen, Orthofotomozaïek, middenschalig, winteropnamen, kleur, meest recent**. Campus images guide approximate landmark geometry and are not redistributed or used as textures.

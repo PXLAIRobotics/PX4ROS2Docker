@@ -154,9 +154,9 @@ Build scripts forward Docker build options. Run scripts accept Docker options be
 
 The default `corda_campus` world contains **82 actual GRB building footprints**, with angled/concave outlines, rounded facades and courtyards preserved as triangulated meshes. Visual and collision geometry match. Corda 1, its companion, Corda 2 and Corda 3 have sloping wedge roofs; Corda Arena and nearby offices retain their mapped outlines. Other roofs are mostly flat. Corda 1/2/3 have separate green roof and blue-grey/light/warm-grey facade materials. Their roof slopes are approximated from campus references; full closed collision meshes match the combined visual surfaces.
 
-Heights use available 3D GRB values matched by stable building IDs, architectural dimensions where available and explicit estimates for missing data. Corda 1's 30 m maximum comes from the architect; the detailed roof plane remains approximate. All sources, licences, data dates and approximation rules are documented in [tools/campus/SOURCES.md](tools/campus/SOURCES.md). This is an untextured building reconstruction: no interiors, windows, detailed terrain, trees, cars or surveyed rooftop structures.
+Heights use available 3D GRB values matched by stable building IDs, architectural dimensions where available and explicit estimates for missing data. Corda 1's 30 m maximum comes from the architect; the detailed roof plane remains approximate. All sources, licences, data dates and approximation rules are documented in [tools/campus/SOURCES.md](tools/campus/SOURCES.md). The Arena now has a hollow roofed hall, glazed entrance, open simulation doors, simple internal galleries and projecting cube facade detail. The 35 m Philips water tower has open lattice supports, stairs and a saucer tank. Six traced parking areas have illustrative bay markings; Corda 4 and 5 have window bands. These are untextured approximations: detailed interiors, terrain, trees, cars and surveyed rooftop structures are omitted.
 
-A **synthetic level 4×4 m launch platform** sits above Corda 1's sloping roof so the drone can stand and land stably. It is marked with an H; it is not a real helipad. The generator verifies the platform lies inside the roof footprint. The original approximate GPS point was beside Corda 1; the new spawn is on its actual footprint.
+A **synthetic level 4×4 m launch platform** sits above Corda 1's sloping roof so the drone can stand and land stably. It is marked with an H; it is not a real helipad. The generator verifies the platform lies inside the roof footprint. The spawn is at approximately 50.9516471 N, 5.3522555 E. Footprints and the tower use native EPSG:3812 coordinates transformed locally, correcting an offset in the WFS geographic-coordinate response.
 
 For an existing container/workspace, install the new assets and restart:
 
@@ -169,7 +169,7 @@ start_px4_dev --no-attach
 ros2 run px4_dev_examples campus_check
 ```
 
-`start_gazebo_gui` opens the normal Gazebo controls with a view toward the launch roof. It supplies the installed campus resource paths for meshes. The `sensors` window bridges the selected world's clock, so the existing RViz viewer also works in the campus.
+`start_gazebo_gui` opens the normal Gazebo controls with a view of the campus landmarks and parking. It supplies the installed campus resource paths for meshes. The `sensors` window bridges the selected world's clock, so the existing RViz viewer also works in the campus.
 
 To use the original empty world, stop the session and run `PX4_GZ_WORLD=default start_px4_dev`. To use campus geometry without rendered sensors, use `PX4_SENSOR_SUITE=none start_px4_dev`. `PX4_GZ_MODEL_POSE` can explicitly override the default local spawn (`x,y,z,roll,pitch,yaw` in metres/radians); ensure any alternative starts clear of buildings. An explicit world/pose override is forwarded to tmux even if its server was already running.
 

@@ -5,16 +5,16 @@
     "ground_altitude_m": 50.0
   },
   "bounds_m": [
-    -320,
-    -160,
-    330,
-    360
+    -246,
+    -132,
+    404,
+    388
   ],
   "buildings": [
     {
       "name": "building_543267",
       "grb_oidn": 543267,
-      "area_m2": 551.974,
+      "area_m2": 551.98,
       "height_m": 5.71,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -27,7 +27,7 @@
     {
       "name": "building_543268",
       "grb_oidn": 543268,
-      "area_m2": 254.051,
+      "area_m2": 254.048,
       "height_m": 4.56,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -40,7 +40,7 @@
     {
       "name": "building_545772",
       "grb_oidn": 545772,
-      "area_m2": 53.098,
+      "area_m2": 53.101,
       "height_m": 4.7,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -53,7 +53,7 @@
     {
       "name": "building_545780",
       "grb_oidn": 545780,
-      "area_m2": 52.032,
+      "area_m2": 52.035,
       "height_m": 4.72,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -66,7 +66,7 @@
     {
       "name": "building_545835",
       "grb_oidn": 545835,
-      "area_m2": 18.282,
+      "area_m2": 18.28,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -79,7 +79,7 @@
     {
       "name": "corda_5",
       "grb_oidn": 545957,
-      "area_m2": 4996.717,
+      "area_m2": 4996.836,
       "height_m": 16.65,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -92,7 +92,7 @@
     {
       "name": "building_545988",
       "grb_oidn": 545988,
-      "area_m2": 84.732,
+      "area_m2": 84.735,
       "height_m": 3.77,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -105,7 +105,7 @@
     {
       "name": "building_546665",
       "grb_oidn": 546665,
-      "area_m2": 176.001,
+      "area_m2": 175.988,
       "height_m": 8.88,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -118,7 +118,7 @@
     {
       "name": "building_546667",
       "grb_oidn": 546667,
-      "area_m2": 124.416,
+      "area_m2": 124.421,
       "height_m": 9.94,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -131,7 +131,7 @@
     {
       "name": "building_546668",
       "grb_oidn": 546668,
-      "area_m2": 146.832,
+      "area_m2": 146.833,
       "height_m": 8.45,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -144,7 +144,7 @@
     {
       "name": "building_546670",
       "grb_oidn": 546670,
-      "area_m2": 170.434,
+      "area_m2": 170.424,
       "height_m": 10.91,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -157,7 +157,7 @@
     {
       "name": "building_546675",
       "grb_oidn": 546675,
-      "area_m2": 153.981,
+      "area_m2": 153.988,
       "height_m": 10.06,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -170,7 +170,7 @@
     {
       "name": "building_549011",
       "grb_oidn": 549011,
-      "area_m2": 1777.29,
+      "area_m2": 1777.322,
       "height_m": 4.58,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -183,7 +183,7 @@
     {
       "name": "building_549242",
       "grb_oidn": 549242,
-      "area_m2": 1479.916,
+      "area_m2": 1479.93,
       "height_m": 7.02,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -196,7 +196,7 @@
     {
       "name": "building_551750",
       "grb_oidn": 551750,
-      "area_m2": 83.655,
+      "area_m2": 83.656,
       "height_m": 9.16,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -209,7 +209,7 @@
     {
       "name": "building_551751",
       "grb_oidn": 551751,
-      "area_m2": 113.302,
+      "area_m2": 113.299,
       "height_m": 9.14,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -222,7 +222,7 @@
     {
       "name": "building_551752",
       "grb_oidn": 551752,
-      "area_m2": 19.48,
+      "area_m2": 19.479,
       "height_m": 2.7,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -235,7 +235,7 @@
     {
       "name": "building_552227",
       "grb_oidn": 552227,
-      "area_m2": 16.172,
+      "area_m2": 16.176,
       "height_m": 1.92,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -248,7 +248,7 @@
     {
       "name": "building_552256",
       "grb_oidn": 552256,
-      "area_m2": 75.201,
+      "area_m2": 75.2,
       "height_m": 3.89,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -261,7 +261,7 @@
     {
       "name": "building_552279",
       "grb_oidn": 552279,
-      "area_m2": 30.926,
+      "area_m2": 30.925,
       "height_m": 2.57,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -274,7 +274,7 @@
     {
       "name": "building_552280",
       "grb_oidn": 552280,
-      "area_m2": 31.79,
+      "area_m2": 31.795,
       "height_m": 2.35,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -313,7 +313,7 @@
     {
       "name": "building_553070",
       "grb_oidn": 553070,
-      "area_m2": 76.164,
+      "area_m2": 76.172,
       "height_m": 9.63,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -339,7 +339,7 @@
     {
       "name": "building_553136",
       "grb_oidn": 553136,
-      "area_m2": 25.761,
+      "area_m2": 25.764,
       "height_m": 2.43,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -352,7 +352,7 @@
     {
       "name": "building_553444",
       "grb_oidn": 553444,
-      "area_m2": 82.499,
+      "area_m2": 82.506,
       "height_m": 9.18,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -365,7 +365,7 @@
     {
       "name": "building_553445",
       "grb_oidn": 553445,
-      "area_m2": 100.131,
+      "area_m2": 100.132,
       "height_m": 10.05,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -378,7 +378,7 @@
     {
       "name": "building_553453",
       "grb_oidn": 553453,
-      "area_m2": 103.937,
+      "area_m2": 103.931,
       "height_m": 9.15,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -391,7 +391,7 @@
     {
       "name": "building_553880",
       "grb_oidn": 553880,
-      "area_m2": 97.405,
+      "area_m2": 97.402,
       "height_m": 9.79,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -404,7 +404,7 @@
     {
       "name": "building_553881",
       "grb_oidn": 553881,
-      "area_m2": 22.931,
+      "area_m2": 22.934,
       "height_m": 2.69,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -417,7 +417,7 @@
     {
       "name": "building_2042434",
       "grb_oidn": 2042434,
-      "area_m2": 21.386,
+      "area_m2": 21.387,
       "height_m": 3.13,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -430,7 +430,7 @@
     {
       "name": "building_3199966",
       "grb_oidn": 3199966,
-      "area_m2": 4376.69,
+      "area_m2": 4376.755,
       "height_m": 7.45,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -443,7 +443,7 @@
     {
       "name": "building_4481027",
       "grb_oidn": 4481027,
-      "area_m2": 532.39,
+      "area_m2": 532.397,
       "height_m": 5.2,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -456,7 +456,7 @@
     {
       "name": "building_4482303",
       "grb_oidn": 4482303,
-      "area_m2": 43.26,
+      "area_m2": 43.262,
       "height_m": 3.31,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -469,7 +469,7 @@
     {
       "name": "building_4482422",
       "grb_oidn": 4482422,
-      "area_m2": 39.681,
+      "area_m2": 39.68,
       "height_m": 2.39,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -482,7 +482,7 @@
     {
       "name": "building_4483475",
       "grb_oidn": 4483475,
-      "area_m2": 26.785,
+      "area_m2": 26.787,
       "height_m": 2.43,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -508,7 +508,7 @@
     {
       "name": "building_4484612",
       "grb_oidn": 4484612,
-      "area_m2": 18.633,
+      "area_m2": 18.634,
       "height_m": 2.81,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -521,7 +521,7 @@
     {
       "name": "building_4484715",
       "grb_oidn": 4484715,
-      "area_m2": 18.187,
+      "area_m2": 18.185,
       "height_m": 2.45,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -534,7 +534,7 @@
     {
       "name": "building_4485021",
       "grb_oidn": 4485021,
-      "area_m2": 16.584,
+      "area_m2": 16.585,
       "height_m": 2.17,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -560,7 +560,7 @@
     {
       "name": "building_4487126",
       "grb_oidn": 4487126,
-      "area_m2": 2602.259,
+      "area_m2": 2602.29,
       "height_m": 11.19,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -573,7 +573,7 @@
     {
       "name": "building_4487135",
       "grb_oidn": 4487135,
-      "area_m2": 2272.424,
+      "area_m2": 2272.456,
       "height_m": 9.27,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -586,7 +586,7 @@
     {
       "name": "corda_4",
       "grb_oidn": 4487171,
-      "area_m2": 1498.975,
+      "area_m2": 1498.994,
       "height_m": 12,
       "low_height_m": null,
       "height_source": "estimated storey height from official visitor map",
@@ -599,7 +599,7 @@
     {
       "name": "building_4487186",
       "grb_oidn": 4487186,
-      "area_m2": 1256.126,
+      "area_m2": 1256.14,
       "height_m": 8.01,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -612,7 +612,7 @@
     {
       "name": "building_4489603",
       "grb_oidn": 4489603,
-      "area_m2": 100.741,
+      "area_m2": 100.737,
       "height_m": 9.71,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -625,7 +625,7 @@
     {
       "name": "building_5148120",
       "grb_oidn": 5148120,
-      "area_m2": 2895.158,
+      "area_m2": 2895.192,
       "height_m": 7.86,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -638,7 +638,7 @@
     {
       "name": "building_5148135",
       "grb_oidn": 5148135,
-      "area_m2": 3099.029,
+      "area_m2": 3099.072,
       "height_m": 6.99,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -651,7 +651,7 @@
     {
       "name": "building_5149925",
       "grb_oidn": 5149925,
-      "area_m2": 3642.854,
+      "area_m2": 3642.915,
       "height_m": 11.03,
       "low_height_m": null,
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
@@ -664,7 +664,7 @@
     {
       "name": "building_5791560",
       "grb_oidn": 5791560,
-      "area_m2": 8648.593,
+      "area_m2": 8648.67,
       "height_m": 12,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -677,7 +677,7 @@
     {
       "name": "corda_1_bar",
       "grb_oidn": 5791580,
-      "area_m2": 437.093,
+      "area_m2": 437.101,
       "height_m": 8,
       "low_height_m": 2,
       "height_source": "estimated small companion wedge from official visitor map",
@@ -690,7 +690,7 @@
     {
       "name": "building_5793940",
       "grb_oidn": 5793940,
-      "area_m2": 24.642,
+      "area_m2": 24.64,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -703,7 +703,7 @@
     {
       "name": "building_5794944",
       "grb_oidn": 5794944,
-      "area_m2": 16.261,
+      "area_m2": 16.262,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -716,7 +716,7 @@
     {
       "name": "building_5795925",
       "grb_oidn": 5795925,
-      "area_m2": 12.313,
+      "area_m2": 12.314,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -729,7 +729,7 @@
     {
       "name": "building_5796462",
       "grb_oidn": 5796462,
-      "area_m2": 2180.728,
+      "area_m2": 2180.779,
       "height_m": 12,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -742,7 +742,7 @@
     {
       "name": "building_5796560",
       "grb_oidn": 5796560,
-      "area_m2": 676.131,
+      "area_m2": 676.142,
       "height_m": 12,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -755,7 +755,7 @@
     {
       "name": "building_5797048",
       "grb_oidn": 5797048,
-      "area_m2": 185.462,
+      "area_m2": 185.461,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -768,7 +768,7 @@
     {
       "name": "corda_2",
       "grb_oidn": 6682622,
-      "area_m2": 2491.638,
+      "area_m2": 2491.636,
       "height_m": 18,
       "low_height_m": 4,
       "height_source": "eld phases 2/3 and official visitor map confirm sloping form; 18 m high edge, 4 m low edge and long-axis roof direction are visual approximations",
@@ -781,7 +781,7 @@
     {
       "name": "corda_3",
       "grb_oidn": 6682623,
-      "area_m2": 2478.335,
+      "area_m2": 2478.332,
       "height_m": 18,
       "low_height_m": 4,
       "height_source": "eld phases 2/3 and official visitor map confirm sloping form; 18 m high edge, 4 m low edge and long-axis roof direction are visual approximations",
@@ -794,7 +794,7 @@
     {
       "name": "corda_1",
       "grb_oidn": 6766058,
-      "area_m2": 3708.965,
+      "area_m2": 3708.964,
       "height_m": 30,
       "low_height_m": 4,
       "height_source": "eld architect: highest point 30 m; roof direction/low edge approximated from campus photo and visitor map",
@@ -807,7 +807,7 @@
     {
       "name": "building_6821864",
       "grb_oidn": 6821864,
-      "area_m2": 8380.748,
+      "area_m2": 8380.832,
       "height_m": 12,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -820,7 +820,7 @@
     {
       "name": "building_6822086",
       "grb_oidn": 6822086,
-      "area_m2": 2348.038,
+      "area_m2": 2348.12,
       "height_m": 12,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -846,7 +846,7 @@
     {
       "name": "building_6822089",
       "grb_oidn": 6822089,
-      "area_m2": 161.047,
+      "area_m2": 161.046,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -859,7 +859,7 @@
     {
       "name": "building_6822100",
       "grb_oidn": 6822100,
-      "area_m2": 32.69,
+      "area_m2": 32.691,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -872,7 +872,7 @@
     {
       "name": "building_7145243",
       "grb_oidn": 7145243,
-      "area_m2": 97.308,
+      "area_m2": 97.307,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -885,7 +885,7 @@
     {
       "name": "building_7145244",
       "grb_oidn": 7145244,
-      "area_m2": 24.878,
+      "area_m2": 24.879,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -898,7 +898,7 @@
     {
       "name": "building_7145245",
       "grb_oidn": 7145245,
-      "area_m2": 38.974,
+      "area_m2": 38.97,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -911,7 +911,7 @@
     {
       "name": "building_7145246",
       "grb_oidn": 7145246,
-      "area_m2": 32.605,
+      "area_m2": 32.602,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -924,7 +924,7 @@
     {
       "name": "building_7145247",
       "grb_oidn": 7145247,
-      "area_m2": 44.786,
+      "area_m2": 44.781,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -937,7 +937,7 @@
     {
       "name": "building_7494602",
       "grb_oidn": 7494602,
-      "area_m2": 10336.374,
+      "area_m2": 10336.451,
       "height_m": 12,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -950,7 +950,7 @@
     {
       "name": "building_7571830",
       "grb_oidn": 7571830,
-      "area_m2": 3338.318,
+      "area_m2": 3338.353,
       "height_m": 12,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -963,7 +963,7 @@
     {
       "name": "building_7598570",
       "grb_oidn": 7598570,
-      "area_m2": 6593.151,
+      "area_m2": 6593.273,
       "height_m": 12,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -989,7 +989,7 @@
     {
       "name": "building_7689722",
       "grb_oidn": 7689722,
-      "area_m2": 19.187,
+      "area_m2": 19.188,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -1002,7 +1002,7 @@
     {
       "name": "building_7689824",
       "grb_oidn": 7689824,
-      "area_m2": 17.082,
+      "area_m2": 17.083,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -1015,20 +1015,24 @@
     {
       "name": "corda_arena",
       "grb_oidn": 7690099,
-      "area_m2": 3253.498,
+      "area_m2": 4435.648,
       "height_m": 24,
-      "low_height_m": null,
-      "height_source": "Corda Campus Masterplan 2.0: arena height 24 m",
-      "height_quality": null,
-      "footprint_version_date": "2025-12-18",
-      "courtyards": 1,
-      "vertices": 52,
-      "faces": 104
+      "height_source": "Corda Campus Masterplan 2.0: arena height 24 m; hollow hall, glazing and cube facade approximated from official 2024 renders; doors held open for simulation",
+      "detail": "hollow roofed hall with glazed entrance",
+      "door_width_m": 8,
+      "door_height_m": 3.625,
+      "door_centre_enu_m": [
+        95.24932950714945,
+        76.13761008148845
+      ],
+      "local_yaw_rad": -0.18177153559437603,
+      "survey_courtyard_replaced_by_roof": 1,
+      "interior_layout": "approximate empty hall with three gallery levels; simulation doors held open"
     },
     {
       "name": "building_7691395",
       "grb_oidn": 7691395,
-      "area_m2": 139.948,
+      "area_m2": 139.957,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -1041,7 +1045,7 @@
     {
       "name": "building_7691785",
       "grb_oidn": 7691785,
-      "area_m2": 2872.196,
+      "area_m2": 2872.236,
       "height_m": 12,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -1054,7 +1058,7 @@
     {
       "name": "building_7691912",
       "grb_oidn": 7691912,
-      "area_m2": 80.985,
+      "area_m2": 80.987,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -1067,7 +1071,7 @@
     {
       "name": "building_7692169",
       "grb_oidn": 7692169,
-      "area_m2": 84.098,
+      "area_m2": 84.105,
       "height_m": 6,
       "low_height_m": null,
       "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
@@ -1081,25 +1085,196 @@
   "notes": [
     "Flat approximate terrain, not a surveyed reconstruction.",
     "The level roof launch platform is a synthetic simulation aid, not a real helipad.",
-    "Building-height attributes are matched by stable GRB OIDN only; the provincial height layer geometry is not used."
+    "Building-height attributes are matched by stable GRB OIDN only; the provincial height layer geometry is not used.",
+    "GRB geometry requested in native EPSG:3812 and transformed locally; the service CRS84 response has a verified datum offset and is not used.",
+    "Arena doors are held open and its interior is schematic. Parking layouts and landmark dimensions are approximate, not a current access map."
+  ],
+  "landmarks": [
+    {
+      "name": "philips_water_tower",
+      "east_m": 99.9289308846412,
+      "north_m": 23.428973725731815,
+      "height_m": 35,
+      "grb_knw_oidn": 9709,
+      "dimensions": "approximate photo-based tank, supports and stairs",
+      "position_source": "native GRB KNW footprint, manually identified against official orthophoto; source label is mast"
+    }
+  ],
+  "parking": [
+    {
+      "name": "parking_east",
+      "area_m2": 17137.28,
+      "marked_bays": 735,
+      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated",
+      "outline_enu_m": [
+        [
+          157.2,
+          161.2
+        ],
+        [
+          259.2,
+          190.4
+        ],
+        [
+          306.8,
+          40.8
+        ],
+        [
+          195.2,
+          12.8
+        ]
+      ],
+      "layout": "approximate 2.6 x 5 m bays with 6 m aisles"
+    },
+    {
+      "name": "parking_southwest",
+      "area_m2": 5706.56,
+      "marked_bays": 236,
+      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated",
+      "outline_enu_m": [
+        [
+          34.4,
+          -40.4
+        ],
+        [
+          94.0,
+          -21.6
+        ],
+        [
+          125.6,
+          -104.4
+        ],
+        [
+          57.6,
+          -121.2
+        ]
+      ],
+      "layout": "approximate 2.6 x 5 m bays with 6 m aisles"
+    },
+    {
+      "name": "parking_southeast",
+      "area_m2": 6404.69,
+      "marked_bays": 268,
+      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated",
+      "outline_enu_m": [
+        [
+          104.0,
+          -19.2
+        ],
+        [
+          172.0,
+          2.0
+        ],
+        [
+          206.0,
+          -79.2
+        ],
+        [
+          133.6,
+          -102.0
+        ]
+      ],
+      "layout": "approximate 2.6 x 5 m bays with 6 m aisles"
+    },
+    {
+      "name": "parking_corda_1",
+      "area_m2": 3958.8,
+      "marked_bays": 162,
+      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated",
+      "outline_enu_m": [
+        [
+          4.8,
+          59.2
+        ],
+        [
+          49.6,
+          72.4
+        ],
+        [
+          73.2,
+          -3.2
+        ],
+        [
+          24.0,
+          -20.0
+        ]
+      ],
+      "layout": "approximate 2.6 x 5 m bays with 6 m aisles"
+    },
+    {
+      "name": "parking_corda_4",
+      "area_m2": 2966.95,
+      "marked_bays": 119,
+      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated",
+      "outline_enu_m": [
+        [
+          -230.8,
+          76.8
+        ],
+        [
+          -148.4,
+          93.6
+        ],
+        [
+          -128.8,
+          66.0
+        ],
+        [
+          -218.8,
+          40.0
+        ]
+      ],
+      "layout": "approximate 2.6 x 5 m bays with 6 m aisles"
+    },
+    {
+      "name": "parking_corda_5",
+      "area_m2": 3302.56,
+      "marked_bays": 137,
+      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated",
+      "outline_enu_m": [
+        [
+          -205.2,
+          228.8
+        ],
+        [
+          -176.4,
+          244.0
+        ],
+        [
+          -158.4,
+          226.4
+        ],
+        [
+          -190.8,
+          157.6
+        ],
+        [
+          -221.6,
+          134.4
+        ]
+      ],
+      "layout": "approximate 2.6 x 5 m bays with 6 m aisles"
+    }
   ],
   "launch": {
-    "east_m": -85,
-    "north_m": -38,
-    "latitude": 50.95139541256409,
-    "longitude": 5.351202397069644,
-    "roof_height_m": 22.78432315953654,
-    "platform_top_m": 23.564764031845225,
-    "model_spawn_z_m": 23.844764031845227,
+    "east_m": -11,
+    "north_m": -10,
+    "latitude": 50.95164711011486,
+    "longitude": 5.352255462304736,
+    "roof_height_m": 22.832061790466355,
+    "platform_top_m": 23.61250156997854,
+    "model_spawn_z_m": 23.892501569978542,
     "world_ground_altitude_m": 50.0,
     "yaw_rad": 0,
     "synthetic_level_platform": true
   },
   "input_sha256": {
-    "site.json": "4ccbac402a35ebafebeb2f57592421f4f619e4e6caacb64e972517a6d9d9c392",
+    "site.json": "c4e15e445110e55e3d9b47179e0324a38c3f7ba6402d9f9f21fa1929595fc43a",
     "gui.config.in": "deb29ba9051999d7405bd7d2bc8963ef1a7cf0957e0102f493ccf02876b44ed4",
-    "SOURCES.md": "001a9f9782a52701ca69e807c425f686a0a0a40b08855705156fc6ec0ef2aba8",
-    "data/buildings.geojson": "520f301a4d12f5b0b33e04a42f32884e86384a947f87a7e9d2cac29965024d35",
-    "data/heights.json": "d694f4c3da6576146f2483e0b5972d5552fb5e2fde1eb384f20500bde37beb87"
+    "SOURCES.md": "31d85c5d41160384b8bf057506ca08f1f80f2a1b541b5d6e3e07e3ef5f427a60",
+    "data/buildings.geojson": "8fbeb882d79ad2cc6d0855f61b9cc205e9582bdbfe8131d74e173375dc95541e",
+    "data/heights.json": "d694f4c3da6576146f2483e0b5972d5552fb5e2fde1eb384f20500bde37beb87",
+    "data/landmarks.geojson": "7206806c0ba7d145b187c289cee4a9ca4b96ac1d3a389f1dbb509dabbdb23e93",
+    "data/reference-requests.json": "7f8c95f889fc6948f1790ec651f5b5595446093ed5cdc6c51aa19a7d38263c7f"
   }
 }

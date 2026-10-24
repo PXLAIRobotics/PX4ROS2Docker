@@ -5,10 +5,10 @@
     "ground_altitude_m": 50.0
   },
   "bounds_m": [
-    -320,
-    -160,
-    330,
-    360
+    -246,
+    -132,
+    404,
+    388
   ],
   "simplify_m": 0.12,
   "buildings": {
@@ -51,21 +51,26 @@
     "4487171": {
       "name": "corda_4",
       "height_m": 12,
-      "source": "estimated storey height from official visitor map"
+      "source": "estimated storey height from official visitor map",
+      "facade_colour": "0.78 0.77 0.72 1",
+      "window_bands": true
     },
     "545957": {
-      "name": "corda_5"
+      "name": "corda_5",
+      "facade_colour": "0.76 0.76 0.72 1",
+      "window_bands": true
     },
     "7690099": {
       "name": "corda_arena",
       "height_m": 24,
-      "source": "Corda Campus Masterplan 2.0: arena height 24 m"
+      "source": "Corda Campus Masterplan 2.0: arena height 24 m; hollow hall, glazing and cube facade approximated from official 2024 renders; doors held open for simulation",
+      "detail": "arena"
     }
   },
   "launch": {
     "building_oidn": 6766058,
-    "east_m": -85,
-    "north_m": -38,
+    "east_m": -11,
+    "north_m": -10,
     "pad_size_m": 4,
     "pad_clearance_m": 0.2,
     "yaw_rad": 0
@@ -73,6 +78,165 @@
   "notes": [
     "Flat approximate terrain, not a surveyed reconstruction.",
     "The level roof launch platform is a synthetic simulation aid, not a real helipad.",
-    "Building-height attributes are matched by stable GRB OIDN only; the provincial height layer geometry is not used."
+    "Building-height attributes are matched by stable GRB OIDN only; the provincial height layer geometry is not used.",
+    "GRB geometry requested in native EPSG:3812 and transformed locally; the service CRS84 response has a verified datum offset and is not used.",
+    "Arena doors are held open and its interior is schematic. Parking layouts and landmark dimensions are approximate, not a current access map."
+  ],
+  "water_tower": {
+    "grb_knw_oidn": 9709,
+    "height_m": 35,
+    "source": "Native GRB KNW footprint, identified against official orthophoto and visitor map; approximate 35 m height, photo-based four-leg frame and saucer tank"
+  },
+  "parking": [
+    {
+      "name": "parking_east",
+      "outline_enu_m": [
+        [
+          157.2,
+          161.2
+        ],
+        [
+          259.2,
+          190.4
+        ],
+        [
+          306.8,
+          40.8
+        ],
+        [
+          195.2,
+          12.8
+        ]
+      ],
+      "yaw_rad": 1.85,
+      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated"
+    },
+    {
+      "name": "parking_southwest",
+      "outline_enu_m": [
+        [
+          34.4,
+          -40.4
+        ],
+        [
+          94.0,
+          -21.6
+        ],
+        [
+          125.6,
+          -104.4
+        ],
+        [
+          57.6,
+          -121.2
+        ]
+      ],
+      "yaw_rad": -0.28,
+      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated"
+    },
+    {
+      "name": "parking_southeast",
+      "outline_enu_m": [
+        [
+          104.0,
+          -19.2
+        ],
+        [
+          172.0,
+          2.0
+        ],
+        [
+          206.0,
+          -79.2
+        ],
+        [
+          133.6,
+          -102.0
+        ]
+      ],
+      "yaw_rad": -0.28,
+      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated"
+    },
+    {
+      "name": "parking_corda_1",
+      "outline_enu_m": [
+        [
+          4.8,
+          59.2
+        ],
+        [
+          49.6,
+          72.4
+        ],
+        [
+          73.2,
+          -3.2
+        ],
+        [
+          24.0,
+          -20.0
+        ]
+      ],
+      "yaw_rad": -0.28,
+      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated"
+    },
+    {
+      "name": "parking_corda_4",
+      "outline_enu_m": [
+        [
+          -230.8,
+          76.8
+        ],
+        [
+          -148.4,
+          93.6
+        ],
+        [
+          -128.8,
+          66.0
+        ],
+        [
+          -218.8,
+          40.0
+        ]
+      ],
+      "yaw_rad": 0.28,
+      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated"
+    },
+    {
+      "name": "parking_corda_5",
+      "outline_enu_m": [
+        [
+          -205.2,
+          228.8
+        ],
+        [
+          -176.4,
+          244.0
+        ],
+        [
+          -158.4,
+          226.4
+        ],
+        [
+          -190.8,
+          157.6
+        ],
+        [
+          -221.6,
+          134.4
+        ]
+      ],
+      "yaw_rad": 1.14,
+      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated"
+    }
+  ],
+  "overview_camera_pose": [
+    280,
+    -230,
+    210,
+    0,
+    0.58,
+    2.15
   ]
 }
