@@ -1,0 +1,9 @@
+Projects/PX4-Autopilot/
+Projects/ros2_workspace/src/px4_msgs/
+**/build/
+**/install/
+**/log/
+**/__pycache__/
+Data/*
+!Data/.gitkeep
+*.log

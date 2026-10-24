@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=QGroundControl
+Exec=/home/user/bin/start_qgroundcontrol
+Icon=/opt/qgroundcontrol/qgroundcontrol.svg
+Terminal=false
+Categories=Development;

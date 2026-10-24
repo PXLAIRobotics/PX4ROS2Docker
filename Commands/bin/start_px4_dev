@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+set -euo pipefail
+headless=0; attach=1
+for argument in "$@"; do
+    case "$argument" in
+        --headless) headless=1 ;;
+        --no-attach) attach=0 ;;
+        *) echo 'Usage: start_px4_dev [--headless] [--no-attach]' >&2; exit 2 ;;
+    esac
+done
+session=px4-dev
+if tmux has-session -t "$session" 2>/dev/null; then
+    if (( attach )) && [[ -t 0 ]]; then exec tmux attach -t "$session"; fi
+    echo 'px4-dev already exists. Use tmux attach -t px4-dev or stop_px4_dev.' >&2
+    exit 1
+fi
+[[ -f "$HOME/Projects/ros2_workspace/install/setup.bash" ]] || { echo 'Run setup_px4_workspace and both build helpers first.' >&2; exit 1; }
+run_dir="$HOME/Data/sessions/$(date +%Y%m%d-%H%M%S)"
+mkdir -p "$run_dir"
+failed=1
+cleanup() {
+    if (( failed )); then
+        tmux kill-session -t "$session" 2>/dev/null || true
+        echo "Session startup failed. Logs: $run_dir" >&2
+    fi
+}
+trap cleanup EXIT
+tmux new-session -d -s "$session" -n agent 'exec bash -lc "start_micro_xrce_agent"'
+# An existing tmux server retains its original environment. Forward overrides
+# from this invocation to the new simulation window explicitly.
+for variable in PX4_HOME_LAT PX4_HOME_LON PX4_HOME_ALT; do
+    if [[ -v $variable ]]; then
+        tmux set-environment -t "$session" "$variable" "${!variable}"
+    fi
+done
+tmux set-option -t "$session" remain-on-exit on
+tmux pipe-pane -o -t "$session:agent" "cat >> '$run_dir/agent.log'"
+# Start the world/vehicle first; attaching the GUI afterward avoids an initial
+# empty scene snapshot and keeps GUI diagnostics in their own pane/log.
+sim_command='start_px4_sitl --headless'
+if (( !headless )); then sim_command+=' --console'; fi
+tmux new-window -t "$session" -n sitl "exec bash -lc '$sim_command'"
+tmux set-option -t "$session:sitl" remain-on-exit on
+tmux pipe-pane -o -t "$session:sitl" "cat >> '$run_dir/sitl.log'"
+# This confirms a valid position and status, not merely the existence of DDS topics.
+ros2 run px4_dev_examples telemetry --once --timeout 90
+for window in agent sitl; do
+    [[ $(tmux display-message -p -t "$session:$window" '#{pane_dead}') == 0 ]] || { echo "$window exited" >&2; exit 1; }
+done
+if (( !headless )); then
+    tmux new-window -t "$session" -n gazebo 'exec bash -lc "gz sim -g"'
+    tmux set-option -t "$session:gazebo" remain-on-exit on
+    tmux pipe-pane -o -t "$session:gazebo" "cat >> '$run_dir/gazebo.log'"
+    tmux new-window -t "$session" -n qgc 'exec bash -lc "start_qgroundcontrol"'
+    tmux set-option -t "$session:qgc" remain-on-exit on
+    tmux pipe-pane -o -t "$session:qgc" "cat >> '$run_dir/qgc.log'"
+fi
+tmux new-window -t "$session" -n ros 'exec bash -l'
+tmux select-window -t "$session:sitl"
+failed=0
+printf 'Session ready. Logs: %s\nAttach: tmux attach -t px4-dev\nStop: stop_px4_dev\n' "$run_dir"
+if (( attach )) && [[ -t 0 ]]; then tmux attach -t "$session"; fi

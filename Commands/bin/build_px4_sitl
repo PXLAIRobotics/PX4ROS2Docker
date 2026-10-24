@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -eo pipefail
+source /opt/ros/jazzy/setup.bash
+export PATH="/opt/px4-venv/bin:$PATH" GZ_DISTRO=harmonic
+export CCACHE_DIR="$HOME/Data/ccache"
+mkdir -p "$CCACHE_DIR"
+cd "$HOME/Projects/PX4-Autopilot"
+[[ ${BUILD_JOBS:-4} =~ ^[1-9][0-9]*$ ]] || { echo 'BUILD_JOBS must be a positive integer' >&2; exit 1; }
+make -j"${BUILD_JOBS:-4}" px4_sitl_default
+cmake --build build/px4_sitl_default --target px4_gz_plugins -j "${BUILD_JOBS:-4}"

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+workspace="$HOME/Projects/ros2_workspace"
+[[ -d "$workspace/src" && "$workspace" != / ]] || { echo 'Expected workspace src is missing' >&2; exit 1; }
+for path in build install log; do
+    [[ ! -L "$workspace/$path" ]] || { echo "Refusing linked directory: $path" >&2; exit 1; }
+done
+rm -rf -- "$workspace/build" "$workspace/install" "$workspace/log"
+exec "$HOME/bin/build_ros2_workspace" "$@"

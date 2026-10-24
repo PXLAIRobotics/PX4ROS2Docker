@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+source /etc/px4-versions.env
+projects="$HOME/Projects"
+mkdir -p "$projects/ros2_workspace/src"
+checkout() {
+    local url=$1 revision=$2 destination=$3
+    if [[ -e "$destination" ]]; then
+        git -C "$destination" rev-parse --is-inside-work-tree >/dev/null || {
+            echo "Existing directory is not a Git checkout: $destination" >&2; exit 1;
+        }
+        actual=$(git -C "$destination" rev-parse HEAD)
+        if [[ "$actual" != "$revision" ]]; then
+            echo "Preserving checkout at $actual (expected $revision): $destination" >&2
+            echo 'Use a separate checkout or explicitly upgrade after reviewing your work.' >&2
+            exit 1
+        fi
+        echo "Preserving existing checkout and edits: $destination"
+    else
+        # Leave a failed partial checkout visible; never remove an existing source directory.
+        git init -q "$destination"
+        git -C "$destination" remote add origin "$url"
+        git -C "$destination" fetch --depth 1 origin "$revision"
+        git -C "$destination" checkout --detach FETCH_HEAD
+    fi
+}
+checkout https://github.com/PX4/PX4-Autopilot.git "$PX4_COMMIT" "$projects/PX4-Autopilot"
+# PX4 embeds git-describe version metadata and therefore needs its release tag.
+if ! git -C "$projects/PX4-Autopilot" show-ref --verify --quiet "refs/tags/$PX4_VERSION"; then
+    git -C "$projects/PX4-Autopilot" fetch --depth 1 origin "refs/tags/$PX4_VERSION:refs/tags/$PX4_VERSION"
+fi
+test "$(git -C "$projects/PX4-Autopilot" rev-parse "$PX4_VERSION^{commit}")" = "$PX4_COMMIT"
+# Initial population only. A repeated setup must not reset modified submodules.
+if [[ ! -f "$projects/PX4-Autopilot/.px4-docker-submodules-ready" ]]; then
+    git -C "$projects/PX4-Autopilot" submodule update --init --recursive --depth 1
+    touch "$projects/PX4-Autopilot/.px4-docker-submodules-ready"
+    printf '\n.px4-docker-submodules-ready\n' >> "$projects/PX4-Autopilot/.git/info/exclude"
+fi
+checkout https://github.com/PX4/px4_msgs.git "$PX4_MSGS_COMMIT" "$projects/ros2_workspace/src/px4_msgs"
+if [[ ! -d "$projects/ros2_workspace/src/px4_dev_examples" ]]; then
+    cp -a /opt/px4-seed/ros2-src/px4_dev_examples "$projects/ros2_workspace/src/"
+fi
+printf '\nWorkspace ready. Run build_px4_sitl, then build_ros2_workspace.\n'

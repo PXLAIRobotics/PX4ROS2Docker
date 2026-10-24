@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -euo pipefail
+headless=0; console=0
+for argument in "$@"; do
+    case "$argument" in
+        --headless) headless=1 ;;
+        --console) console=1 ;;
+        *) echo 'Usage: start_px4_sitl [--headless] [--console]. Set PX4_GZ_WORLD to select a bundled world.' >&2; exit 2 ;;
+    esac
+done
+export GZ_DISTRO=harmonic GZ_IP=127.0.0.1
+export PX4_SIM_MODEL=gz_x500 PX4_GZ_WORLD="${PX4_GZ_WORLD:-default}"
+# Approximate Corda Campus centre, Hasselt. PX4 applies these to Gazebo's
+# spherical world origin before spawning the vehicle; altitude is metres AMSL.
+export PX4_HOME_LAT="${PX4_HOME_LAT:-50.951737}"
+export PX4_HOME_LON="${PX4_HOME_LON:-5.352412}"
+export PX4_HOME_ALT="${PX4_HOME_ALT:-50}"
+export PX4_UXRCE_DDS_PORT="${XRCE_PORT:-8888}"
+# The pinned startup script reads the domain from this environment variable.
+export ROS_DOMAIN_ID="${ROS_DOMAIN_ID:-0}"
+px4_args=()
+if (( headless )); then
+    export HEADLESS=1
+    if (( !console )); then px4_args+=(-d); fi
+fi
+source_dir="$HOME/Projects/PX4-Autopilot"
+build_dir="$source_dir/build/px4_sitl_default"
+[[ -x "$build_dir/bin/px4" ]] || { echo 'Run build_px4_sitl first.' >&2; exit 1; }
+[[ -d "$source_dir/Tools/simulation/gz/models/x500" ]] || { echo 'Gazebo submodule missing; run setup_px4_workspace.' >&2; exit 1; }
+mkdir -p "$HOME/Data/px4/logs" "$build_dir/rootfs"
+cd "$build_dir/rootfs"
+if [[ ! -e log && ! -L log ]]; then ln -s "$HOME/Data/px4/logs" log; fi
+# rootfs/parameters.bson persists in the host Projects mount; logs live under Data.
+exec python3 /usr/local/lib/px4-supervise.py "$build_dir/bin/px4" "${px4_args[@]}"

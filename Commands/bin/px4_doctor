@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -uo pipefail
+cat /etc/px4-versions.env
+printf '\nUser: %s UID=%s GID=%s\n' "$(whoami)" "$(id -u)" "$(id -g)"
+printf 'ROS_DOMAIN_ID=%s RMW_IMPLEMENTATION=%s DISPLAY=%s\n' "${ROS_DOMAIN_ID:-0}" "${RMW_IMPLEMENTATION:-unset}" "${DISPLAY:-unset}"
+for checkout in "$HOME/Projects/PX4-Autopilot" "$HOME/Projects/ros2_workspace/src/px4_msgs"; do
+    if [[ -d $checkout/.git ]]; then git -C "$checkout" log -1 --format='%H %s'; git -C "$checkout" status --short; fi
+done
+printf '\nListeners\n'; ss -lunp
+printf '\nSession\n'; tmux list-sessions 2>/dev/null || true
+tmux list-panes -s -t px4-dev -F '#{window_name}: exited=#{pane_dead} status=#{pane_dead_status}' 2>/dev/null || true
+printf '\nRenderer\n'; timeout 5 glxinfo -B 2>&1 || true
+printf '\nPX4 telemetry\n'; timeout 15 ros2 run px4_dev_examples telemetry --once --timeout 10 || true
+printf '\nData paths\n'; du -sh "$HOME/Data/"* 2>/dev/null || true

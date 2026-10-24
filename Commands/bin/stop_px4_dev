@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+session=px4-dev
+tmux has-session -t "$session" 2>/dev/null || { echo 'No px4-dev session running.'; exit 0; }
+# Interrupt each owned foreground process first, allowing PX4/Gazebo to clean up.
+while read -r pane window; do
+    [[ $window == ros ]] || tmux send-keys -t "$pane" C-c 2>/dev/null || true
+done < <(tmux list-panes -s -t "$session" -F '#{pane_id} #{window_name}' 2>/dev/null)
+for _ in {1..150}; do
+    tmux has-session -t "$session" 2>/dev/null || break
+    live=$({ tmux list-panes -s -t "$session" -F '#{window_name} #{pane_dead}' 2>/dev/null || true; } | awk '$1 != "ros" && $2 == 0 {n++} END {print n+0}')
+    (( live == 0 )) && break
+    sleep 0.1
+done
+tmux kill-session -t "$session" 2>/dev/null || true
+echo 'Stopped px4-dev. Persistent sources and data are retained.'

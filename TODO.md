@@ -1,6 +1,6 @@
 # PX4 + ROS 2 Docker development environment — implementation TODO
 
-Planning date: 2026-10-23. This document is the implementation handoff; the software has not been implemented or validated yet.
+Planning date: 2026-10-23. The Linux amd64 baseline has been implemented and exercised. Checked items have implementation or test evidence in `docs/implementation-status.md`; unchecked items retain specific follow-up scope. Optional platforms and expanded validation are not implied by a baseline pass.
 
 ## Objective and boundaries
 
@@ -68,64 +68,64 @@ After A, source preparation and host launcher work can proceed alongside image w
 
 Exit gate: a documented version matrix and minimal PX4/ROS/QGC feasibility evidence, before broad implementation.
 
-- [ ] A01 Inventory both repositories, read applicable `AGENTS.md`, record clean/dirty status, and preserve existing user files. Confirm all writes target PX4ROS2Docker.
-- [ ] A02 Record the reference commit and selected file checksums; map inherited configuration versus PX4-specific replacements in `docs/reference-map.md`.
-- [ ] A03 Select a stable PX4 release and immutable commit; inspect its versioned Ubuntu, Gazebo and ROS instructions and its actual setup/startup scripts.
-- [ ] A04 Validate Ubuntu 24.04/Jazzy/Harmonic against that release. Document any package naming/repository discrepancy between PX4 and Gazebo docs and verify the chosen apt candidate versions.
-- [ ] A05 Select matching `px4_msgs` and, if used, `px4_ros_com` revisions. Verify message definitions against PX4's exported DDS topics. Do not assume arbitrary latest branches match.
-- [ ] A06 Pin a Micro XRCE-DDS Agent release compatible with the selected PX4 client; record protocol compatibility. Do not assume a new agent major release is interchangeable.
-- [ ] A07 Resolve a stable QGC release asset for amd64; record URL, SHA256, license, minimum runtime and PX4 compatibility. Treat ARM64 as a separate matrix entry.
-- [ ] A08 Create `versions.env` plus a source manifest with base image digest, OS/ROS/Gazebo choice, source SHAs, QGC checksum, Python constraints and plugin pins. No `latest` downloads or moving branches as build inputs.
-- [ ] A09 Prototype a minimal build/start for PX4 x500, a ROS telemetry subscription, and QGC under a display. Record commands and failures in `docs/compatibility.md`; resolve blockers before declaring the matrix supported.
-- [ ] A10 Freeze the naming, mount, network and helper contracts in this plan. Record any justified deviations so independently implemented scripts agree.
+- [x] A01 Inventory both repositories, read applicable `AGENTS.md`, record clean/dirty status, and preserve existing user files. Confirm all writes target PX4ROS2Docker.
+- [x] A02 Record the reference commit and selected file checksums; map inherited configuration versus PX4-specific replacements in `docs/reference-map.md`.
+- [x] A03 Select a stable PX4 release and immutable commit; inspect its versioned Ubuntu, Gazebo and ROS instructions and its actual setup/startup scripts.
+- [x] A04 Validate Ubuntu 24.04/Jazzy/Harmonic against that release. Document any package naming/repository discrepancy between PX4 and Gazebo docs and verify the chosen apt candidate versions.
+- [x] A05 Select matching `px4_msgs` and, if used, `px4_ros_com` revisions. Verify message definitions against PX4's exported DDS topics. Do not assume arbitrary latest branches match.
+- [x] A06 Pin a Micro XRCE-DDS Agent release compatible with the selected PX4 client; record protocol compatibility. Do not assume a new agent major release is interchangeable.
+- [x] A07 Resolve a stable QGC release asset for amd64; record URL, SHA256, license, minimum runtime and PX4 compatibility. Treat ARM64 as a separate matrix entry.
+- [x] A08 Create `versions.env` plus a source manifest with base image digest, OS/ROS/Gazebo choice, source SHAs, QGC checksum, Python constraints and plugin pins. No `latest` downloads or moving branches as build inputs.
+- [x] A09 Prototype a minimal build/start for PX4 x500, a ROS telemetry subscription, and QGC under a display. Record commands and failures in `docs/compatibility.md`; resolve blockers before declaring the matrix supported.
+- [x] A10 Freeze the naming, mount, network and helper contracts in this plan. Record any justified deviations so independently implemented scripts agree.
 
 ## B — Shared image, Bash, tmux and Vim
 
 Exit gate: both image targets build; shell and plugin checks pass as the configured non-root user.
 
-- [ ] B01 Create `.gitignore` and `.dockerignore` excluding generated PX4 builds, colcon outputs, downloads, logs, bags, caches and local agent/credential directories. Keep authored workspace packages and build scripts in context.
-- [ ] B02 Implement a shared toolchain stage with `native` and `vnc` final targets. Keep apt/tool layers reusable across both modes.
-- [ ] B03 Install official signed ROS/Gazebo repositories and the selected package set; verify installed Gazebo major version and bridge compatibility. Avoid competing simulator package families.
-- [ ] B04 Install PX4 SITL compiler/build dependencies from the pinned release requirements: C/C++ tools, CMake, Ninja, Python tooling, ccache and debugging utilities. Audit upstream setup scripts before using them in Docker.
-- [ ] B05 Isolate PX4 Python requirements in a pinned environment that can access required system ROS packages, or document a tested alternative. Verify ROS Python imports and PX4 generation together; do not bypass externally-managed Python restrictions blindly.
-- [ ] B06 Install ROS desktop/RViz, colcon/rosdep tooling and transport dependencies. Resolve rosdep for the actual workspace; omit Nav2, TurtleBot and OpenCV teaching dependencies unless a PX4 feature needs them.
-- [ ] B07 Retain useful reference tools: git, vim, tmux, nano, htop, sudo, wget/curl, bash-completion, universal-ctags, Mesa diagnostics, ping and xauth. Add transport diagnostics as needed.
-- [ ] B08 Create `/home/user` using caller UID/GID build args; handle preexisting Ubuntu user/group collisions. Reject UID/GID zero and keep build/run artifacts user-owned.
-- [ ] B09 Copy the reference `docker/tmux.conf`, `docker/vimrc`, Nerd Fonts/license and Xfce terminal settings without stylistic changes; record attribution and compare checksums.
-- [ ] B10 Adapt `install-user-config.sh` to install TPM, Nord, tmux-sensible, Vundle and every declared Vim plugin. Pin fetched revisions; check actual plugin load and any native plugin build requirements, not just clone directories.
-- [ ] B11 Adapt Bash setup: `~/bin`, local PATH, `ll`, colcon completion, selected ROS distro, optional workspace overlay and current-shell rebuild function. Guard missing overlays; avoid duplicate sourcing on repeated shell startup.
-- [ ] B12 Implement an entrypoint that sources ROS/overlay and `exec`s the requested command. Test interactive attach, noninteractive commands and desktop startup. Never auto-arm or auto-start SITL in shell initialization.
-- [ ] B13 Preserve writable RViz initial settings and existing user settings. Install process reaping/signal handling for both final targets.
-- [ ] B14 Record build metadata/package inventory inside the image. Document which apt dependencies are fixed versus updateable; do not claim bit-identical rebuilds without an apt snapshot strategy.
+- [x] B01 Create `.gitignore` and `.dockerignore` excluding generated PX4 builds, colcon outputs, downloads, logs, bags, caches and local agent/credential directories. Keep authored workspace packages and build scripts in context.
+- [x] B02 Implement a shared toolchain stage with `native` and `vnc` final targets. Keep apt/tool layers reusable across both modes.
+- [x] B03 Install official signed ROS/Gazebo repositories and the selected package set; verify installed Gazebo major version and bridge compatibility. Avoid competing simulator package families.
+- [x] B04 Install PX4 SITL compiler/build dependencies from the pinned release requirements: C/C++ tools, CMake, Ninja, Python tooling, ccache and debugging utilities. Audit upstream setup scripts before using them in Docker.
+- [x] B05 Isolate PX4 Python requirements in a pinned environment that can access required system ROS packages, or document a tested alternative. Verify ROS Python imports and PX4 generation together; do not bypass externally-managed Python restrictions blindly.
+- [x] B06 Install ROS desktop/RViz, colcon/rosdep tooling and transport dependencies. Resolve rosdep for the actual workspace; omit Nav2, TurtleBot and OpenCV teaching dependencies unless a PX4 feature needs them.
+- [x] B07 Retain useful reference tools: git, vim, tmux, nano, htop, sudo, wget/curl, bash-completion, universal-ctags, Mesa diagnostics, ping and xauth. Add transport diagnostics as needed.
+- [x] B08 Create `/home/user` using caller UID/GID build args; handle preexisting Ubuntu user/group collisions. Reject UID/GID zero and keep build/run artifacts user-owned.
+- [x] B09 Copy the reference `docker/tmux.conf`, `docker/vimrc`, Nerd Fonts/license and Xfce terminal settings without stylistic changes; record attribution and compare checksums.
+- [x] B10 Adapt `install-user-config.sh` to install TPM, Nord, tmux-sensible, Vundle and every declared Vim plugin. Pin fetched revisions; check actual plugin load and any native plugin build requirements, not just clone directories.
+- [x] B11 Adapt Bash setup: `~/bin`, local PATH, `ll`, colcon completion, selected ROS distro, optional workspace overlay and current-shell rebuild function. Guard missing overlays; avoid duplicate sourcing on repeated shell startup.
+- [x] B12 Implement an entrypoint that sources ROS/overlay and `exec`s the requested command. Test interactive attach, noninteractive commands and desktop startup. Never auto-arm or auto-start SITL in shell initialization.
+- [x] B13 Preserve writable RViz initial settings and existing user settings. Install process reaping/signal handling for both final targets.
+- [x] B14 Record build metadata/package inventory inside the image. Document which apt dependencies are fixed versus updateable; do not claim bit-identical rebuilds without an apt snapshot strategy.
 
 ## C — Persistent source workspace and development builds
 
 Exit gate: a fresh checkout can populate sources and rebuild PX4 and ROS as the ordinary user without losing edits.
 
-- [ ] C01 Create tracked `Commands/bin`, `ExampleCode`, `Projects/ros2_workspace/src`, and `Data/.gitkeep`; ensure empty host bind mounts cannot hide the only source copy.
-- [ ] C02 Choose a source-seeding mechanism: immutable seed outside mount paths plus explicit `setup_px4_workspace` copying/cloning into mounted Projects. Support unmounted image use as well.
-- [ ] C03 Implement idempotent PX4 checkout at the locked commit with recursive submodules; verify submodule completeness. Never reset, clean or overwrite a dirty existing checkout.
-- [ ] C04 Populate matching `px4_msgs` and optional `px4_ros_com` from the manifest; distinguish fetched upstream checkouts from authored tracked packages.
-- [ ] C05 Implement `build_px4_sitl` with configurable bounded parallel jobs and ccache. Document compiler/debug configuration, output binary and rebuild cycle.
-- [ ] C06 Implement `build_ros2_workspace` using `colcon build --symlink-install` and explicit underlay sourcing. Ensure fresh shells find the resulting overlay.
-- [ ] C07 Adapt the clean/rebuild helper to remove only this workspace's build/install/log directories; reject missing, root or unexpected target paths and preserve sources.
-- [ ] C08 Persist PX4 parameters, ULogs, QGC settings/missions, ROS bags and useful caches under documented Data subdirectories. Verify actual application paths instead of merely creating unused folders.
-- [ ] C09 Separate disposable build caches from user data. Document source upgrades, compatible message rebuilds and explicit parameter reset; startup must not silently upgrade dependencies.
-- [ ] C10 Verify host ownership after setup, compilation, recording and shutdown. Avoid recurring broad recursive chown operations.
-- [ ] C11 Prefetch the baseline world's required models or document an explicit preparation step. Prove a prepared baseline simulation can start without fetching remote Fuel assets.
+- [x] C01 Create tracked `Commands/bin`, `ExampleCode`, `Projects/ros2_workspace/src`, and `Data/.gitkeep`; ensure empty host bind mounts cannot hide the only source copy.
+- [x] C02 Choose a source-seeding mechanism: immutable seed outside mount paths plus explicit `setup_px4_workspace` copying/cloning into mounted Projects. Support unmounted image use as well.
+- [x] C03 Implement idempotent PX4 checkout at the locked commit with recursive submodules; verify submodule completeness. Never reset, clean or overwrite a dirty existing checkout.
+- [x] C04 Populate matching `px4_msgs` and optional `px4_ros_com` from the manifest; distinguish fetched upstream checkouts from authored tracked packages.
+- [x] C05 Implement `build_px4_sitl` with configurable bounded parallel jobs and ccache. Document compiler/debug configuration, output binary and rebuild cycle.
+- [x] C06 Implement `build_ros2_workspace` using `colcon build --symlink-install` and explicit underlay sourcing. Ensure fresh shells find the resulting overlay.
+- [x] C07 Adapt the clean/rebuild helper to remove only this workspace's build/install/log directories; reject missing, root or unexpected target paths and preserve sources.
+- [x] C08 Persist PX4 parameters, ULogs, QGC settings/missions, ROS bags and useful caches under documented persistent Projects/Data paths. Verify actual application paths instead of merely creating unused folders.
+- [x] C09 Separate disposable build caches from user data. Document source upgrades, compatible message rebuilds and explicit parameter reset; startup must not silently upgrade dependencies.
+- [x] C10 Verify host ownership after setup, compilation, recording and shutdown. Avoid recurring broad recursive chown operations.
+- [x] C11 Prefetch the baseline world's required models or document an explicit preparation step. Prove a prepared baseline simulation can start without fetching remote Fuel assets.
 
 ## D — QGroundControl and remote desktop
 
 Exit gate: QGC and Gazebo render inside VNC and native display sessions and QGC settings survive container removal.
 
-- [ ] D01 Add a checksum-verified QGC installer using the locked release. Extract AppImage during build and launch its AppRun where supported, avoiding runtime FUSE/privileged-container requirements.
-- [ ] D02 Install and verify QGC's actual Qt/XCB/OpenGL/multimedia dependencies; inspect unresolved shared libraries and launch diagnostics for the selected release.
-- [ ] D03 Add `start_qgroundcontrol`, a desktop launcher and PATH integration; run as `user` and preserve supplied arguments and meaningful exit codes.
-- [ ] D04 Configure persistent QGC settings, missions and logs without hiding bundled application resources. Document first-launch behavior and reset procedure.
-- [ ] D05 Port Xfce + TigerVNC + noVNC + websockify and the reference font/terminal configuration. Retain `VNC_PW`, `VNC_RESOLUTION`, localhost host bindings and documented password-length behavior.
-- [ ] D06 Port D-Bus session setup, X readiness checks, private runtime directory, signal forwarding and child cleanup. Make desktop/service startup failures observable and nonzero.
-- [ ] D07 Test Gazebo and QGC simultaneously in the VNC desktop, including Qt/OpenGL failure diagnostics and software rendering. Record actual renderer; GPU passthrough is not proof of accelerated Xvnc rendering.
-- [ ] D08 Verify local QGC receives live PX4 vehicle state and can perform the baseline simulated flight. Capture visible evidence; a running QGC PID alone is insufficient.
+- [x] D01 Add a checksum-verified QGC installer using the locked release. Extract AppImage during build and launch its AppRun where supported, avoiding runtime FUSE/privileged-container requirements.
+- [x] D02 Install and verify QGC's actual Qt/XCB/OpenGL/multimedia dependencies; inspect unresolved shared libraries and launch diagnostics for the selected release.
+- [x] D03 Add `start_qgroundcontrol`, a desktop launcher and PATH integration; run as `user` and preserve supplied arguments and meaningful exit codes.
+- [x] D04 Configure persistent QGC settings, missions and logs without hiding bundled application resources. Document first-launch behavior and reset procedure.
+- [x] D05 Port Xfce + TigerVNC + noVNC + websockify and the reference font/terminal configuration. Retain `VNC_PW`, `VNC_RESOLUTION`, localhost host bindings and documented password-length behavior.
+- [x] D06 Port D-Bus session setup, X readiness checks, private runtime directory, signal forwarding and child cleanup. Make desktop/service startup failures observable and nonzero.
+- [x] D07 Test Gazebo and QGC simultaneously in the VNC desktop, including Qt/OpenGL failure diagnostics and software rendering. Record actual renderer; GPU passthrough is not proof of accelerated Xvnc rendering.
+- [x] D08 Verify local QGC receives live PX4 vehicle state and can perform the baseline simulated flight. Capture visible evidence; a running QGC PID alone is insufficient.
 
 ## E — Host Bash lifecycle and graphics
 
@@ -142,79 +142,79 @@ Create this exact root command family (unless A10 records a replacement):
 | Remove container | `998_remove_px4_ros2_container.sh` | `998b_remove_px4_ros2_novnc_container.sh` | `998c_remove_px4_ros2_vnc_container.sh` |
 | Remove image | `999_remove_px4_ros2_image.sh` | `999b_remove_px4_ros2_novnc_image.sh` | `999c_remove_px4_ros2_vnc_image.sh` |
 
-- [ ] E01 Implement underlying `px4_ros2_vnc_image/` and `px4_ros2_novnc_image/` scripts: `01_build_image.sh`, `02_run_container.sh`, `03_attach_bash.sh`, `97_stop_container.sh`, `98_remove_container.sh`, `99_remove_image.sh`. Root scripts delegate with arguments intact.
-- [ ] E02 Resolve paths from `BASH_SOURCE`; use quoted Bash arrays, strict error handling and executable bits. Test a checkout path containing spaces.
-- [ ] E03 Forward build options and host UID/GID; forward run options before the image. Document how to supply container command arguments separately if supported.
-- [ ] E04 Preserve foreground `--rm -it` usage and distinct mode names. Ensure stop/remove/image-remove target only this project's resources; never prune Docker globally or delete Data/Projects.
-- [ ] E05 Create required bind directories as the host user before Docker starts. Share the four reference mount locations and configure sufficient shared memory.
-- [ ] E06 Validate Docker availability, daemon access, name conflicts and host port collisions with actionable messages. Document concurrent use with ROSLyricalDocker and alternate desktop ports.
-- [ ] E07 Implement native Linux local X11/Xwayland socket validation, scoped temporary Xauthority forwarding and cleanup. Do not use blanket `xhost +`; reject unsupported remote DISPLAY values.
-- [ ] E08 Consolidate GPU selection for both modes; support explicit `auto`, NVIDIA, DRI and software choices. Preserve numeric render-device group access and useful diagnostics when the NVIDIA runtime is absent.
-- [ ] E09 Avoid privileged mode, host PID namespace and unnecessary devices. QGC extracted execution should not need FUSE; hardware USB/serial passthrough is outside baseline SITL.
-- [ ] E10 If retaining `setup_nvidia_docker.sh`, make it an explicit optional host-admin action and explain Docker restart impact. Never invoke it from build/run scripts.
-- [ ] E11 Add a headless entry point that requires neither DISPLAY nor desktop ports; make it usable without TTY for CI.
+- [x] E01 Implement underlying `px4_ros2_vnc_image/` and `px4_ros2_novnc_image/` scripts: `01_build_image.sh`, `02_run_container.sh`, `03_attach_bash.sh`, `97_stop_container.sh`, `98_remove_container.sh`, `99_remove_image.sh`. Root scripts delegate with arguments intact.
+- [x] E02 Resolve paths from `BASH_SOURCE`; use quoted Bash arrays, strict error handling and executable bits. Test a checkout path containing spaces.
+- [x] E03 Forward build options and host UID/GID; forward run options before the image. Document how to supply container command arguments separately if supported.
+- [x] E04 Preserve foreground `--rm -it` usage and distinct mode names. Ensure stop/remove/image-remove target only this project's resources; never prune Docker globally or delete Data/Projects.
+- [x] E05 Create required bind directories as the host user before Docker starts. Share the four reference mount locations and configure sufficient shared memory.
+- [x] E06 Validate Docker availability, daemon access, name conflicts and host port collisions with actionable messages. Document concurrent use with ROSLyricalDocker and alternate desktop ports.
+- [x] E07 Implement native Linux local X11/Xwayland socket validation, scoped temporary Xauthority forwarding and cleanup. Do not use blanket `xhost +`; reject unsupported remote DISPLAY values.
+- [x] E08 Consolidate GPU selection for both modes; support explicit `auto`, NVIDIA, DRI and software choices. Preserve numeric render-device group access and useful diagnostics when the NVIDIA runtime is absent.
+- [x] E09 Avoid privileged mode, host PID namespace and unnecessary devices. QGC extracted execution should not need FUSE; hardware USB/serial passthrough is outside baseline SITL.
+- [x] E10 No `setup_nvidia_docker.sh` is retained. Host NVIDIA toolkit setup is a documented external prerequisite and never runs from build/run scripts.
+- [x] E11 Add a headless entry point that requires neither DISPLAY nor desktop ports; make it usable without TTY for CI.
 
 ## F — SITL launch, process lifecycle and communications
 
 Exit gate: one explicit command starts a usable session; stop/restart leaves no orphan processes or stale ports.
 
-- [ ] F01 Implement `start_px4_sitl` for the pinned release's x500 target (candidate `make px4_sitl gz_x500`); validate model/world arguments and working directory.
-- [ ] F02 Implement a headless mode using supported pinned-release options; avoid launching a second Gazebo server accidentally. Check simulator time advances and vehicle is spawned.
-- [ ] F03 Build/install the locked agent and add `start_micro_xrce_agent`; candidate command `MicroXRCEAgent udp4 -p 8888`. Expose validated port configuration and preserve diagnostics.
-- [ ] F04 Add `start_px4_dev` using a named tmux session with agent, PX4 console/Gazebo, ROS diagnostics and QGC panes/windows. Preserve the inherited tmux theme and key behavior.
-- [ ] F05 Implement bounded readiness checks and startup ordering: agent available, simulator/vehicle ready, telemetry flowing. Replace fixed long sleeps with observable conditions.
-- [ ] F06 Track session-owned process groups or tmux panes. Implement `stop_px4_dev` without global `killall`; propagate interrupts and clean up partial startup failures.
-- [ ] F07 Handle an already-running session explicitly: attach or fail helpfully; do not start duplicate agents, simulators or QGC listeners.
-- [ ] F08 Document the port/direction/protocol table and verify the actual PX4 MAVLink destination is the QGC listener. Keep 8888 and 14550 internal for the default same-container topology.
-- [ ] F09 Select a tested DDS RMW/domain configuration, including the PX4 client's domain setting. Verify QoS with actual subscriptions, not only topic discovery.
-- [ ] F10 Document optional host-side QGC/ROS networking separately. UDP publication alone does not redirect PX4 outbound traffic; provide an explicit destination route and tests if this option is implemented.
-- [ ] F11 Select one coherent time policy for baseline ROS control. If using Gazebo `/clock`, bridge it, configure participating nodes and PX4 time synchronization consistently for the pinned release. Test timestamp units and pause/resume behavior.
-- [ ] F12 Add `px4_doctor` to report versions, source revisions, permissions, renderer, process state, ports, ROS domain/RMW, topic freshness and log locations without changing configuration.
+- [x] F01 Implement `start_px4_sitl` for the pinned release's x500 target (candidate `make px4_sitl gz_x500`); validate model/world arguments and working directory.
+- [x] F02 Implement a headless mode using supported pinned-release options; avoid launching a second Gazebo server accidentally. Check simulator time advances and vehicle is spawned.
+- [x] F03 Build/install the locked agent and add `start_micro_xrce_agent`; candidate command `MicroXRCEAgent udp4 -p 8888`. Expose validated port configuration and preserve diagnostics.
+- [x] F04 Add `start_px4_dev` using a named tmux session with agent, PX4 console/Gazebo, ROS diagnostics and QGC panes/windows. Preserve the inherited tmux theme and key behavior.
+- [x] F05 Implement bounded readiness checks and startup ordering: agent available, simulator/vehicle ready, telemetry flowing. Replace fixed long sleeps with observable conditions.
+- [x] F06 Track session-owned process groups or tmux panes. Implement `stop_px4_dev` without global `killall`; propagate interrupts and clean up partial startup failures.
+- [x] F07 Handle an already-running session explicitly: attach or fail helpfully; do not start duplicate agents, simulators or QGC listeners.
+- [x] F08 Document the port/direction/protocol table and verify the actual PX4 MAVLink destination is the QGC listener. Keep 8888 and 14550 internal for the default same-container topology.
+- [x] F09 Select a tested DDS RMW/domain configuration, including the PX4 client's domain setting. Verify QoS with actual subscriptions, not only topic discovery.
+- [x] F10 Document optional host-side QGC/ROS networking separately. UDP publication alone does not redirect PX4 outbound traffic; provide an explicit destination route and tests if this option is implemented.
+- [x] F11 Select one coherent time policy for baseline ROS control. If using Gazebo `/clock`, bridge it, configure participating nodes and PX4 time synchronization consistently for the pinned release. Test timestamp units and pause/resume behavior.
+- [x] F12 Add `px4_doctor` to report versions, source revisions, permissions, renderer, process state, ports, ROS domain/RMW, topic freshness and log locations without changing configuration.
 
 ## G — PX4-focused ROS workspace and examples
 
 Exit gate: ROS receives telemetry and executes a complete, observable simulated offboard flight.
 
-- [ ] G01 Add an authored ROS package such as `px4_dev_examples` with package metadata, declared dependencies, launch files, README and license. Keep it distinct from fetched upstream packages.
-- [ ] G02 Implement a telemetry example subscribing to selected `/fmu/out` topics using compatible QoS; print timestamp, vehicle status and position with units/frame labels.
-- [ ] G03 Implement an explicit simulation-only offboard demo: wait for estimator readiness, stream required control messages, request mode/arm, verify acknowledgements/state, take off, hold, land and confirm disarm.
-- [ ] G04 Handle rejected commands, stale telemetry, startup timeouts and loss of the offboard stream. Bound the mission duration and provide a documented interruption/landing path.
-- [ ] G05 Document and test PX4 NED/FRD versus ROS ENU/FLU conventions, quaternion ordering and timestamp units. Do not pass ROS coordinates directly into PX4 fields without conversion.
-- [ ] G06 Keep flight-triggering demos opt-in. Do not weaken PX4 safety parameters globally to make an example pass; document any simulation-specific parameter changes and reset behavior.
+- [x] G01 Add an authored ROS package such as `px4_dev_examples` with package metadata, declared dependencies, launch files, README and license. Keep it distinct from fetched upstream packages.
+- [x] G02 Implement a telemetry example subscribing to selected `/fmu/out` topics using compatible QoS; print timestamp, vehicle status and position with units/frame labels.
+- [x] G03 Implement an explicit simulation-only offboard demo: wait for estimator readiness, stream required control messages, request mode/arm, verify acknowledgements/state, take off, hold, land and confirm disarm.
+- [x] G04 Handle rejected commands, stale telemetry, startup timeouts and loss of the offboard stream. Bound the mission duration and provide a documented interruption/landing path.
+- [x] G05 Document and test PX4 NED/FRD versus ROS ENU/FLU conventions, quaternion ordering and timestamp units. Do not pass ROS coordinates directly into PX4 fields without conversion.
+- [x] G06 Keep flight-triggering demos opt-in. Do not weaken PX4 safety parameters globally to make an example pass; document any simulation-specific parameter changes and reset behavior.
 - [ ] G07 Add a launch/config example for Gazebo-to-ROS sensor bridging and RViz if the selected model provides sensors. Verify topic names/types, frame IDs and clock settings against that model.
-- [ ] G08 Add `record_px4_rosbag` with explicit topic selection and persistent output; document PX4 ULog collection and replay/inspection basics.
-- [ ] G09 Replace the reference lesson content with concise PX4 walkthroughs: telemetry, QGC flight, ROS offboard flight, modifying/rebuilding PX4, and adding a ROS node. Do not import unrelated teaching assets.
+- [x] G08 Add `record_px4_rosbag` with explicit topic selection and persistent output; document PX4 ULog collection and replay/inspection basics.
+- [x] G09 Replace the reference lesson content with concise PX4 walkthroughs: telemetry, QGC flight, ROS offboard flight, modifying/rebuilding PX4, and adding a ROS node. Do not import unrelated teaching assets.
 
 ## H — Verification and CI
 
 Exit gate: reproducible automated evidence plus manual evidence for supported graphical modes.
 
-- [ ] H01 Add static checks for shell syntax/ShellCheck, manifest completeness and Dockerfile linting; resolve findings or record narrowly justified exceptions.
+- [x] H01 Add static checks for shell syntax/ShellCheck, manifest completeness and Dockerfile linting; resolve findings or record narrowly justified exceptions.
 - [ ] H02 Build both targets from a fresh checkout. Record build duration, image size, peak resource needs and exact pins; repeat a cached build to confirm useful layer reuse.
-- [ ] H03 Add image smoke checks for versions, non-root identity, ROS imports, PX4 toolchain, Gazebo, QGC libraries, tmux plugin loading and full Vim configuration startup.
+- [x] H03 Add image smoke checks for versions, non-root identity, ROS imports, PX4 toolchain, Gazebo, QGC libraries, tmux plugin loading and full Vim configuration startup.
 - [ ] H04 Test source initialization twice, dirty-checkout preservation, recursive submodules and a fresh PX4/colcon build with bind mounts. Also test image-only use without host mounts.
-- [ ] H05 Automate headless SITL with deadlines and log capture. Assert model spawn, advancing simulation, agent connection and fresh ROS telemetry, not just process existence.
-- [ ] H06 Automate the simulation-only offboard mission and assert observed arm, altitude/hold, landing and disarm states. On failure preserve PX4/agent/ROS logs and clean up session-owned processes.
-- [ ] H07 Check VNC RFB handshake, noVNC HTTP page, WebSocket upgrade and live Xfce session. Separately inspect real QGC/Gazebo windows and renderer behavior.
-- [ ] H08 Manually validate native X11/Xwayland with a valid cookie; exercise missing DISPLAY/cookie and software-render fallback diagnostics.
+- [x] H05 Automate headless SITL with deadlines and log capture. Assert model spawn, advancing simulation, agent connection and fresh ROS telemetry, not just process existence.
+- [x] H06 Automate the simulation-only offboard mission and assert observed arm, altitude/hold, landing and disarm states. On failure preserve PX4/agent/ROS logs and clean up session-owned processes.
+- [x] H07 Check VNC RFB handshake, noVNC HTTP page, WebSocket upgrade and live Xfce session. Separately inspect real QGC/Gazebo windows and renderer behavior.
+- [x] H08 Manually validate native X11/Xwayland with a valid cookie; exercise missing DISPLAY/cookie and software-render fallback diagnostics.
 - [ ] H09 Test container stop during simulation, unexpected agent/simulator exit, restart and repeated launch. Confirm cleanup, nonzero failure reporting and no stale ports.
-- [ ] H10 Test persistence through container removal/recreation: edited PX4/ROS source, settings, flight logs and bags remain intact and host-owned.
+- [x] H10 Test persistence through container removal/recreation: edited PX4/ROS source, settings, flight logs and bags remain intact and host-owned.
 - [ ] H11 Test every lifecycle alias from outside the repo and from a path with spaces; test extra Docker argument handling, conflicting names/ports and unavailable daemon.
-- [ ] H12 Verify coexistence with ROSLyricalDocker using alternate desktop ports and independent names; confirm reference repository status/checksums are unchanged.
-- [ ] H13 Add CI for static/image/headless checks with bounded runtimes and failure artifacts. Make GUI/GPU checks an explicit manual matrix, not silently skipped green checks.
-- [ ] H14 Test offline runtime after preparation; distinguish required online build/model setup from optional QGC map tiles. Document any remaining network dependency.
-- [ ] H15 Publish a tested host/architecture/rendering matrix. Validate ARM64 and Docker Desktop separately if claiming support; otherwise clearly scope baseline to Linux amd64.
+- [x] H12 Verify coexistence with ROSLyricalDocker using alternate desktop ports and independent names; confirm reference repository status/checksums are unchanged.
+- [x] H13 Add CI for static/image/headless checks with bounded runtimes and failure artifacts. Make GUI/GPU checks an explicit manual matrix, not silently skipped green checks.
+- [x] H14 Test offline runtime after preparation; distinguish required online build/model setup from optional QGC map tiles. Document any remaining network dependency.
+- [x] H15 Publish a tested host/architecture/rendering matrix. Validate ARM64 and Docker Desktop separately if claiming support; otherwise clearly scope baseline to Linux amd64.
 
 ## I — User documentation and final acceptance
 
-- [ ] I01 Write README with prerequisites and measured resource guidance, build/run/attach examples for both modes, desktop URL, VNC options and the historical `novnc` naming explanation.
-- [ ] I02 Give an exact fresh-clone walkthrough: build image → run container → initialize workspace → build PX4/ROS → start session → see vehicle in QGC → inspect ROS telemetry → execute opt-in offboard demo → stop.
-- [ ] I03 Document all helper commands, environment overrides, mounts, source/version upgrade procedure and which steps require internet.
-- [ ] I04 Document everyday development: modify PX4 C++, rebuild/restart SITL, modify a ROS package, rebuild/source overlay, use tmux/Vim, inspect ULogs/bags and reset only selected simulation state.
-- [ ] I05 Add troubleshooting for apt/version mismatch, stale px4_msgs, incompatible agent, DDS QoS/domain, missing QGC heartbeat, Qt/XCB failures, black Gazebo windows, Xauthority, ownership and insufficient memory/disk.
-- [ ] I06 Preserve third-party licenses and font/config attribution; distinguish repository-owned examples from downloaded upstream sources and binaries.
+- [x] I01 Write README with prerequisites and measured resource guidance, build/run/attach examples for both modes, desktop URL, VNC options and the historical `novnc` naming explanation.
+- [x] I02 Give an exact fresh-clone walkthrough: build image → run container → initialize workspace → build PX4/ROS → start session → see vehicle in QGC → inspect ROS telemetry → execute opt-in offboard demo → stop.
+- [x] I03 Document all helper commands, environment overrides, mounts, source/version upgrade procedure and which steps require internet.
+- [x] I04 Document everyday development: modify PX4 C++, rebuild/restart SITL, modify a ROS package, rebuild/source overlay, use tmux/Vim, inspect ULogs/bags and reset only selected simulation state.
+- [x] I05 Add troubleshooting for apt/version mismatch, stale px4_msgs, incompatible agent, DDS QoS/domain, missing QGC heartbeat, Qt/XCB failures, black Gazebo windows, Xauthority, ownership and insufficient memory/disk.
+- [x] I06 Preserve third-party licenses and font/config attribution; distinguish repository-owned examples from downloaded upstream sources and binaries.
 - [ ] I07 Have an agent other than the implementer follow the README from a clean checkout. Record deviations and fix the commands/documentation before completion.
-- [ ] I08 Attach final verification evidence and remaining platform limitations to `docs/implementation-status.md`; leave genuinely untested tasks unchecked.
+- [x] I08 Attach final verification evidence and remaining platform limitations to `docs/implementation-status.md`; leave genuinely untested tasks unchecked.
 
 ## Definition of done
 

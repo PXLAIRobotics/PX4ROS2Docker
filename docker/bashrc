@@ -1,0 +1,27 @@
+# The flag is deliberately not exported: each new shell still defines aliases/functions.
+[[ ${PX4_DEV_BASHRC_LOADED:-0} != 1 ]] || return 0
+source /opt/ros/jazzy/setup.bash
+for _px4_path in "$HOME/.local/bin" /opt/px4-venv/bin "$HOME/bin"; do
+    case ":$PATH:" in
+        *":$_px4_path:"*) ;;
+        *) PATH="$_px4_path:$PATH" ;;
+    esac
+done
+unset _px4_path
+export PATH
+export ROS_DOMAIN_ID="${ROS_DOMAIN_ID:-0}"
+export RMW_IMPLEMENTATION="${RMW_IMPLEMENTATION:-rmw_fastrtps_cpp}"
+export GZ_DISTRO=harmonic
+if [[ -f /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash ]]; then
+    source /usr/share/colcon_argcomplete/hook/colcon-argcomplete.bash
+fi
+if [[ -f "$HOME/Projects/ros2_workspace/install/local_setup.bash" ]]; then
+    source "$HOME/Projects/ros2_workspace/install/local_setup.bash"
+fi
+alias ll='ls --color=auto -alFh'
+clean_and_rebuild_ros2_workspace() {
+    "$HOME/bin/remove_colcon_dirs_and_rebuild_in_ros2_workspace" || return
+    source "$HOME/Projects/ros2_workspace/install/setup.bash"
+}
+
+PX4_DEV_BASHRC_LOADED=1

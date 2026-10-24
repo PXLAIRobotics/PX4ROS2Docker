@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -euo pipefail
+mkdir -p "$HOME/Data/bags"
+# Match the compiled message schemas, including PX4's nonzero version suffixes.
+topics_text=$(python3 - <<'PY'
+from px4_msgs.msg import VehicleStatus, VehicleLocalPosition, VehicleCommandAck
+from px4_dev_examples.common import topic
+for name, cls in [('vehicle_status', VehicleStatus), ('vehicle_local_position', VehicleLocalPosition),
+                  ('vehicle_command_ack', VehicleCommandAck)]:
+    print(topic('out', name, cls))
+PY
+)
+mapfile -t topics <<< "$topics_text"
+exec ros2 bag record -o "$HOME/Data/bags/px4-$(date +%Y%m%d-%H%M%S)" "${topics[@]}" "$@"

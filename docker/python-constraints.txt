@@ -1,0 +1,3 @@
+# ROS Jazzy's Noble binary extensions use the NumPy 1.x C ABI.
+numpy==1.26.4
+pandas==2.2.3

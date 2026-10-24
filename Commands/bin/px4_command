@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Invoke a command in the running instance without taking over its PX4 console.
+set -euo pipefail
+command=${1:?Usage: px4_command COMMAND [arguments...]}; shift
+[[ $command =~ ^[a-z][a-z0-9_]*$ ]] || { echo 'Invalid PX4 command name' >&2; exit 2; }
+binary="$HOME/Projects/PX4-Autopilot/build/px4_sitl_default/bin/px4-$command"
+[[ -x $binary ]] || { echo "PX4 command is unavailable: $command. Build SITL first." >&2; exit 1; }
+exec "$binary" "$@"

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -eo pipefail
+source /opt/ros/jazzy/setup.bash
+[[ ${BUILD_JOBS:-4} =~ ^[1-9][0-9]*$ ]] || { echo 'BUILD_JOBS must be a positive integer' >&2; exit 1; }
+export CMAKE_BUILD_PARALLEL_LEVEL="${BUILD_JOBS:-4}"
+cd "$HOME/Projects/ros2_workspace"
+exec colcon build --symlink-install --parallel-workers "${BUILD_JOBS:-4}" "$@"
