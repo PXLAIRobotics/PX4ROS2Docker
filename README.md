@@ -123,11 +123,11 @@ rviz2
 glxinfo -B
 ```
 
-`start_px4_sitl` uses an x500 with the RGB-D/lidar suite and the bundled default world. `PX4_GZ_WORLD` selects another bundled world. Parameters persist under `Projects/PX4-Autopilot/build/px4_sitl_default/rootfs/parameters.bson`; stop SITL and back up that file before any deliberate reset. Flight ULogs are linked into `Data/px4/logs`; ROS recordings go into `Data/bags`; tmux service output goes into timestamped `Data/sessions` directories. Use the installed `pyulog` tools for ULog inspection and `ros2 bag info/play` for ROS bags.
+`start_px4_sitl` uses an x500 with the RGB-D/lidar suite and the bundled `corda_campus` world. `PX4_GZ_WORLD` selects another bundled world. Parameters persist under `Projects/PX4-Autopilot/build/px4_sitl_default/rootfs/parameters.bson`; stop SITL and back up that file before any deliberate reset. Flight ULogs are linked into `Data/px4/logs`; ROS recordings go into `Data/bags`; tmux service output goes into timestamped `Data/sessions` directories. Use the installed `pyulog` tools for ULog inspection and `ros2 bag info/play` for ROS bags.
 
-The default simulated GPS origin is **Corda Campus, Hasselt**, approximately **50.951737° N, 5.352412° E**, at an assumed elevation of **50 m AMSL**. This relocates the simulated GPS/home position and QGC map; Gazebo still uses its bundled flat world, without campus buildings or terrain. The coordinates are an approximate campus point, not a surveyed launch position.
+The world's geographic origin remains **50.951737° N, 5.352412° E**, with assumed flat ground at **50 m AMSL**. In the campus world, the actual drone starts on the Corda 1 roof at local East/North **(-85, -38) m**, approximately **50.9513954° N, 5.3512024° E**. The platform is about **23.56 m above ground**; the vehicle rests about **73.8 m AMSL**. These are approximate simulation coordinates, not a surveyed launch position. QGC discovers this actual vehicle/home location from PX4.
 
-To select a different origin, stop the session and supply all three values inside the container:
+To relocate the entire world geographically, stop the session and supply all three origin values inside the container (the campus geometry and rooftop spawn retain their local offsets):
 
 ```bash
 stop_px4_dev
@@ -149,6 +149,33 @@ BUILD_JOBS=2 build_px4_sitl  # inside container, for constrained hosts
 ```
 
 Build scripts forward Docker build options. Run scripts accept Docker options before an optional `--`; words after `--` replace the container command. `GPU_MODE` accepts `auto`, `nvidia`, `dri`, or `software`. VNC acceleration depends on its X server; inspect the actual renderer rather than assuming GPU passthrough accelerates Xvnc. Classic VNC password authentication uses only the first eight characters. Use SSH tunnels for remote desktop access.
+
+## Corda Campus world
+
+The default `corda_campus` world contains **82 actual GRB building footprints**, with angled/concave outlines, rounded facades and courtyards preserved as triangulated meshes. Visual and collision geometry match. Corda 1, its companion, Corda 2 and Corda 3 have sloping wedge roofs; Corda Arena and nearby offices retain their mapped outlines. Other roofs are mostly flat. Corda 1/2/3 have separate green roof and blue-grey/light/warm-grey facade materials. Their roof slopes are approximated from campus references; full closed collision meshes match the combined visual surfaces.
+
+Heights use available 3D GRB values matched by stable building IDs, architectural dimensions where available and explicit estimates for missing data. Corda 1's 30 m maximum comes from the architect; the detailed roof plane remains approximate. All sources, licences, data dates and approximation rules are documented in [tools/campus/SOURCES.md](tools/campus/SOURCES.md). This is an untextured building reconstruction: no interiors, windows, detailed terrain, trees, cars or surveyed rooftop structures.
+
+A **synthetic level 4×4 m launch platform** sits above Corda 1's sloping roof so the drone can stand and land stably. It is marked with an H; it is not a real helipad. The generator verifies the platform lies inside the roof footprint. The original approximate GPS point was beside Corda 1; the new spawn is on its actual footprint.
+
+For an existing container/workspace, install the new assets and restart:
+
+```bash
+stop_px4_dev
+build_ros2_workspace --packages-select px4_dev_examples
+source ~/Projects/ros2_workspace/install/setup.bash
+start_px4_dev --no-attach
+# Verify the disarmed vehicle stays at the rooftop elevation:
+ros2 run px4_dev_examples campus_check
+```
+
+`start_gazebo_gui` opens the normal Gazebo controls with a view toward the launch roof. It supplies the installed campus resource paths for meshes. The `sensors` window bridges the selected world's clock, so the existing RViz viewer also works in the campus.
+
+To use the original empty world, stop the session and run `PX4_GZ_WORLD=default start_px4_dev`. To use campus geometry without rendered sensors, use `PX4_SENSOR_SUITE=none start_px4_dev`. `PX4_GZ_MODEL_POSE` can explicitly override the default local spawn (`x,y,z,roll,pitch,yaw` in metres/radians); ensure any alternative starts clear of buildings. An explicit world/pose override is forwarded to tmux even if its server was already running.
+
+All world/model/mesh assets are local, so simulation needs no map download. Editable source footprints, height attributes and overrides are under `tools/campus`; generated assets and a per-building provenance report are installed under the ROS package's `simulation` directory. Regeneration is an optional offline GIS build step described in the source notes; ordinary Docker image builds just package the checked-in meshes. Software rendering and complex collisions can reduce simulation speed.
+
+The integration check `bash /opt/px4-tests/campus.sh` starts and stops its own headless session, verifies rooftop support for several seconds and checks sensor payloads/TF. Run it only without an active development session. The ordinary opt-in offboard demo takes off relative to the rooftop and returns to the launch platform.
 
 ## RGB-D camera and 3D lidar
 
@@ -173,13 +200,13 @@ view_px4_sensors
 ros2 run px4_dev_examples sensor_check --save ~/Data/evidence/sensors
 ```
 
-The `sensors` tmux window runs `ros2 launch px4_dev_examples sensors.launch.py`. Standalone `start_px4_sitl` starts the model/server only; launch that bridge separately for ROS sensor topics. The bridge uses best-effort sensor QoS and lazy subscriptions so unused streams avoid unnecessary transfers. For direct inspection, use `--qos-reliability best_effort`. Sensors also work without a display server using Gazebo's Ogre2 EGL headless rendering; software rendering can be slower.
+The `sensors` tmux window runs `ros2 launch px4_dev_examples sensors.launch.py`. Standalone `start_px4_sitl` starts the model/server only; launch that bridge separately for ROS sensor topics. When choosing another world, give that bridge the matching `PX4_GZ_WORLD` environment value as well. The bridge uses best-effort sensor QoS and lazy subscriptions so unused streams avoid unnecessary transfers. For direct inspection, use `--qos-reliability best_effort`. Sensors also work without a display server using Gazebo's Ogre2 EGL headless rendering; software rendering can be slower.
 
 `view_px4_sensors` opens the included RViz configuration with RGB/depth panels and both clouds. Its fixed frame is `base_link` (ROS FLU). Static TF connects that frame to `lidar_link`, `rgbd_link`, `rgbd_sensor` and `rgbd_optical_frame`; images, camera info and the RGB-D cloud use the optical frame (+Z forward, +X right, +Y down). This is a vehicle-relative view; no map/odometry TF, SLAM or obstacle-avoidance controller is provided. These sensors feed ROS perception and do not automatically change PX4 flight behaviour or stream camera video into QGC.
 
 Sensor timestamps and `/clock` use Gazebo simulation time. The sensor launch bridges the selected world's clock; RViz uses `use_sim_time:=true`. Keep the existing PX4 offboard control nodes on their documented wall-time setup. Do not launch a second clock bridge at the same time.
 
-To run the original lighter, sensor-free x500, stop the session and use `PX4_SENSOR_SUITE=none start_px4_dev`. The same selector works with standalone SITL. Sensor-free runs do not require the rendered sensor checks or publish these sensor topics. To record sensors alongside control telemetry, pass their topics explicitly, for example:
+To run without the rendered sensor suite, stop the session and use `PX4_SENSOR_SUITE=none start_px4_dev` (the campus world remains selected). The same selector works with standalone SITL. Sensor-free runs do not require the rendered sensor checks or publish these sensor topics. To record sensors alongside control telemetry, pass their topics explicitly, for example:
 
 ```bash
 record_px4_rosbag /drone/rgbd/image /drone/rgbd/depth_image \
@@ -216,6 +243,7 @@ PX4 local positions use NED: positive X north, Y east, Z down. The demo sets a n
 # Inside a built development container, with no other session/QGC running:
 bash /opt/px4-tests/flight.sh
 bash /opt/px4-tests/sensors.sh
+bash /opt/px4-tests/campus.sh
 ```
 
 The flight test starts headless SITL and a local test GCS heartbeat, then asserts arm/takeoff/hold/land/disarm. It does not replace the manual QGC visual/flight test. The CI image job is opt-in through workflow dispatch because full builds are large. See `docs/implementation-status.md` for actual results.

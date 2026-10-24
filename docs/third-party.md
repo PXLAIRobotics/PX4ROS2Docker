@@ -8,3 +8,6 @@
 - QGroundControl is downloaded from an official stable release and extracted without changing its resources. Its upstream licensing includes Apache-2.0/GPL-3.0 options and bundled dependency notices; consult the exact release before redistribution.
 - Vim/tmux plugins are pinned in docker/plugins.lock and retain each upstream repository's license. The image keeps plugin source/license files.
 - Ubuntu, ROS 2 and Gazebo packages carry their respective licenses and package notices inside the image.
+
+- Campus footprints and derived building meshes use GRB open data. Attribution: **Bron: Grootschalig Referentie Bestand Vlaanderen, Digitaal Vlaanderen**. Height attributes are distributed by the province of Limburg. See `tools/campus/SOURCES.md` and the model's installed `ATTRIBUTION.md`; the environment MIT licence does not replace their source-data terms.
+- `tools/campus/gui.config.in` adapts Gazebo Sim 8's standard GUI configuration under Apache-2.0. Its licence is included in `tools/campus/Gazebo-GUI-LICENSE` and installed beside the runtime assets.

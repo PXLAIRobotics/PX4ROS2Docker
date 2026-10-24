@@ -2,6 +2,7 @@
 set -euo pipefail
 headless=0; attach=1
 export PX4_SENSOR_SUITE="${PX4_SENSOR_SUITE:-rgbd_lidar}"
+export PX4_GZ_WORLD="${PX4_GZ_WORLD:-corda_campus}"
 case "$PX4_SENSOR_SUITE" in rgbd_lidar|none) ;; *) echo 'PX4_SENSOR_SUITE must be rgbd_lidar or none.' >&2; exit 2;; esac
 for argument in "$@"; do
     case "$argument" in
@@ -22,17 +23,25 @@ mkdir -p "$run_dir"
 failed=1
 cleanup() {
     if (( failed )); then
-        tmux kill-session -t "$session" 2>/dev/null || true
+        # A stopped/failed startup may still have a readiness waiter. Its EXIT
+        # trap must not kill a newer session created under the same name.
+        current_run=$(tmux show-environment -t "$session" PX4_DEV_RUN_DIR 2>/dev/null || true)
+        if [[ $current_run == "PX4_DEV_RUN_DIR=$run_dir" ]]; then
+            tmux kill-session -t "$session" 2>/dev/null || true
+        fi
         echo "Session startup failed. Logs: $run_dir" >&2
     fi
 }
 trap cleanup EXIT
 tmux new-session -d -s "$session" -n agent 'exec bash -lc "start_micro_xrce_agent"'
+tmux set-environment -t "$session" PX4_DEV_RUN_DIR "$run_dir"
 # An existing tmux server retains its original environment. Forward overrides
 # from this invocation to the new simulation window explicitly.
-for variable in PX4_HOME_LAT PX4_HOME_LON PX4_HOME_ALT PX4_SENSOR_SUITE PX4_GZ_WORLD; do
+for variable in PX4_HOME_LAT PX4_HOME_LON PX4_HOME_ALT PX4_SENSOR_SUITE PX4_GZ_WORLD PX4_GZ_MODEL_POSE; do
     if [[ -v $variable ]]; then
         tmux set-environment -t "$session" "$variable" "${!variable}"
+    else
+        tmux set-environment -r -t "$session" "$variable"
     fi
 done
 tmux set-option -t "$session" remain-on-exit on
@@ -56,7 +65,7 @@ if [[ $PX4_SENSOR_SUITE == rgbd_lidar ]]; then
     ros2 run px4_dev_examples sensor_check --timeout 45 > "$run_dir/sensor-check.json"
 fi
 if (( !headless )); then
-    tmux new-window -t "$session" -n gazebo 'exec bash -lc "gz sim -g"'
+    tmux new-window -t "$session" -n gazebo 'exec bash -lc "start_gazebo_gui"'
     tmux set-option -t "$session:gazebo" remain-on-exit on
     tmux pipe-pane -o -t "$session:gazebo" "cat >> '$run_dir/gazebo.log'"
     tmux new-window -t "$session" -n qgc 'exec bash -lc "start_qgroundcontrol"'

@@ -90,3 +90,27 @@ Configured sensor rates use simulation time; no hardware-performance guarantee i
 An initial 640×480/15 Hz RGB-D preset was too expensive with both point-cloud displays active on software rendering. The default was reduced to 320×240/10 Hz before final validation. Hardware rendering and sustained real-time performance remain platform-dependent.
 
 The final VNC container was recreated from the updated image after validation, then started with the sensor suite and RViz viewer. Final startup evidence: `Data/evidence/sensors-ready.log`; runtime health: `Data/evidence/sensors-final-health.log`.
+
+## Corda Campus world (2026-10-24)
+
+The default world is now `corda_campus`: 82 mapped GRB building footprints, with actual concave/angled/rounded outlines and two courtyards. Binary STL meshes have explicit normals and matching static collision/visual geometry. Each nested building is explicitly static for physics performance. Corda 1, its companion, Corda 2 and Corda 3 have approximated sloping wedge roofs; Corda 1's maximum is 30 m per its architect. Corda 1/2/3 have separate green roof and blue-grey/light/warm-grey facade materials. Their roof slopes are approximated from campus references; full closed collision meshes match the combined visual surfaces. Current GRB outlines include Corda Arena; its 24 m height follows the campus masterplan.
+
+Heights: 48 positive exact-ID 3D GRB matches, two architectural height constraints, four visually estimated overrides and 28 generic estimates. The ID-based source refresh recovered ten usable heights outside the older geometry-based download. Every source/estimate is recorded in the generated `simulation/campus.json`. The provincial height layer's geometry had a systematic difference from current footprints, so only stable-ID attribute joins are used. No erroneous spatial height transfer is applied. `tools/campus/SOURCES.md` details data dates, attribution and accuracy limits; its attribution is also installed inside the campus model.
+
+The original approximate GPS point was east of Corda 1. The default spawn is now on its actual footprint, at local East/North (-85,-38) m, approximately 50.9513954 N / 5.3512024 E. A synthetic 4×4 m level launch platform sits above the sloping roof. Its top is 23.565 m above assumed ground; the disarmed vehicle rests around 73.805 m AMSL with the retained 50 m ground datum. Terrain and detailed roof geometry are not surveyed. The launch platform is not a real campus helipad.
+
+Verified on Linux amd64/software rendering:
+
+- Generator verifies watertight topology and cap area, preserving footprint holes. Regeneration into a separate folder matches the packaged assets byte for byte without network: `campus-regenerate.log`.
+- Rooftop support check: eight seconds of disarmed global position at the expected elevation, roughly centimetre-scale position variation: `campus-start.log` and `campus-after-flight.log`.
+- RGB-D images/depth and both point clouds return actual world surfaces with matching TF: `Data/evidence/campus-sensors/`.
+- Full QGC-connected offboard takeoff 3 m above the rooftop, hold, landing/disarm and restored Hold passed: `campus-flight.log`.
+- Campus GUI inspected through noVNC: curved/angled buildings, courtyards, wedge roof and launch pad visible. Screenshot: `corda-campus-world.png`.
+
+The source fetcher downloads into a new review directory; it never silently replaces accepted inputs. GIS dependencies are isolated from ROS and needed only to regenerate assets. Runtime meshes and data attribution are bundled for offline operation. A failed startup's cleanup is now scoped to its own run marker so an old readiness waiter cannot destroy a replacement tmux session. Explicit world/pose overrides are forwarded into tmux, and absent overrides clear stale inherited values.
+
+Additional campus checks: source refresh fetched the same 82 footprints and 50 exact-ID height records into a separate review directory (`campus-fetch.log`); ten additional positive heights were reviewed and accepted, reducing generic estimates. Final campus and sensor-free campus checks passed with network disabled, and the original empty/sensor-free world still supplies fresh ROS telemetry (`campus-offline.log`). A final sensor/roof check after the peripheral height refinements is recorded in `campus-final-offline.log`. Both native and VNC images include the local world and installed attribution. The reference repository and nested PX4/Gazebo source checkouts remain unchanged.
+
+Final delivery: recreated the VNC container from the updated image and started the default campus session. `campus-ready.log` confirms stable rooftop support, with fresh ROS telemetry and QGC Ready / Hold. The noVNC view is left on Gazebo; `corda-campus-world.png` captures the final scene. `ROSLyricalDocker` and the fetched PX4/Gazebo repositories remain unchanged. No commit or push was made.
+
+Corda 2/3 roof correction and facade colours: offline regeneration, exact visual/collision triangle comparison, stable rooftop support and live RGB-D/lidar checks passed (`campus-colours-regenerate.log`, `campus-colours-check.log`). Both images were rebuilt with the separated roof/facade meshes.

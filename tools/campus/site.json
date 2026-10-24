@@ -1,0 +1,78 @@
+{
+  "origin": {
+    "latitude": 50.951737,
+    "longitude": 5.352412,
+    "ground_altitude_m": 50.0
+  },
+  "bounds_m": [
+    -320,
+    -160,
+    330,
+    360
+  ],
+  "simplify_m": 0.12,
+  "buildings": {
+    "6766058": {
+      "name": "corda_1",
+      "roof": "slope",
+      "height_m": 30,
+      "low_height_m": 4,
+      "source": "eld architect: highest point 30 m; roof direction/low edge approximated from campus photo and visitor map",
+      "facade_colour": "0.30 0.40 0.46 1",
+      "roof_colour": "0.30 0.46 0.25 1"
+    },
+    "5791580": {
+      "name": "corda_1_bar",
+      "roof": "slope",
+      "height_m": 8,
+      "low_height_m": 2,
+      "source": "estimated small companion wedge from official visitor map",
+      "facade_colour": "0.30 0.40 0.46 1",
+      "roof_colour": "0.30 0.46 0.25 1"
+    },
+    "6682622": {
+      "name": "corda_2",
+      "roof": "slope",
+      "height_m": 18,
+      "low_height_m": 4,
+      "source": "eld phases 2/3 and official visitor map confirm sloping form; 18 m high edge, 4 m low edge and long-axis roof direction are visual approximations",
+      "facade_colour": "0.83 0.82 0.76 1",
+      "roof_colour": "0.30 0.46 0.25 1"
+    },
+    "6682623": {
+      "name": "corda_3",
+      "roof": "slope",
+      "height_m": 18,
+      "low_height_m": 4,
+      "source": "eld phases 2/3 and official visitor map confirm sloping form; 18 m high edge, 4 m low edge and long-axis roof direction are visual approximations",
+      "facade_colour": "0.53 0.51 0.48 1",
+      "roof_colour": "0.30 0.46 0.25 1"
+    },
+    "4487171": {
+      "name": "corda_4",
+      "height_m": 12,
+      "source": "estimated storey height from official visitor map"
+    },
+    "545957": {
+      "name": "corda_5"
+    },
+    "7690099": {
+      "name": "corda_arena",
+      "height_m": 24,
+      "source": "Corda Campus Masterplan 2.0: arena height 24 m"
+    }
+  },
+  "launch": {
+    "building_oidn": 6766058,
+    "east_m": -85,
+    "north_m": -38,
+    "pad_size_m": 4,
+    "pad_clearance_m": 0.2,
+    "yaw_rad": 0
+  },
+  "notes": [
+    "Flat approximate terrain, not a surveyed reconstruction.",
+    "The level roof launch platform is a synthetic simulation aid, not a real helipad.",
+    "Building-height attributes are matched by stable GRB OIDN only; the provincial height layer geometry is not used."
+  ]
+}

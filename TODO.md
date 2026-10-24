@@ -221,3 +221,12 @@ Exit gate: reproducible automated evidence plus manual evidence for supported gr
 A user can clone PX4ROS2Docker, build and run either GUI variant through familiar numbered scripts, initialize persistent sources, edit and rebuild PX4 and ROS code, start x500 SITL, see Gazebo and QGC, receive PX4 telemetry in ROS 2, complete a takeoff/hold/land offboard demonstration, and stop/recreate the container without losing work. Bash, tmux, Vim and terminal appearance match the inspected reference configuration. Headless integration checks pass, supported graphical modes have visual evidence, exact dependency choices are recorded, and ROSLyricalDocker remains unchanged.
 
 Optional work after baseline acceptance: experimental Lyrical/Jetty, multi-vehicle simulation, custom airframes/worlds, external ROS networking, ARM64 expansion, firmware flashing/HITL, joystick/video integration and PX4 ROS 2 control-interface-library examples. Do not let these defer the baseline acceptance gates.
+
+## J — Corda Campus world (2026-10-24)
+
+- [x] J01 Acquire and attribute current GRB building outlines and exact-ID 3D GRB heights; retain source snapshots and mark estimated heights.
+- [x] J02 Generate watertight static collision/visual meshes preserving concave outlines, curves and courtyards; add approximated Corda 1 wedge roofs.
+- [x] J03 Place a clearly synthetic level launch platform inside Corda 1's actual roof footprint and verify stable disarmed support.
+- [x] J04 Integrate the default campus world, alternate empty world, pose overrides, GUI resource paths and selected-world sensor clock.
+- [x] J05 Validate rendered sensor payloads and a full rooftop takeoff/hold/landing/disarm; verify offline and sensor-free compatibility.
+- [x] J06 Provide reproducible source refresh/regeneration tools, data/GUI licences, documentation and a Gazebo scene screenshot.

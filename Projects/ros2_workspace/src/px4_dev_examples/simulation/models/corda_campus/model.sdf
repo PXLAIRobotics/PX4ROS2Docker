@@ -1,0 +1,2137 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.9">
+  <model name="corda_campus">
+    <static>true</static>
+    <model name="building_543267">
+      <static>true</static>
+      <pose>248.577045 367.016490 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_543267.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_543267.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_543268">
+      <static>true</static>
+      <pose>228.493310 370.239929 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_543268.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_543268.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_545772">
+      <static>true</static>
+      <pose>-306.869272 362.398960 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_545772.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_545772.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_545780">
+      <static>true</static>
+      <pose>-190.132856 337.037817 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_545780.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_545780.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_545835">
+      <static>true</static>
+      <pose>-187.022795 344.281855 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_545835.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_545835.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="corda_5">
+      <static>true</static>
+      <pose>-229.951240 105.357034 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_545957.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_545957.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_545988">
+      <static>true</static>
+      <pose>-233.485729 251.296226 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_545988.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_545988.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_546665">
+      <static>true</static>
+      <pose>-325.457567 361.111931 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_546665.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_546665.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_546667">
+      <static>true</static>
+      <pose>-291.842588 316.220596 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_546667.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_546667.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_546668">
+      <static>true</static>
+      <pose>-285.244599 334.434164 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_546668.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_546668.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_546670">
+      <static>true</static>
+      <pose>-280.214691 354.791259 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_546670.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_546670.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_546675">
+      <static>true</static>
+      <pose>-209.069446 337.960767 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_546675.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_546675.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_549011">
+      <static>true</static>
+      <pose>341.413470 222.281807 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_549011.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_549011.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_549242">
+      <static>true</static>
+      <pose>315.103442 368.091291 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_549242.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_549242.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_551750">
+      <static>true</static>
+      <pose>-270.888006 -144.860375 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_551750.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_551750.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_551751">
+      <static>true</static>
+      <pose>-269.391939 -137.989721 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_551751.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_551751.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_551752">
+      <static>true</static>
+      <pose>-282.438878 -133.266556 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_551752.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_551752.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_552227">
+      <static>true</static>
+      <pose>145.678288 -124.052453 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_552227.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_552227.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_552256">
+      <static>true</static>
+      <pose>39.962362 -0.845377 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_552256.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_552256.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_552279">
+      <static>true</static>
+      <pose>-210.502759 -159.308484 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_552279.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_552279.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_552280">
+      <static>true</static>
+      <pose>-220.479055 -154.310142 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_552280.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_552280.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_552358">
+      <static>true</static>
+      <pose>-315.744801 -116.602197 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_552358.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_552358.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_552564">
+      <static>true</static>
+      <pose>-236.073604 -153.296932 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_552564.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_552564.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_553070">
+      <static>true</static>
+      <pose>-240.369118 -165.004231 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553070.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553070.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_553135">
+      <static>true</static>
+      <pose>-299.357233 -154.875495 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553135.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553135.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_553136">
+      <static>true</static>
+      <pose>-297.454516 -149.715133 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553136.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553136.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_553444">
+      <static>true</static>
+      <pose>-279.416688 -164.449108 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553444.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553444.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_553445">
+      <static>true</static>
+      <pose>-311.277708 -144.990130 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553445.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553445.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_553453">
+      <static>true</static>
+      <pose>-277.655760 -157.466851 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553453.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553453.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_553880">
+      <static>true</static>
+      <pose>-313.242198 -162.596637 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553880.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553880.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_553881">
+      <static>true</static>
+      <pose>-310.135230 -121.907158 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553881.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_553881.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_2042434">
+      <static>true</static>
+      <pose>244.911349 36.353966 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_2042434.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_2042434.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_3199966">
+      <static>true</static>
+      <pose>148.399278 228.908870 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_3199966.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_3199966.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_4481027">
+      <static>true</static>
+      <pose>278.570949 366.474549 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4481027.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4481027.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_4482303">
+      <static>true</static>
+      <pose>65.366022 304.008192 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4482303.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4482303.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_4482422">
+      <static>true</static>
+      <pose>-290.640272 22.586832 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4482422.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4482422.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_4483475">
+      <static>true</static>
+      <pose>-306.936558 337.958562 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4483475.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4483475.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_4484102">
+      <static>true</static>
+      <pose>-279.888612 -127.674556 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4484102.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4484102.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_4484612">
+      <static>true</static>
+      <pose>-311.312623 341.808171 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4484612.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4484612.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_4484715">
+      <static>true</static>
+      <pose>-316.864599 311.546272 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4484715.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4484715.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_4485021">
+      <static>true</static>
+      <pose>89.958633 -129.884476 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4485021.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4485021.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_4485807">
+      <static>true</static>
+      <pose>-308.528006 346.687681 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4485807.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4485807.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_4487126">
+      <static>true</static>
+      <pose>277.044385 238.030345 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4487126.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4487126.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_4487135">
+      <static>true</static>
+      <pose>183.223041 -63.344635 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4487135.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4487135.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="corda_4">
+      <static>true</static>
+      <pose>-237.374904 -1.471696 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4487171.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4487171.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_4487186">
+      <static>true</static>
+      <pose>239.307582 -46.085191 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4487186.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4487186.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_4489603">
+      <static>true</static>
+      <pose>-236.102198 -160.395288 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4489603.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_4489603.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_5148120">
+      <static>true</static>
+      <pose>356.809474 345.590935 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5148120.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5148120.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_5148135">
+      <static>true</static>
+      <pose>66.213009 256.343864 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5148135.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5148135.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_5149925">
+      <static>true</static>
+      <pose>252.226512 161.828362 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5149925.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5149925.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_5791560">
+      <static>true</static>
+      <pose>-99.092541 277.008160 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5791560.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5791560.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="corda_1_bar">
+      <static>true</static>
+      <pose>-89.783248 55.356091 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5791580.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="roof">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5791580_roof.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.30 0.46 0.25 1</ambient>
+            <diffuse>0.30 0.46 0.25 1</diffuse>
+          </material>
+        </visual>
+        <visual name="facade">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5791580_facade.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.30 0.40 0.46 1</ambient>
+            <diffuse>0.30 0.40 0.46 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_5793940">
+      <static>true</static>
+      <pose>-201.716349 -162.696392 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5793940.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5793940.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_5794944">
+      <static>true</static>
+      <pose>67.181855 -145.518627 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5794944.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5794944.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_5795925">
+      <static>true</static>
+      <pose>-317.530424 326.912579 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5795925.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5795925.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_5796462">
+      <static>true</static>
+      <pose>249.829073 92.269522 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5796462.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5796462.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_5796560">
+      <static>true</static>
+      <pose>-67.272458 -124.333998 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5796560.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5796560.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_5797048">
+      <static>true</static>
+      <pose>-304.915095 301.676514 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5797048.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_5797048.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="corda_2">
+      <static>true</static>
+      <pose>-143.850262 -29.845247 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6682622.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="roof">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6682622_roof.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.30 0.46 0.25 1</ambient>
+            <diffuse>0.30 0.46 0.25 1</diffuse>
+          </material>
+        </visual>
+        <visual name="facade">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6682622_facade.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.83 0.82 0.76 1</ambient>
+            <diffuse>0.83 0.82 0.76 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="corda_3">
+      <static>true</static>
+      <pose>-194.488105 -24.794566 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6682623.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="roof">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6682623_roof.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.30 0.46 0.25 1</ambient>
+            <diffuse>0.30 0.46 0.25 1</diffuse>
+          </material>
+        </visual>
+        <visual name="facade">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6682623_facade.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.53 0.51 0.48 1</ambient>
+            <diffuse>0.53 0.51 0.48 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="corda_1">
+      <static>true</static>
+      <pose>-89.099158 -20.751416 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6766058.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="roof">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6766058_roof.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.30 0.46 0.25 1</ambient>
+            <diffuse>0.30 0.46 0.25 1</diffuse>
+          </material>
+        </visual>
+        <visual name="facade">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6766058_facade.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.30 0.40 0.46 1</ambient>
+            <diffuse>0.30 0.40 0.46 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_6821864">
+      <static>true</static>
+      <pose>317.556407 -45.050867 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6821864.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6821864.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_6822086">
+      <static>true</static>
+      <pose>177.354192 324.682948 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6822086.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6822086.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_6822087">
+      <static>true</static>
+      <pose>96.164008 232.937661 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6822087.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6822087.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_6822089">
+      <static>true</static>
+      <pose>-199.940417 356.164975 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6822089.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6822089.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_6822100">
+      <static>true</static>
+      <pose>-159.392604 30.940149 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6822100.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_6822100.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_7145243">
+      <static>true</static>
+      <pose>187.739167 -103.645073 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7145243.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7145243.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_7145244">
+      <static>true</static>
+      <pose>121.336079 -108.029744 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7145244.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7145244.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_7145245">
+      <static>true</static>
+      <pose>103.064860 -121.878744 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7145245.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7145245.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_7145246">
+      <static>true</static>
+      <pose>74.634473 -141.087878 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7145246.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7145246.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_7145247">
+      <static>true</static>
+      <pose>171.911215 -164.925336 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7145247.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7145247.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_7494602">
+      <static>true</static>
+      <pose>-128.609303 157.067590 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7494602.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7494602.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_7571830">
+      <static>true</static>
+      <pose>14.358222 196.864925 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7571830.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7571830.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_7598570">
+      <static>true</static>
+      <pose>-35.615960 196.061507 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7598570.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7598570.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_7689594">
+      <static>true</static>
+      <pose>187.052852 318.915296 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7689594.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7689594.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_7689722">
+      <static>true</static>
+      <pose>42.769187 239.450897 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7689722.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7689722.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_7689824">
+      <static>true</static>
+      <pose>-27.660421 225.096893 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7689824.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7689824.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="corda_arena">
+      <static>true</static>
+      <pose>27.005043 79.869967 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7690099.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7690099.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_7691395">
+      <static>true</static>
+      <pose>122.201050 349.672996 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7691395.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7691395.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_7691785">
+      <static>true</static>
+      <pose>88.110096 190.857952 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7691785.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7691785.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_7691912">
+      <static>true</static>
+      <pose>-313.537771 -137.930922 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7691912.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7691912.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="building_7692169">
+      <static>true</static>
+      <pose>-274.075973 -151.696601 0 0 0 0</pose>
+      <link name="body">
+        <collision name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7692169.stl</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="building">
+          <geometry>
+            <mesh>
+              <uri>model://corda_campus/meshes/building_7692169.stl</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.63 0.65 0.68 1</ambient>
+            <diffuse>0.63 0.65 0.68 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <link name="simulation_launch_platform">
+      <pose>-85 -38 23.489764031845226 0 0 0</pose>
+      <visual name="simulation_launch_platform">
+        <geometry>
+          <box>
+            <size>4 4 0.15</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.18 0.25 0.32 1</ambient>
+          <diffuse>0.18 0.25 0.32 1</diffuse>
+        </material>
+      </visual>
+      <collision name="simulation_launch_platform">
+        <geometry>
+          <box>
+            <size>4 4 0.15</size>
+          </box>
+        </geometry>
+      </collision>
+    </link>
+    <link name="launch_support_0">
+      <pose>-87.0 -40.0 23.301297968561755 0 0 0</pose>
+      <visual name="launch_support_0">
+        <geometry>
+          <box>
+            <size>0.08 0.08 0.22693212656693973</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.3 0.3 1</ambient>
+          <diffuse>0.3 0.3 0.3 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="launch_support_1">
+      <pose>-83.0 -40.0 23.389764031845225 0 0 0</pose>
+      <visual name="launch_support_1">
+        <geometry>
+          <box>
+            <size>0.08 0.08 0.05000000000000071</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.3 0.3 1</ambient>
+          <diffuse>0.3 0.3 0.3 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="launch_support_2">
+      <pose>-83.0 -36.0 22.89778922282001 0 0 0</pose>
+      <visual name="launch_support_2">
+        <geometry>
+          <box>
+            <size>0.08 0.08 1.033949618050432</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.3 0.3 1</ambient>
+          <diffuse>0.3 0.3 0.3 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="launch_support_3">
+      <pose>-87.0 -36.0 22.80932315953654 0 0 0</pose>
+      <visual name="launch_support_3">
+        <geometry>
+          <box>
+            <size>0.08 0.08 1.210881744617371</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.3 0.3 1</ambient>
+          <diffuse>0.3 0.3 0.3 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="launch_mark_left">
+      <pose>-85.5 -38 23.572764031845225 0 0 0</pose>
+      <visual name="launch_mark_left">
+        <geometry>
+          <box>
+            <size>0.12 1.4 0.012</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1</ambient>
+          <diffuse>0.95 0.95 0.95 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="launch_mark_right">
+      <pose>-84.5 -38 23.572764031845225 0 0 0</pose>
+      <visual name="launch_mark_right">
+        <geometry>
+          <box>
+            <size>0.12 1.4 0.012</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1</ambient>
+          <diffuse>0.95 0.95 0.95 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <link name="launch_mark_bar">
+      <pose>-85 -38 23.572764031845225 0 0 0</pose>
+      <visual name="launch_mark_bar">
+        <geometry>
+          <box>
+            <size>1 0.12 0.012</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.95 0.95 0.95 1</ambient>
+          <diffuse>0.95 0.95 0.95 1</diffuse>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>

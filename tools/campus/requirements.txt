@@ -1,0 +1,5 @@
+# Install in an isolated venv; ROS's NumPy 1.26 remains compatible.
+numpy==1.26.4
+shapely==2.0.7
+pyproj==3.7.2
+mapbox-earcut==1.0.3

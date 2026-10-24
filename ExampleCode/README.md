@@ -10,3 +10,5 @@ Use the root README to build/run the container and populate/compile Projects fir
 6. **Record:** run `record_px4_rosbag` before a simulated flight and stop it afterward. Use `ros2 bag info` on the resulting folder; keep replay nodes separate from live control nodes.
 
 7. **Inspect perception:** the default x500 now carries an RGB-D camera and 16-channel 3D lidar. Run `view_px4_sensors` for the prepared RViz displays, or `ros2 run px4_dev_examples sensor_check --save ~/Data/evidence/sensors` to verify all streams and save RGB/depth previews. See the root README for topic names, frames and the sensor-free option.
+
+8. **Fly from the campus roof:** the default world reconstructs Corda Campus from GRB footprints. Run `ros2 run px4_dev_examples campus_check` while disarmed to verify that the vehicle rests on the synthetic level platform on Corda 1. The normal offboard demo takes off relative to that roof and lands back on it. Switch to `PX4_GZ_WORLD=default start_px4_dev` for the earlier empty world.

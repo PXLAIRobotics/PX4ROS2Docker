@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -eo pipefail
+share=$(ros2 pkg prefix --share px4_dev_examples)
+source "$HOME/Projects/PX4-Autopilot/build/px4_sitl_default/rootfs/gz_env.sh"
+export GZ_SIM_RESOURCE_PATH="$share/simulation/models:$share/simulation/worlds:$GZ_SIM_RESOURCE_PATH"
+options=()
+if [[ ${PX4_GZ_WORLD:-corda_campus} == corda_campus ]]; then
+    options+=(--gui-config "$share/simulation/campus.gui.config")
+fi
+exec gz sim -g "${options[@]}" "$@"

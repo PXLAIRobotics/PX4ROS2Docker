@@ -20,7 +20,7 @@ jobs:
       - run: ./tests/image-smoke.sh px4_ros2_vnc:latest
       - run: ./tests/desktop.sh
       - run: |
-          docker run --name px4-ci --mount type=bind,src="$PWD/Projects",dst=/home/user/Projects --mount type=bind,src="$PWD/Data",dst=/home/user/Data px4_ros2_vnc:latest bash -ec 'setup_px4_workspace; build_px4_sitl; build_ros2_workspace; source ~/Projects/ros2_workspace/install/setup.bash; /opt/px4-tests/sensors.sh; /opt/px4-tests/flight.sh'
+          docker run --name px4-ci --mount type=bind,src="$PWD/Projects",dst=/home/user/Projects --mount type=bind,src="$PWD/Data",dst=/home/user/Data px4_ros2_vnc:latest bash -ec 'setup_px4_workspace; build_px4_sitl; build_ros2_workspace; source ~/Projects/ros2_workspace/install/setup.bash; /opt/px4-tests/campus.sh; /opt/px4-tests/flight.sh'
       - if: always()
         run: docker logs px4-ci > Data/ci.log 2>&1 || true
       - uses: actions/upload-artifact@v4

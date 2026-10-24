@@ -8,7 +8,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     share = Path(get_package_share_directory('px4_dev_examples'))
-    world_clock = '/world/' + os.environ.get('PX4_GZ_WORLD', 'default') + '/clock'
+    world_clock = '/world/' + os.environ.get('PX4_GZ_WORLD', 'corda_campus') + '/clock'
     def fixed(parent, child, xyz, rpy):
         return Node(package='tf2_ros', executable='static_transform_publisher',
                     name=child + '_tf', arguments=[
