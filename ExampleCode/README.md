@@ -1,6 +1,6 @@
 # PX4 development walkthroughs
 
-Use the root README to build/run the container and populate/compile Projects first.
+Start with the [eleven-lesson Python tutorial](../docs/tutorial/README.md), including exercises, screenshots and instructor notes. Complete programs are in [tutorial/](tutorial/). Use the root README to build/run the container and populate/compile Projects first.
 
 1. **Inspect telemetry:** start the session with `start_px4_dev`, then run `ros2 run px4_dev_examples telemetry` in another shell. Check NED position and state while moving the simulated vehicle in QGC.
 2. **Fly through QGC:** wait for the x500 to connect and pass preflight checks. Use Takeoff, observe Gazebo movement, then Land. Inspect the new ULog under `~/Data/px4/logs`.

@@ -6,7 +6,7 @@ for script in Commands/bin/*; do bash -n "$script"; done
 python3 - <<'PY'
 import ast
 from pathlib import Path
-for path in list(Path('Projects/ros2_workspace/src/px4_dev_examples').rglob('*.py')) + list(Path('docker').glob('*.py')) + list(Path('tests').glob('*.py')) + list(Path('tools').rglob('*.py')):
+for path in list(Path('Projects/ros2_workspace/src/px4_dev_examples').rglob('*.py')) + list(Path('docker').glob('*.py')) + list(Path('tests').glob('*.py')) + list(Path('tools').rglob('*.py')) + list(Path('ExampleCode/tutorial').glob('*.py')):
     ast.parse(path.read_text(), filename=str(path))
 import xml.etree.ElementTree as ET
 for path in Path('Projects/ros2_workspace/src/px4_dev_examples/simulation').rglob('*.sdf'):

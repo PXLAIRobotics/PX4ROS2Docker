@@ -4,6 +4,26 @@ PX4 SITL, Gazebo Harmonic, ROS 2 Jazzy and QGroundControl in a shared developmen
 
 The Bash, tmux, Vim, Nerd Font and numbered-script workflow comes from `ROSLyricalDocker`. This repository has its own images, containers and PX4 examples. See [TODO.md](TODO.md) for implementation tasks and [implementation status](docs/implementation-status.md) for verified capabilities and remaining checks.
 
+## Python tutorial and screenshots
+
+New to PX4? Follow the [Python and ROS 2 tutorial](docs/tutorial/README.md): eleven lessons covering setup, QGroundControl, telemetry, coordinate frames, offboard takeoff/landing, waypoint control, recovery, RGB-D/lidar and flight evaluation. It includes runnable Python examples, exercises and an instructor answer guide. Start in the empty world before the Corda Campus project.
+
+![Corda Campus in Gazebo](docs/tutorial/images/campus.png)
+
+The bundled campus world includes mapped building footprints, sloping and sawtooth roofs, parking, the Arena and water tower.
+
+![Rooftop landing deck](docs/tutorial/images/landing-deck.png)
+
+A level six-metre deck supports the simulated rooftop takeoff and landing exercises.
+
+![RGB-D and lidar in RViz](docs/tutorial/images/rviz-sensors.png)
+
+Inspect camera images and both point clouds through the prepared ROS bridge and RViz configuration. These streams are available for student perception work; obstacle avoidance is not enabled automatically.
+
+![QGroundControl observing an offboard flight](docs/tutorial/images/qgroundcontrol-flight.png)
+
+QGroundControl remains connected while the Python ROS 2 controller flies the simulated vehicle.
+
 ## Versions and host requirements
 
 - Ubuntu 24.04, ROS 2 Jazzy, Gazebo Harmonic.
@@ -125,7 +145,7 @@ glxinfo -B
 
 `start_px4_sitl` uses an x500 with the RGB-D/lidar suite and the bundled `corda_campus` world. `PX4_GZ_WORLD` selects another bundled world. Parameters persist under `Projects/PX4-Autopilot/build/px4_sitl_default/rootfs/parameters.bson`; stop SITL and back up that file before any deliberate reset. Flight ULogs are linked into `Data/px4/logs`; ROS recordings go into `Data/bags`; tmux service output goes into timestamped `Data/sessions` directories. Use the installed `pyulog` tools for ULog inspection and `ros2 bag info/play` for ROS bags.
 
-The world's geographic origin remains **50.951737° N, 5.352412° E**, with assumed flat ground at **50 m AMSL**. In the campus world, the actual drone starts on the Corda 1 roof at local East/North **(-85, -38) m**, approximately **50.9513954° N, 5.3512024° E**. The platform is about **23.56 m above ground**; the vehicle rests about **73.8 m AMSL**. These are approximate simulation coordinates, not a surveyed launch position. QGC discovers this actual vehicle/home location from PX4.
+The world's geographic origin remains **50.951737° N, 5.352412° E**, with assumed flat ground at **50 m AMSL**. In the campus world, the actual drone starts on the Corda 1 roof at local East/North **(-11, -10) m**, approximately **50.9516471° N, 5.3522555° E**. The platform is about **23.974 m above ground**; the vehicle rests about **74.214 m AMSL**. These are approximate simulation coordinates, not a surveyed launch position. QGC discovers this actual vehicle/home location from PX4.
 
 To relocate the entire world geographically, stop the session and supply all three origin values inside the container (the campus geometry and rooftop spawn retain their local offsets):
 
@@ -242,6 +262,7 @@ PX4 local positions use NED: positive X north, Y east, Z down. The demo sets a n
 
 ```bash
 ./tests/static.sh
+python3 tests/tutorial.py
 ./tests/image-smoke.sh px4_ros2_novnc:latest
 ./tests/desktop.sh
 # Inside a built development container, with no other session/QGC running:

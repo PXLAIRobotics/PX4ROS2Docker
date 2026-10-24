@@ -20,6 +20,7 @@ class Offboard(Node):
         self.last_position = self.last_status = 0.0
         self.acks = []
         self.origin = None
+        self.target = None
         self.mode_requested = self.offboard_observed = self.arm_observed = self.altitude_observed = False
         for cls, name, callback in [
             (VehicleLocalPosition, 'vehicle_local_position', self.on_position),
@@ -71,7 +72,7 @@ class Offboard(Node):
         self.control.publish(mode)
         setpoint = TrajectorySetpoint()
         setpoint.timestamp = timestamp()
-        setpoint.position = [self.origin[0], self.origin[1], self.origin[2] - self.altitude]
+        setpoint.position = list(self.target)
         setpoint.velocity = [math.nan] * 3
         setpoint.acceleration = [math.nan] * 3
         setpoint.yaw = 0.0
@@ -98,6 +99,7 @@ class Offboard(Node):
         if self.status.arming_state == VehicleStatus.ARMING_STATE_ARMED:
             raise RuntimeError('Expected a disarmed simulated vehicle before starting')
         self.origin = (self.position.x, self.position.y, self.position.z)
+        self.target = (self.origin[0], self.origin[1], self.origin[2] - self.altitude)
         # Establish the >2 Hz offboard stream before requesting the mode.
         deadline = time.monotonic() + 3
         self.wait_for(lambda: time.monotonic() >= deadline, 5, stream=True)
@@ -113,12 +115,16 @@ class Offboard(Node):
         self.wait_for(lambda: abs(self.position.z - target_z) < 0.35, 35, stream=True)
         self.altitude_observed = True
         self.get_logger().info(f'Observed takeoff to {self.altitude}m above initial local position')
-        deadline = time.monotonic() + self.hold
-        self.wait_for(lambda: time.monotonic() >= deadline, self.hold + 2, stream=True)
+        self.fly()
         self.land_and_wait()
         if not self.arm_observed or not self.altitude_observed:
             raise RuntimeError('Missing flight evidence')
         print('PASS: observed arm, takeoff, hold, landing and disarm', flush=True)
+
+    def fly(self):
+        """Flight exercise hook; the default demonstration holds its target."""
+        deadline = time.monotonic() + self.hold
+        self.wait_for(lambda: time.monotonic() >= deadline, self.hold + 2, stream=True)
 
     def land_and_wait(self):
         self.command(VehicleCommand.VEHICLE_CMD_NAV_LAND)

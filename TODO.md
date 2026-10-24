@@ -239,3 +239,10 @@ Optional work after baseline acceptance: experimental Lyrical/Jetty, multi-vehic
 - [x] J11 Add the Corda 8 sawtooth roof and separate Corda 5 office wings, curved hall and entrance drum; extend geometry regression checks.
 
 - [x] J12 Replace the simple launch slab/posts with a chamfered rooftop landing deck, continuous support plinth and flush markings; keep the flight area unobstructed.
+
+## K — Python teaching material
+
+- [x] K01 Add a progressive beginner PX4/ROS 2 tutorial with setup, architecture, QGC, telemetry, frames/time and offboard lifecycle.
+- [x] K02 Provide Python position/lidar readers, a bounded square-flight solution, CSV evaluation and plotting.
+- [x] K03 Add recovery, perception, recording and a campus final project, with exercises, checkpoints, instructor answers and assessment.
+- [x] K04 Track real screenshots for the lessons and root README; verify links and example behaviour locally.
