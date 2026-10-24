@@ -43,8 +43,9 @@ arena=sdf.find("./model/model[@name='corda_arena']")
 assert arena is not None and arena.findtext('static')=='true'
 collisions=[]
 for link in arena.findall('link'):
-    pose=list(map(float,link.findtext('pose','0 0 0 0 0 0').split()))
+    link_pose=np.asarray(list(map(float,link.findtext('pose','0 0 0 0 0 0').split())))
     for collider in link.findall('collision'):
+        pose=link_pose+np.asarray(list(map(float,collider.findtext('pose','0 0 0 0 0 0').split())))
         size=collider.findtext('geometry/box/size')
         assert size is not None, 'Arena must not retain the old solid footprint collision'
         collisions.append((np.asarray(pose[:3]),np.asarray(list(map(float,size.split())))/2))
@@ -64,7 +65,7 @@ def ray_hits(a,b):
             if low<=high:return True
     return False
 
-front=np.asarray(list(map(float,arena.find("link[@name='upper_front']/pose").text.split())))
+front=np.asarray(list(map(float,arena.find("link/collision[@name='upper_front']/pose").text.split())))
 assert not ray_hits(np.array([0.,front[1]-5,1.5]),np.array([0.,0.,1.5])), 'Entrance corridor must be open'
 assert ray_hits(np.array([10.,front[1]-5,1.5]),np.array([10.,0.,1.5])), 'Glazing must retain collision'
 assert ray_hits(np.array([0.,0.,30.]),np.array([0.,0.,20.])), 'Hall must have a roof'
@@ -90,3 +91,28 @@ assert all(n==2 for n in edges.values())
 print('PASS: native-grid alignment, landmark placement, parking, open entrance, solid glazing/roof and mesh validity')
 print('Water tower WGS84:',to_geo.transform(tower['east_m'],tower['north_m']))
 print('Approximate marked bays:',sum(p['marked_bays'] for p in report['parking']))
+
+# Scene simplification must retain the launch and named landmarks, and keep
+# the original GIS snapshot available for future regeneration.
+assert len(report['buildings'])<40 and len(report['culled_buildings'])>40
+assert {b['name'] for b in report['buildings']} >= {'corda_1','corda_2','corda_3','corda_4','corda_5','corda_8','corda_arena'}
+assert all(b['area_m2']<350 and b['distance_from_launch_m']>160 for b in report['culled_buildings'])
+assert len(list(sdf.iter('visual')))<100 and len(list(sdf.iter('link')))<50
+c5=next(b for b in report['buildings'] if b['name']=='corda_5')
+assert abs(c5['partition_area_m2']-c5['area_m2'])<.1
+assert len({p['height_m'] for p in c5['sections']})==3 and max(p['height_m'] for p in c5['sections'])<14
+c8=next(b for b in report['buildings'] if b['name']=='corda_8')
+assert c8['roof_teeth']==9 and abs(c8['area_m2']-c8['covered_area_m2'])<.05
+# Inspect actual roof triangles: alternating valleys and ridges must exist in
+# the collision geometry rather than only in decorative surface colours.
+z_ranges=[]
+for collider in sdf.findall("./model/model[@name='corda_8']/link/collision"):
+    uri=collider.findtext('geometry/mesh/uri')
+    data=(ASSETS/'models/corda_campus/meshes'/uri.rsplit('/',1)[1]).read_bytes()
+    top=[]
+    for off in range(84,len(data),50):
+        row=struct.unpack_from('<12fH',data,off)
+        if row[2]>.2:top.extend(row[5:12:3])
+    z_ranges.append((min(top),max(top)))
+assert len(z_ranges)==9 and all(lo<8.01 and hi>10.49 for lo,hi in z_ranges)
+print('PASS: peripheral culling, batched scene size, Corda 5 sections and nine physical sawtooth ridges')

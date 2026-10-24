@@ -58,13 +58,75 @@
     "545957": {
       "name": "corda_5",
       "facade_colour": "0.76 0.76 0.72 1",
-      "window_bands": true
+      "window_bands": true,
+      "detail": "corda5",
+      "height_m": 13.5,
+      "office_height_m": 11.5,
+      "hall_height_m": 7.5,
+      "drum_height_m": 13.5,
+      "drum_centre_enu_m": [
+        -125.3,
+        117.2
+      ],
+      "drum_radius_m": 12.5,
+      "north_wing_outline_enu_m": [
+        [
+          -155,
+          124
+        ],
+        [
+          -110,
+          124
+        ],
+        [
+          -110,
+          207
+        ],
+        [
+          -160,
+          207
+        ]
+      ],
+      "south_wing_outline_enu_m": [
+        [
+          -212,
+          72
+        ],
+        [
+          -130,
+          99
+        ],
+        [
+          -130,
+          125
+        ],
+        [
+          -145,
+          124
+        ],
+        [
+          -210,
+          105
+        ]
+      ],
+      "source": "Official visitor/mobility map: separate three-storey office wings, lower curved hall and round entrance drum; 11.5/7.5/13.5 m heights and partition boundaries are visual estimates, replacing a uniform 16.65 m 3D GRB maximum"
     },
     "7690099": {
       "name": "corda_arena",
       "height_m": 24,
       "source": "Corda Campus Masterplan 2.0: arena height 24 m; hollow hall, glazing and cube facade approximated from official 2024 renders; doors held open for simulation",
       "detail": "arena"
+    },
+    "7571830": {
+      "name": "corda_8",
+      "roof": "sawtooth",
+      "detail": "sawtooth",
+      "height_m": 10.5,
+      "low_height_m": 8,
+      "roof_teeth": 9,
+      "roof_colour": "0.76 0.77 0.72 1",
+      "facade_colour": "0.65 0.65 0.60 1",
+      "source": "Official mobility map and winter orthophoto identify the repeated shed/sawtooth roof; nine teeth and 8/10.5 m valley/peak heights are approximate visual dimensions"
     }
   },
   "launch": {
@@ -238,5 +300,10 @@
     0,
     0.58,
     2.15
-  ]
+  ],
+  "performance": {
+    "omit_small_buildings_beyond_m": 160,
+    "small_building_area_m2": 350,
+    "batch_static_visuals": true
+  }
 }

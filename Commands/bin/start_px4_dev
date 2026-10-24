@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 set -euo pipefail
-headless=0; attach=1
+headless=0; attach=1; gazebo_gui=1
 export PX4_SENSOR_SUITE="${PX4_SENSOR_SUITE:-rgbd_lidar}"
 export PX4_GZ_WORLD="${PX4_GZ_WORLD:-corda_campus}"
 case "$PX4_SENSOR_SUITE" in rgbd_lidar|none) ;; *) echo 'PX4_SENSOR_SUITE must be rgbd_lidar or none.' >&2; exit 2;; esac
 for argument in "$@"; do
     case "$argument" in
         --headless) headless=1 ;;
+        --no-gazebo-gui) gazebo_gui=0 ;;
         --no-attach) attach=0 ;;
-        *) echo 'Usage: start_px4_dev [--headless] [--no-attach]' >&2; exit 2 ;;
+        *) echo 'Usage: start_px4_dev [--headless] [--no-gazebo-gui] [--no-attach]' >&2; exit 2 ;;
     esac
 done
 session=px4-dev
@@ -64,10 +65,12 @@ if [[ $PX4_SENSOR_SUITE == rgbd_lidar ]]; then
     tmux pipe-pane -o -t "$session:sensors" "cat >> '$run_dir/sensors.log'"
     ros2 run px4_dev_examples sensor_check --timeout 45 > "$run_dir/sensor-check.json"
 fi
-if (( !headless )); then
+if (( !headless && gazebo_gui )); then
     tmux new-window -t "$session" -n gazebo 'exec bash -lc "start_gazebo_gui"'
     tmux set-option -t "$session:gazebo" remain-on-exit on
     tmux pipe-pane -o -t "$session:gazebo" "cat >> '$run_dir/gazebo.log'"
+fi
+if (( !headless )); then
     tmux new-window -t "$session" -n qgc 'exec bash -lc "start_qgroundcontrol"'
     tmux set-option -t "$session:qgc" remain-on-exit on
     tmux pipe-pane -o -t "$session:qgc" "cat >> '$run_dir/qgc.log'"

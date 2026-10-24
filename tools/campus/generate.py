@@ -12,7 +12,9 @@ from shapely.geometry import Point, Polygon, shape
 from shapely.ops import transform
 
 from geometry import box, element, extrude, material, roof_function, save_xml
-from details import add_arena, add_landscape, add_office_bands
+from details import add_arena, add_landscape, add_office_bands, add_corda5, add_sawtooth
+
+from optimize import compact_static
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = Path(__file__).resolve().parent
@@ -34,7 +36,7 @@ def generate(output):
     models = output/'models/corda_campus'; meshes = models/'meshes'; meshes.mkdir(parents=True,exist_ok=True)
     sdf = ET.Element('sdf', version='1.9'); campus = element(sdf,'model',name='corda_campus')
     element(campus,'static','true')
-    report = {'origin':origin, 'bounds_m':site['bounds_m'], 'buildings':[], 'notes':site['notes']}
+    report = {'origin':origin, 'bounds_m':site['bounds_m'], 'buildings':[], 'culled_buildings':[], 'notes':site['notes']}
     launch_polygon = launch_roof = None
     for feature in buildings:
         oid = str(feature['properties']['OIDN'])
@@ -42,6 +44,11 @@ def generate(output):
         if not polygon.is_valid or polygon.geom_type != 'Polygon':
             raise ValueError(f'Invalid/nonpolygon footprint: {oid}')
         override = site['buildings'].get(oid,{})
+        perf=site.get('performance',{})
+        distance=polygon.distance(Point(site['launch']['east_m'],site['launch']['north_m']))
+        if not override and polygon.area<perf.get('small_building_area_m2',0) and distance>perf.get('omit_small_buildings_beyond_m',float('inf')):
+            report['culled_buildings'].append({'grb_oidn':int(oid),'area_m2':round(polygon.area,3),'distance_from_launch_m':round(distance,2),'reason':'small peripheral building omitted for performance'})
+            continue
         measured = heights.get(oid)
         if 'height_m' in override:
             height = override['height_m']; provenance = override['source']
@@ -54,6 +61,10 @@ def generate(output):
         roof = roof_function(polygon,height,low)
         if override.get('detail') == 'arena':
             report['buildings'].append(add_arena(campus,polygon,height,meshes,override,int(oid)))
+            continue
+        if override.get('detail') in ('corda5','sawtooth'):
+            builder=add_corda5 if override['detail']=='corda5' else add_sawtooth
+            report['buildings'].append(builder(campus,polygon,meshes,override,int(oid)))
             continue
         mesh = meshes/f'building_{oid}.stl'
         centre,nv,nf = extrude(polygon,roof,mesh,split_visual=low is not None)
@@ -96,11 +107,13 @@ def generate(output):
             box(campus,f'launch_support_{i}',(cx,cy,bottom+length/2),(.08,.08,length),'0.3 0.3 0.3 1',False)
     for name,dx,dy,sx,sy in [('left',-.5,0,.12,1.4),('right',.5,0,.12,1.4),('bar',0,0,1,.12)]:
         box(campus,'launch_mark_'+name,(x+dx,y+dy,pad_top+.008),(sx,sy,.012),'0.95 0.95 0.95 1',False)
+    if site.get('performance',{}).get('batch_static_visuals'):
+        report['performance']=compact_static(campus,meshes)
     referenced={uri.text.rsplit('/',1)[-1] for uri in sdf.iter('uri') if uri.text and uri.text.endswith('.stl')}
     # This directory contains generated meshes; remove obsolete generated parts
     # so in-place regeneration matches a fresh output folder.
     for path in meshes.glob('*.stl'):
-        if path.name.startswith(('building_','parking_','water_tower_')) and path.name not in referenced:
+        if path.name.startswith(('building_','parking_','water_tower_','batch_')) and path.name not in referenced:
             path.unlink()
     save_xml(models/'model.sdf',sdf)
     config=ET.Element('model');element(config,'name','corda_campus');element(config,'version','1.0')
@@ -132,7 +145,7 @@ def generate(output):
     (output/'campus.json').write_text(json.dumps(report,indent=2)+'\n')
     (output/'campus.env').write_text('# Generated; metres ENU, z above flat campus ground.\n'+
         f'export PX4_GZ_MODEL_POSE="{x},{y},{pad_top+.28:.6f},0,0,{launch["yaw_rad"]}"\n')
-    print(f'Generated {len(buildings)} buildings, rooftop spawn {report["launch"]}')
+    print(f'Generated {len(report["buildings"])} buildings ({len(report["culled_buildings"])} small peripheral buildings omitted), rooftop spawn {report["launch"]}')
 
 
 if __name__=='__main__':

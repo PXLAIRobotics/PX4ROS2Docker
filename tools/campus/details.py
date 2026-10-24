@@ -208,3 +208,80 @@ def add_landscape(parent,site,forward,meshes,report,source):
     features=json.loads((source/'data/buildings.geojson').read_text())['features']
     obstacles=unary_union([transform(forward.transform,shape(f['geometry'])) for f in features])
     report['parking']=[add_parking(parent,p,obstacles,meshes) for p in site['parking']]
+
+
+def add_corda5(parent,polygon,meshes,config,oid):
+    """Separate the entrance drum, office wings and curved low hall."""
+    model=static_model(parent,'corda_5')
+    drum=Point(*config['drum_centre_enu_m']).buffer(config['drum_radius_m'],resolution=20)
+    remaining=polygon
+    masks=[('entrance_drum',drum,config['drum_height_m']),
+           ('north_offices',Polygon(config['north_wing_outline_enu_m']),config['office_height_m']),
+           ('south_offices',Polygon(config['south_wing_outline_enu_m']),config['office_height_m'])]
+    pieces=[]
+    for name,mask,height in masks:
+        region=remaining.intersection(mask)
+        remaining=remaining.difference(mask)
+        for i,p in enumerate(components(region)):
+            if p.area>.1:pieces.append((f'{name}_{i}',p,height))
+    for i,p in enumerate(components(remaining)):
+        if p.area>.1:pieces.append((f'curved_hall_{i}',p,config['hall_height_m']))
+    for name,p,height in pieces:
+        path=meshes/f'building_{oid}_{name}.stl'
+        centre,_,_=extrude(p,lambda xy,h=height:np.full(len(xy),h),path)
+        mesh_part(model,name,path,centre,config['facade_colour'])
+        add_office_bands(model,p,(0,0),height)
+    # Red entrance accent beside the pale cylindrical stair/reception drum.
+    x,y=config['drum_centre_enu_m']
+    box(model,'entrance_accent',(x-9.2,y-5,config['drum_height_m']/2),(1.3,2,config['drum_height_m']),'0.53 0.12 0.11 1',False)
+    return {'name':'corda_5','grb_oidn':oid,'area_m2':round(polygon.area,3),
+            'height_m':max(p[2] for p in pieces),'height_source':config['source'],
+            'detail':'separate low curved hall, three-storey office wings and entrance drum',
+            'sections':[{'name':name,'height_m':height,'area_m2':round(p.area,3)} for name,p,height in pieces],
+            'partition_area_m2':round(sum(p.area for name,p,height in pieces),3)}
+
+
+def add_sawtooth(parent,polygon,meshes,config,oid):
+    model=static_model(parent,config['name'])
+    rect=np.asarray(polygon.minimum_rotated_rectangle.exterior.coords)[:4]
+    sides=np.roll(rect,-1,axis=0)-rect
+    axis=max(sides,key=np.linalg.norm);axis=axis/np.linalg.norm(axis)
+    if axis[1]<0:axis=-axis
+    angle=math.atan2(axis[1],axis[0])
+    local=affinity.rotate(polygon,-angle,origin=(0,0),use_radians=True)
+    xmin,ymin,xmax,ymax=local.bounds
+    count=config['roof_teeth'];pitch=(xmax-xmin)/count
+    high=config['height_m'];low=config['low_height_m'];covered=0
+    for i in range(count):
+        a=xmin+i*pitch;b=a+pitch
+        mask=affinity.rotate(rectangle(a,ymin-1,b,ymax+1),angle,origin=(0,0),use_radians=True)
+        for j,p in enumerate(components(polygon.intersection(mask))):
+            if p.area<.001:continue
+            # Slice intersections can leave sub-millimetre collinear edges;
+            # remove them before float32 STL export to avoid collapsed faces.
+            p=p.simplify(.002,preserve_topology=True)
+            path=meshes/f'building_{oid}_tooth_{i}_{j}.stl'
+            roof=lambda xy,a=a:low+(np.asarray(xy)@axis-a)/pitch*(high-low)
+            centre,_,_=extrude(p,roof,path,split_visual=True)
+            # One closed wedge per tooth gives the steep clerestory face real
+            # collision geometry, not just a painted zig-zag on a flat roof.
+            link=element(model,'link',name=f'tooth_{i}_{j}')
+            element(link,'pose',f'{centre[0]} {centre[1]} 0 0 0 0')
+            collision=element(link,'collision',name=f'tooth_{i}_{j}')
+            element(element(element(collision,'geometry'),'mesh'),'uri',f'model://corda_campus/meshes/{path.name}')
+            for surface,colour in [('roof',config['roof_colour']),('facade',config['facade_colour'])]:
+                visual=element(link,'visual',name=surface)
+                element(element(element(visual,'geometry'),'mesh'),'uri',f'model://corda_campus/meshes/{path.stem}_{surface}.stl')
+                material(visual,colour)
+            covered+=p.area
+        # Clerestory strip across the high edge, clipped to the footprint.
+        section=local.intersection(LineString([(b-.015,ymin-1),(b-.015,ymax+1)]))
+        if section.geom_type=='LineString' and section.length>.3:
+            mid=section.centroid
+            world=affinity.rotate(mid,angle,origin=(0,0),use_radians=True)
+            box(model,f'clerestory_{i}',(world.x,world.y,(high+low)/2),(.05,section.length,high-low-.12),GLASS,False,rpy=(0,0,angle))
+    if abs(covered-polygon.area)>.05:raise ValueError('Sawtooth roof does not cover its mapped footprint')
+    return {'name':config['name'],'grb_oidn':oid,'area_m2':round(polygon.area,3),
+            'height_m':high,'low_height_m':low,'height_source':config['source'],
+            'roof':'sawtooth','roof_teeth':count,'pitch_m':pitch,'axis_enu':axis.tolist(),
+            'covered_area_m2':round(covered,3),'roof_colour':config['roof_colour']}

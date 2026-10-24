@@ -234,3 +234,6 @@ Optional work after baseline acceptance: experimental Lyrical/Jetty, multi-vehic
 - [x] J07 Correct WFS datum conversion using native EPSG:3812; validate against independent map imagery and move the roof spawn with its building.
 - [x] J08 Replace the Arena extrusion with a roofed hollow shell, glazed facade, open simulation entrance and schematic galleries.
 - [x] J09 Add the mapped Philips water tower, traced parking areas, bay markings and Corda 4/5 facade bands; verify geometry and sensor output.
+
+- [x] J10 Omit distant small buildings, batch static visuals while retaining collisions, and add a QGC/sensors mode without the Gazebo GUI.
+- [x] J11 Add the Corda 8 sawtooth roof and separate Corda 5 office wings, curved hall and entrance drum; extend geometry regression checks.

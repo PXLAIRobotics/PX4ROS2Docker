@@ -25,147 +25,35 @@
       "faces": 12
     },
     {
-      "name": "building_543268",
-      "grb_oidn": 543268,
-      "area_m2": 254.048,
-      "height_m": 4.56,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Matig",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 16,
-      "faces": 28
-    },
-    {
-      "name": "building_545772",
-      "grb_oidn": 545772,
-      "area_m2": 53.101,
-      "height_m": 4.7,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_545780",
-      "grb_oidn": 545780,
-      "area_m2": 52.035,
-      "height_m": 4.72,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Matig",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 12,
-      "faces": 20
-    },
-    {
-      "name": "building_545835",
-      "grb_oidn": 545835,
-      "area_m2": 18.28,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": "Slecht",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
       "name": "corda_5",
       "grb_oidn": 545957,
       "area_m2": 4996.836,
-      "height_m": 16.65,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 126,
-      "faces": 248
-    },
-    {
-      "name": "building_545988",
-      "grb_oidn": 545988,
-      "area_m2": 84.735,
-      "height_m": 3.77,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2026-02-07",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_546665",
-      "grb_oidn": 546665,
-      "area_m2": 175.988,
-      "height_m": 8.88,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 16,
-      "faces": 28
-    },
-    {
-      "name": "building_546667",
-      "grb_oidn": 546667,
-      "area_m2": 124.421,
-      "height_m": 9.94,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 24,
-      "faces": 44
-    },
-    {
-      "name": "building_546668",
-      "grb_oidn": 546668,
-      "area_m2": 146.833,
-      "height_m": 8.45,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2025-12-18",
-      "courtyards": 0,
-      "vertices": 26,
-      "faces": 48
-    },
-    {
-      "name": "building_546670",
-      "grb_oidn": 546670,
-      "area_m2": 170.424,
-      "height_m": 10.91,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_546675",
-      "grb_oidn": 546675,
-      "area_m2": 153.988,
-      "height_m": 10.06,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 16,
-      "faces": 28
+      "height_m": 13.5,
+      "height_source": "Official visitor/mobility map: separate three-storey office wings, lower curved hall and round entrance drum; 11.5/7.5/13.5 m heights and partition boundaries are visual estimates, replacing a uniform 16.65 m 3D GRB maximum",
+      "detail": "separate low curved hall, three-storey office wings and entrance drum",
+      "sections": [
+        {
+          "name": "entrance_drum_0",
+          "height_m": 13.5,
+          "area_m2": 478.233
+        },
+        {
+          "name": "north_offices_0",
+          "height_m": 11.5,
+          "area_m2": 1646.908
+        },
+        {
+          "name": "south_offices_0",
+          "height_m": 11.5,
+          "area_m2": 1432.676
+        },
+        {
+          "name": "curved_hall_0",
+          "height_m": 7.5,
+          "area_m2": 1438.989
+        }
+      ],
+      "partition_area_m2": 4996.807
     },
     {
       "name": "building_549011",
@@ -194,58 +82,6 @@
       "faces": 20
     },
     {
-      "name": "building_551750",
-      "grb_oidn": 551750,
-      "area_m2": 83.656,
-      "height_m": 9.16,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2017-01-17",
-      "courtyards": 0,
-      "vertices": 14,
-      "faces": 24
-    },
-    {
-      "name": "building_551751",
-      "grb_oidn": 551751,
-      "area_m2": 113.299,
-      "height_m": 9.14,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2014-06-04",
-      "courtyards": 0,
-      "vertices": 14,
-      "faces": 24
-    },
-    {
-      "name": "building_551752",
-      "grb_oidn": 551752,
-      "area_m2": 19.479,
-      "height_m": 2.7,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_552227",
-      "grb_oidn": 552227,
-      "area_m2": 16.176,
-      "height_m": 1.92,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 12,
-      "faces": 20
-    },
-    {
       "name": "building_552256",
       "grb_oidn": 552256,
       "area_m2": 75.2,
@@ -254,175 +90,6 @@
       "height_source": "3D GRB HN_P99, exact GRB OIDN match",
       "height_quality": "Goed",
       "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_552279",
-      "grb_oidn": 552279,
-      "area_m2": 30.925,
-      "height_m": 2.57,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2026-06-04",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_552280",
-      "grb_oidn": 552280,
-      "area_m2": 31.795,
-      "height_m": 2.35,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2026-06-04",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_552358",
-      "grb_oidn": 552358,
-      "area_m2": 75.676,
-      "height_m": 2.98,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_552564",
-      "grb_oidn": 552564,
-      "area_m2": 77.199,
-      "height_m": 9.96,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2026-02-07",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_553070",
-      "grb_oidn": 553070,
-      "area_m2": 76.172,
-      "height_m": 9.63,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2026-06-04",
-      "courtyards": 0,
-      "vertices": 12,
-      "faces": 20
-    },
-    {
-      "name": "building_553135",
-      "grb_oidn": 553135,
-      "area_m2": 42.06,
-      "height_m": 3.5,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 10,
-      "faces": 16
-    },
-    {
-      "name": "building_553136",
-      "grb_oidn": 553136,
-      "area_m2": 25.764,
-      "height_m": 2.43,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_553444",
-      "grb_oidn": 553444,
-      "area_m2": 82.506,
-      "height_m": 9.18,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2022-07-01",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_553445",
-      "grb_oidn": 553445,
-      "area_m2": 100.132,
-      "height_m": 10.05,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2025-12-18",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_553453",
-      "grb_oidn": 553453,
-      "area_m2": 103.931,
-      "height_m": 9.15,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2022-07-01",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_553880",
-      "grb_oidn": 553880,
-      "area_m2": 97.402,
-      "height_m": 9.79,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_553881",
-      "grb_oidn": 553881,
-      "area_m2": 22.934,
-      "height_m": 2.69,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2008-12-08",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_2042434",
-      "grb_oidn": 2042434,
-      "area_m2": 21.387,
-      "height_m": 3.13,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2010-11-10",
       "courtyards": 0,
       "vertices": 8,
       "faces": 12
@@ -452,110 +119,6 @@
       "courtyards": 0,
       "vertices": 12,
       "faces": 20
-    },
-    {
-      "name": "building_4482303",
-      "grb_oidn": 4482303,
-      "area_m2": 43.262,
-      "height_m": 3.31,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2014-01-22",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_4482422",
-      "grb_oidn": 4482422,
-      "area_m2": 39.68,
-      "height_m": 2.39,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2014-06-04",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_4483475",
-      "grb_oidn": 4483475,
-      "area_m2": 26.787,
-      "height_m": 2.43,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2014-01-22",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_4484102",
-      "grb_oidn": 4484102,
-      "area_m2": 21.716,
-      "height_m": 2.53,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2014-01-22",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_4484612",
-      "grb_oidn": 4484612,
-      "area_m2": 18.634,
-      "height_m": 2.81,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2014-01-22",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_4484715",
-      "grb_oidn": 4484715,
-      "area_m2": 18.185,
-      "height_m": 2.45,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2014-01-22",
-      "courtyards": 0,
-      "vertices": 10,
-      "faces": 16
-    },
-    {
-      "name": "building_4485021",
-      "grb_oidn": 4485021,
-      "area_m2": 16.585,
-      "height_m": 2.17,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2014-01-22",
-      "courtyards": 0,
-      "vertices": 14,
-      "faces": 24
-    },
-    {
-      "name": "building_4485807",
-      "grb_oidn": 4485807,
-      "area_m2": 13.256,
-      "height_m": 2.89,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2014-01-22",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
     },
     {
       "name": "building_4487126",
@@ -608,19 +171,6 @@
       "courtyards": 0,
       "vertices": 26,
       "faces": 48
-    },
-    {
-      "name": "building_4489603",
-      "grb_oidn": 4489603,
-      "area_m2": 100.737,
-      "height_m": 9.71,
-      "low_height_m": null,
-      "height_source": "3D GRB HN_P99, exact GRB OIDN match",
-      "height_quality": "Goed",
-      "footprint_version_date": "2026-06-04",
-      "courtyards": 0,
-      "vertices": 10,
-      "faces": 16
     },
     {
       "name": "building_5148120",
@@ -688,45 +238,6 @@
       "faces": 24
     },
     {
-      "name": "building_5793940",
-      "grb_oidn": 5793940,
-      "area_m2": 24.64,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2026-06-04",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_5794944",
-      "grb_oidn": 5794944,
-      "area_m2": 16.262,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2026-06-04",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_5795925",
-      "grb_oidn": 5795925,
-      "area_m2": 12.314,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2017-01-17",
-      "courtyards": 0,
-      "vertices": 16,
-      "faces": 28
-    },
-    {
       "name": "building_5796462",
       "grb_oidn": 5796462,
       "area_m2": 2180.779,
@@ -751,19 +262,6 @@
       "courtyards": 0,
       "vertices": 34,
       "faces": 64
-    },
-    {
-      "name": "building_5797048",
-      "grb_oidn": 5797048,
-      "area_m2": 185.461,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2017-01-17",
-      "courtyards": 0,
-      "vertices": 16,
-      "faces": 28
     },
     {
       "name": "corda_2",
@@ -831,32 +329,6 @@
       "faces": 32
     },
     {
-      "name": "building_6822087",
-      "grb_oidn": 6822087,
-      "area_m2": 116.493,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2026-02-07",
-      "courtyards": 0,
-      "vertices": 16,
-      "faces": 28
-    },
-    {
-      "name": "building_6822089",
-      "grb_oidn": 6822089,
-      "area_m2": 161.046,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2020-08-12",
-      "courtyards": 0,
-      "vertices": 22,
-      "faces": 40
-    },
-    {
       "name": "building_6822100",
       "grb_oidn": 6822100,
       "area_m2": 32.691,
@@ -868,71 +340,6 @@
       "courtyards": 0,
       "vertices": 8,
       "faces": 12
-    },
-    {
-      "name": "building_7145243",
-      "grb_oidn": 7145243,
-      "area_m2": 97.307,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2022-07-01",
-      "courtyards": 0,
-      "vertices": 12,
-      "faces": 20
-    },
-    {
-      "name": "building_7145244",
-      "grb_oidn": 7145244,
-      "area_m2": 24.879,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2026-06-04",
-      "courtyards": 0,
-      "vertices": 12,
-      "faces": 20
-    },
-    {
-      "name": "building_7145245",
-      "grb_oidn": 7145245,
-      "area_m2": 38.97,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2022-07-01",
-      "courtyards": 0,
-      "vertices": 18,
-      "faces": 32
-    },
-    {
-      "name": "building_7145246",
-      "grb_oidn": 7145246,
-      "area_m2": 32.602,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2026-02-07",
-      "courtyards": 0,
-      "vertices": 12,
-      "faces": 20
-    },
-    {
-      "name": "building_7145247",
-      "grb_oidn": 7145247,
-      "area_m2": 44.781,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2022-07-01",
-      "courtyards": 0,
-      "vertices": 16,
-      "faces": 28
     },
     {
       "name": "building_7494602",
@@ -948,17 +355,21 @@
       "faces": 112
     },
     {
-      "name": "building_7571830",
+      "name": "corda_8",
       "grb_oidn": 7571830,
       "area_m2": 3338.353,
-      "height_m": 12,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2025-06-06",
-      "courtyards": 0,
-      "vertices": 40,
-      "faces": 76
+      "height_m": 10.5,
+      "low_height_m": 8,
+      "height_source": "Official mobility map and winter orthophoto identify the repeated shed/sawtooth roof; nine teeth and 8/10.5 m valley/peak heights are approximate visual dimensions",
+      "roof": "sawtooth",
+      "roof_teeth": 9,
+      "pitch_m": 10.941482717511288,
+      "axis_enu": [
+        -0.3009400223452647,
+        0.9536430689470938
+      ],
+      "covered_area_m2": 3338.353,
+      "roof_colour": "0.76 0.77 0.72 1"
     },
     {
       "name": "building_7598570",
@@ -972,45 +383,6 @@
       "courtyards": 0,
       "vertices": 52,
       "faces": 100
-    },
-    {
-      "name": "building_7689594",
-      "grb_oidn": 7689594,
-      "area_m2": 16.75,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2025-12-18",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_7689722",
-      "grb_oidn": 7689722,
-      "area_m2": 19.188,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2025-12-18",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
-      "name": "building_7689824",
-      "grb_oidn": 7689824,
-      "area_m2": 17.083,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2025-12-18",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
     },
     {
       "name": "corda_arena",
@@ -1030,19 +402,6 @@
       "interior_layout": "approximate empty hall with three gallery levels; simulation doors held open"
     },
     {
-      "name": "building_7691395",
-      "grb_oidn": 7691395,
-      "area_m2": 139.957,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2026-05-28",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
-    },
-    {
       "name": "building_7691785",
       "grb_oidn": 7691785,
       "area_m2": 2872.236,
@@ -1054,32 +413,326 @@
       "courtyards": 0,
       "vertices": 26,
       "faces": 48
+    }
+  ],
+  "culled_buildings": [
+    {
+      "grb_oidn": 543268,
+      "area_m2": 254.048,
+      "distance_from_launch_m": 506.86,
+      "reason": "small peripheral building omitted for performance"
     },
     {
-      "name": "building_7691912",
+      "grb_oidn": 545772,
+      "area_m2": 53.101,
+      "distance_from_launch_m": 452.82,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 545780,
+      "area_m2": 52.035,
+      "distance_from_launch_m": 384.8,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 545835,
+      "area_m2": 18.28,
+      "distance_from_launch_m": 392.93,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 545988,
+      "area_m2": 84.735,
+      "distance_from_launch_m": 318.31,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 546665,
+      "area_m2": 175.988,
+      "distance_from_launch_m": 456.72,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 546667,
+      "area_m2": 124.421,
+      "distance_from_launch_m": 401.48,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 546668,
+      "area_m2": 146.833,
+      "distance_from_launch_m": 413.38,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 546670,
+      "area_m2": 170.424,
+      "distance_from_launch_m": 429.05,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 546675,
+      "area_m2": 153.988,
+      "distance_from_launch_m": 387.15,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 551750,
+      "area_m2": 83.656,
+      "distance_from_launch_m": 208.1,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 551751,
+      "area_m2": 113.299,
+      "distance_from_launch_m": 202.13,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 551752,
+      "area_m2": 19.479,
+      "distance_from_launch_m": 215.86,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 552227,
+      "area_m2": 16.176,
+      "distance_from_launch_m": 243.4,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 552279,
+      "area_m2": 30.925,
+      "distance_from_launch_m": 170.95,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 552280,
+      "area_m2": 31.795,
+      "distance_from_launch_m": 174.96,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 552358,
+      "area_m2": 75.676,
+      "distance_from_launch_m": 238.16,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 552564,
+      "area_m2": 77.199,
+      "distance_from_launch_m": 184.24,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 553070,
+      "area_m2": 76.172,
+      "distance_from_launch_m": 194.88,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 553135,
+      "area_m2": 42.06,
+      "distance_from_launch_m": 238.37,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 553136,
+      "area_m2": 25.764,
+      "distance_from_launch_m": 235.05,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 553444,
+      "area_m2": 82.506,
+      "distance_from_launch_m": 225.71,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 553445,
+      "area_m2": 100.132,
+      "distance_from_launch_m": 242.54,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 553453,
+      "area_m2": 103.931,
+      "distance_from_launch_m": 219.66,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 553880,
+      "area_m2": 97.402,
+      "distance_from_launch_m": 252.81,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 553881,
+      "area_m2": 22.934,
+      "distance_from_launch_m": 236.63,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 2042434,
+      "area_m2": 21.387,
+      "distance_from_launch_m": 335.79,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 4482303,
+      "area_m2": 43.262,
+      "distance_from_launch_m": 368.45,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 4482422,
+      "area_m2": 39.68,
+      "distance_from_launch_m": 209.85,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 4483475,
+      "area_m2": 26.787,
+      "distance_from_launch_m": 432.95,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 4484102,
+      "area_m2": 21.716,
+      "distance_from_launch_m": 211.04,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 4484612,
+      "area_m2": 18.634,
+      "distance_from_launch_m": 439.25,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 4484715,
+      "area_m2": 18.185,
+      "distance_from_launch_m": 416.68,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 4485021,
+      "area_m2": 16.585,
+      "distance_from_launch_m": 194.5,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 4485807,
+      "area_m2": 13.256,
+      "distance_from_launch_m": 442.59,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 4489603,
+      "area_m2": 100.737,
+      "distance_from_launch_m": 187.93,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 5793940,
+      "area_m2": 24.64,
+      "distance_from_launch_m": 167.77,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 5794944,
+      "area_m2": 16.262,
+      "distance_from_launch_m": 183.43,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 5795925,
+      "area_m2": 12.314,
+      "distance_from_launch_m": 430.77,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 5797048,
+      "area_m2": 185.461,
+      "distance_from_launch_m": 394.15,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 6822087,
+      "area_m2": 116.493,
+      "distance_from_launch_m": 317.83,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 6822089,
+      "area_m2": 161.046,
+      "distance_from_launch_m": 402.1,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 7145243,
+      "area_m2": 97.307,
+      "distance_from_launch_m": 272.58,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 7145244,
+      "area_m2": 24.879,
+      "distance_from_launch_m": 214.19,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 7145245,
+      "area_m2": 38.97,
+      "distance_from_launch_m": 199.8,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 7145246,
+      "area_m2": 32.602,
+      "distance_from_launch_m": 186.11,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 7145247,
+      "area_m2": 44.781,
+      "distance_from_launch_m": 282.47,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 7689594,
+      "area_m2": 16.75,
+      "distance_from_launch_m": 447.29,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 7689722,
+      "area_m2": 19.188,
+      "distance_from_launch_m": 302.24,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 7689824,
+      "area_m2": 17.083,
+      "distance_from_launch_m": 265.94,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
+      "grb_oidn": 7691395,
+      "area_m2": 139.957,
+      "distance_from_launch_m": 435.55,
+      "reason": "small peripheral building omitted for performance"
+    },
+    {
       "grb_oidn": 7691912,
       "area_m2": 80.987,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2025-12-18",
-      "courtyards": 0,
-      "vertices": 8,
-      "faces": 12
+      "distance_from_launch_m": 243.07,
+      "reason": "small peripheral building omitted for performance"
     },
     {
-      "name": "building_7692169",
       "grb_oidn": 7692169,
       "area_m2": 84.105,
-      "height_m": 6,
-      "low_height_m": null,
-      "height_source": "estimated fallback: 6 m for small buildings, 12 m otherwise",
-      "height_quality": null,
-      "footprint_version_date": "2025-12-18",
-      "courtyards": 0,
-      "vertices": 12,
-      "faces": 20
+      "distance_from_launch_m": 213.92,
+      "reason": "small peripheral building omitted for performance"
     }
   ],
   "notes": [
@@ -1256,6 +909,20 @@
       "layout": "approximate 2.6 x 5 m bays with 6 m aisles"
     }
   ],
+  "performance": {
+    "before_batching": {
+      "link": 548,
+      "visual": 561,
+      "collision": 296
+    },
+    "after_batching": {
+      "link": 37,
+      "visual": 66,
+      "collision": 296
+    },
+    "cylinder_visual_segments": 16,
+    "collisions": "Original analytic/mesh collisions retained; link transforms baked into collider poses"
+  },
   "launch": {
     "east_m": -11,
     "north_m": -10,
@@ -1269,9 +936,9 @@
     "synthetic_level_platform": true
   },
   "input_sha256": {
-    "site.json": "c4e15e445110e55e3d9b47179e0324a38c3f7ba6402d9f9f21fa1929595fc43a",
+    "site.json": "afd615c34db78dc2ca1e39e49164f8d064e53521708fae56d3dace6e56bb0fa3",
     "gui.config.in": "deb29ba9051999d7405bd7d2bc8963ef1a7cf0957e0102f493ccf02876b44ed4",
-    "SOURCES.md": "31d85c5d41160384b8bf057506ca08f1f80f2a1b541b5d6e3e07e3ef5f427a60",
+    "SOURCES.md": "2bb4ba3ee9ed9c5693cbd16dcc519bc10d66fd52d7cbc68c2b52accf943e27d2",
     "data/buildings.geojson": "8fbeb882d79ad2cc6d0855f61b9cc205e9582bdbfe8131d74e173375dc95541e",
     "data/heights.json": "d694f4c3da6576146f2483e0b5972d5552fb5e2fde1eb384f20500bde37beb87",
     "data/landmarks.geojson": "7206806c0ba7d145b187c289cee4a9ca4b96ac1d3a389f1dbb509dabbdb23e93",
