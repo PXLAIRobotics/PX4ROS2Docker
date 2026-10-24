@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -euo pipefail
+share=$(ros2 pkg prefix --share px4_dev_examples)
+exec rviz2 -d "$share/config/sensors.rviz" --ros-args -p use_sim_time:=true "$@"

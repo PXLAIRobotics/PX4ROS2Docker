@@ -60,7 +60,7 @@ Evidence logs/screenshots are under ignored `Data/evidence/`, with raw service o
 
 Unchecked TODO entries are expanded validation or optional features; their completion is not implied by baseline checks. Hardware GPU acceleration (NVIDIA/Intel/AMD), ARM64, Docker Desktop, every destructive lifecycle alias, injected component crashes, CI execution, image-only source population, an independent reviewer walkthrough and measured peak build resources remain unverified.
 
-Sensor-equipped model/RViz bridge demos, full Gazebo-time flight control, external host QGC/ROS routing, multi-vehicle, firmware flashing/HITL and experimental Lyrical/Jetty remain extensions. QGC text-to-speech has no configured speech backend; its visual vehicle/flight functions are verified. Apt and some transitive dependency versions evolve; package and Python inventories are recorded inside the images rather than claiming a bit-identical snapshot.
+Full Gazebo-time flight control, external host QGC/ROS routing, multi-vehicle, firmware flashing/HITL and experimental Lyrical/Jetty remain extensions. QGC text-to-speech has no configured speech backend; its visual vehicle/flight functions are verified. Apt and some transitive dependency versions evolve; package and Python inventories are recorded inside the images rather than claiming a bit-identical snapshot.
 
 The final VNC container was recreated from the finished image and successfully reused the compiled firmware and ROS workspace. PX4 reports Release 1.17.0, valid telemetry flows, the recorded bag remains present, QGC retains its saved preferences/window state, and its live view shows Ready / Hold. The running desktop is available on localhost:6901; the user-facing browser tab is left connected. See tested-platforms.md for the support matrix.
 
@@ -69,3 +69,24 @@ Final source checks, Hadolint, image smoke checks and the VNC/QGC endpoint test 
 ## Runtime recovery follow-up
 
 A running session later lost fresh ROS and QGC telemetry while its processes remained alive. Gazebo world time continued, but PX4 reported stale MAVLink counters and IMU timestamp errors. The disarmed session was restarted, restoring fresh telemetry and QGC Ready / Hold. The underlying trigger has not been established; this recovery does not establish a permanent fix for long-running stalls. If it recurs, retain `Data/sessions` logs and restart with `stop_px4_dev` followed by `start_px4_dev` once the vehicle is safely disarmed.
+
+## RGB-D and 3D lidar addition (2026-10-24)
+
+The default x500 now includes an authored 320×240/10 Hz RGB-D camera and a 720×16/10 Hz 3D lidar. These are generic simulated sensors, not a claim of calibration to specific hardware. Their combined 220 g mass and mounts are included in the dynamics. The inherited upstream PX4 and Gazebo checkouts remain clean.
+
+The `sensors` tmux window bridges RGB, floating-point depth, camera info and both clouds using lazy best-effort subscriptions. Static TF covers body, camera optical and lidar frames. A world-specific clock bridge supports RViz simulation time without changing PX4 control time. Sensor-enabled startup checks advancing timestamps, dimensions, finite depth/3D returns and TF before declaring readiness. `PX4_SENSOR_SUITE=none` preserves the lighter original x500 path.
+
+Verified locally on Linux amd64 with software rendering:
+
+- Payload/TF check passed: RGB-D images/cloud are 320×240 in `rgbd_optical_frame`; lidar cloud is 720×16 in `lidar_link`, with finite ground returns and nonzero vertical spread. Camera info dimensions/intrinsics match the images.
+- Sensor-free selection passed with fresh ROS telemetry and no sensor bridge window: `Data/evidence/sensors-free.log`.
+- EGL headless rendering passed with no DISPLAY and no network in the native container: `Data/evidence/sensors-headless.log`; RGB/depth previews and JSON under `Data/evidence/sensors/`.
+- With RViz subscribed to the sensor streams and real QGC connected, PX4 armed, took off 3 m, held, landed/disarmed and restored Hold: `Data/evidence/sensors-final-flight.log`.
+- RViz started with Mesa OpenGL 4.5 and the prepared configuration; `/clock` publication was checked. Cloud/image subscriptions and simulation-time configuration were verified; the viewer layout was not visually inspected during this follow-up.
+- Native and VNC images rebuilt with the new helpers, seed assets and tests. Headless payload validation uses the mounted workspace. Full image-only source setup remains an existing deferred check.
+
+Configured sensor rates use simulation time; no hardware-performance guarantee is made. These are perception outputs, with no SLAM, autonomous avoidance or QGC video pipeline included. Long-running telemetry stalls noted above remain unresolved.
+
+An initial 640×480/15 Hz RGB-D preset was too expensive with both point-cloud displays active on software rendering. The default was reduced to 320×240/10 Hz before final validation. Hardware rendering and sustained real-time performance remain platform-dependent.
+
+The final VNC container was recreated from the updated image after validation, then started with the sensor suite and RViz viewer. Final startup evidence: `Data/evidence/sensors-ready.log`; runtime health: `Data/evidence/sensors-final-health.log`.

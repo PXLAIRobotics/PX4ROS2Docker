@@ -1,0 +1,78 @@
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+  - Class: rviz_common/Views
+    Name: Views
+Visualization Manager:
+  Class: ""
+  Global Options:
+    Background Color: 35; 35; 40
+    Fixed Frame: base_link
+    Frame Rate: 20
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Cell Size: 1
+      Plane: XY
+      Reference Frame: base_link
+    - Class: rviz_default_plugins/TF
+      Name: Sensor frames
+      Enabled: true
+      Show Names: true
+    - Class: rviz_default_plugins/PointCloud2
+      Name: 3D lidar
+      Enabled: true
+      Topic:
+        Value: /drone/lidar/points
+        Reliability Policy: Best Effort
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+      Style: Points
+      Size (Pixels): 3
+      Color Transformer: AxisColor
+      Axis: Z
+      Decay Time: 0
+    - Class: rviz_default_plugins/PointCloud2
+      Name: RGB-D cloud
+      Enabled: true
+      Topic:
+        Value: /drone/rgbd/points
+        Reliability Policy: Best Effort
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+      Style: Points
+      Size (Pixels): 2
+      Color Transformer: RGB8
+      Decay Time: 0
+    - Class: rviz_default_plugins/Image
+      Name: RGB camera
+      Enabled: true
+      Topic:
+        Value: /drone/rgbd/image
+        Reliability Policy: Best Effort
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+    - Class: rviz_default_plugins/Image
+      Name: Depth camera
+      Enabled: true
+      Topic:
+        Value: /drone/rgbd/depth_image
+        Reliability Policy: Best Effort
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Depth: 1
+      Normalize Range: true
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 8
+      Pitch: 0.5
+      Yaw: 0.6
+      Focal Point: {X: 2, Y: 0, Z: 0}
+Window Geometry:
+  Width: 1280
+  Height: 800

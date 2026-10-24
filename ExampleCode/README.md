@@ -9,4 +9,4 @@ Use the root README to build/run the container and populate/compile Projects fir
 5. **Modify ROS:** edit `~/Projects/ros2_workspace/src/px4_dev_examples`, run `build_ros2_workspace`, source `install/setup.bash`, and rerun the node. Add dependencies to package.xml when extending it.
 6. **Record:** run `record_px4_rosbag` before a simulated flight and stop it afterward. Use `ros2 bag info` on the resulting folder; keep replay nodes separate from live control nodes.
 
-The default x500 example demonstrates flight control and telemetry. Camera-equipped model/sensor bridge demonstrations are a later extension; the optional clock launch file is not a sensor demo.
+7. **Inspect perception:** the default x500 now carries an RGB-D camera and 16-channel 3D lidar. Run `view_px4_sensors` for the prepared RViz displays, or `ros2 run px4_dev_examples sensor_check --save ~/Data/evidence/sensors` to verify all streams and save RGB/depth previews. See the root README for topic names, frames and the sensor-free option.

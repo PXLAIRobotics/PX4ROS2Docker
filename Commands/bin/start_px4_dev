@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 headless=0; attach=1
+export PX4_SENSOR_SUITE="${PX4_SENSOR_SUITE:-rgbd_lidar}"
+case "$PX4_SENSOR_SUITE" in rgbd_lidar|none) ;; *) echo 'PX4_SENSOR_SUITE must be rgbd_lidar or none.' >&2; exit 2;; esac
 for argument in "$@"; do
     case "$argument" in
         --headless) headless=1 ;;
@@ -28,7 +30,7 @@ trap cleanup EXIT
 tmux new-session -d -s "$session" -n agent 'exec bash -lc "start_micro_xrce_agent"'
 # An existing tmux server retains its original environment. Forward overrides
 # from this invocation to the new simulation window explicitly.
-for variable in PX4_HOME_LAT PX4_HOME_LON PX4_HOME_ALT; do
+for variable in PX4_HOME_LAT PX4_HOME_LON PX4_HOME_ALT PX4_SENSOR_SUITE PX4_GZ_WORLD; do
     if [[ -v $variable ]]; then
         tmux set-environment -t "$session" "$variable" "${!variable}"
     fi
@@ -47,6 +49,12 @@ ros2 run px4_dev_examples telemetry --once --timeout 90
 for window in agent sitl; do
     [[ $(tmux display-message -p -t "$session:$window" '#{pane_dead}') == 0 ]] || { echo "$window exited" >&2; exit 1; }
 done
+if [[ $PX4_SENSOR_SUITE == rgbd_lidar ]]; then
+    tmux new-window -t "$session" -n sensors 'exec bash -lc "ros2 launch px4_dev_examples sensors.launch.py"'
+    tmux set-option -t "$session:sensors" remain-on-exit on
+    tmux pipe-pane -o -t "$session:sensors" "cat >> '$run_dir/sensors.log'"
+    ros2 run px4_dev_examples sensor_check --timeout 45 > "$run_dir/sensor-check.json"
+fi
 if (( !headless )); then
     tmux new-window -t "$session" -n gazebo 'exec bash -lc "gz sim -g"'
     tmux set-option -t "$session:gazebo" remain-on-exit on

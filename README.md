@@ -43,7 +43,7 @@ source ~/Projects/ros2_workspace/install/setup.bash
 start_px4_dev
 ```
 
-`start_px4_dev` creates a `px4-dev` tmux session: XRCE agent, PX4 console, Gazebo GUI, QGroundControl and a ROS shell. It waits for valid PX4 ROS telemetry before reporting readiness. In QGC, wait for vehicle connection and preflight readiness; use the normal Takeoff/Land actions for a manual simulated flight.
+`start_px4_dev` creates a `px4-dev` tmux session: XRCE agent, PX4 console, sensor bridge, Gazebo GUI, QGroundControl and a ROS shell. It waits for valid PX4 ROS telemetry and rendered sensor data with TF before reporting readiness. In QGC, wait for vehicle connection and preflight readiness; use the normal Takeoff/Land actions for a manual simulated flight.
 
 From the ROS tmux window (or a newly attached shell), try:
 
@@ -123,7 +123,7 @@ rviz2
 glxinfo -B
 ```
 
-`start_px4_sitl` uses the bundled x500 and default world. `PX4_GZ_WORLD` selects another bundled world. Parameters persist under `Projects/PX4-Autopilot/build/px4_sitl_default/rootfs/parameters.bson`; stop SITL and back up that file before any deliberate reset. Flight ULogs are linked into `Data/px4/logs`; ROS recordings go into `Data/bags`; tmux service output goes into timestamped `Data/sessions` directories. Use the installed `pyulog` tools for ULog inspection and `ros2 bag info/play` for ROS bags.
+`start_px4_sitl` uses an x500 with the RGB-D/lidar suite and the bundled default world. `PX4_GZ_WORLD` selects another bundled world. Parameters persist under `Projects/PX4-Autopilot/build/px4_sitl_default/rootfs/parameters.bson`; stop SITL and back up that file before any deliberate reset. Flight ULogs are linked into `Data/px4/logs`; ROS recordings go into `Data/bags`; tmux service output goes into timestamped `Data/sessions` directories. Use the installed `pyulog` tools for ULog inspection and `ros2 bag info/play` for ROS bags.
 
 The default simulated GPS origin is **Corda Campus, Hasselt**, approximately **50.951737° N, 5.352412° E**, at an assumed elevation of **50 m AMSL**. This relocates the simulated GPS/home position and QGC map; Gazebo still uses its bundled flat world, without campus buildings or terrain. The coordinates are an approximate campus point, not a surveyed launch position.
 
@@ -150,6 +150,44 @@ BUILD_JOBS=2 build_px4_sitl  # inside container, for constrained hosts
 
 Build scripts forward Docker build options. Run scripts accept Docker options before an optional `--`; words after `--` replace the container command. `GPU_MODE` accepts `auto`, `nvidia`, `dri`, or `software`. VNC acceleration depends on its X server; inspect the actual renderer rather than assuming GPU passthrough accelerates Xvnc. Classic VNC password authentication uses only the first eight characters. Use SSH tunnels for remote desktop access.
 
+## RGB-D camera and 3D lidar
+
+The default drone includes a forward-facing RGB-D camera tilted 10° downward and a roof-mounted 3D lidar. The authored model extends the pinned upstream x500 without editing its source or Gazebo model repository. It adds 70 g camera mass and 150 g lidar mass with fixed mounts and visible sensor housings.
+
+| Sensor | Configuration | ROS 2 topics |
+| --- | --- | --- |
+| RGB-D | 320 × 240, 87° horizontal FOV, 0.15–20 m, 10 Hz simulation time | `/drone/rgbd/image`, `/drone/rgbd/depth_image`, `/drone/rgbd/camera_info`, `/drone/rgbd/points` |
+| 3D lidar | 720 horizontal × 16 vertical samples, 360° × 30° FOV, 0.1–50 m, 10 Hz simulation time | `/drone/lidar/points` |
+
+RGB uses `sensor_msgs/Image` with `rgb8`; depth uses `32FC1` in metres. Both clouds use `sensor_msgs/PointCloud2`. The lidar cloud contains all 16 vertical channels; it is not a single-plane LaserScan. Update rates are configured simulation rates; actual throughput depends on rendering hardware and subscribers.
+
+After updating an existing checkout, rebuild the ROS package inside the container and restart the session:
+
+```bash
+stop_px4_dev
+build_ros2_workspace --packages-select px4_dev_examples
+source ~/Projects/ros2_workspace/install/setup.bash
+start_px4_dev --no-attach
+view_px4_sensors
+# In another shell: check payloads, advancing stamps and TF; save optional previews:
+ros2 run px4_dev_examples sensor_check --save ~/Data/evidence/sensors
+```
+
+The `sensors` tmux window runs `ros2 launch px4_dev_examples sensors.launch.py`. Standalone `start_px4_sitl` starts the model/server only; launch that bridge separately for ROS sensor topics. The bridge uses best-effort sensor QoS and lazy subscriptions so unused streams avoid unnecessary transfers. For direct inspection, use `--qos-reliability best_effort`. Sensors also work without a display server using Gazebo's Ogre2 EGL headless rendering; software rendering can be slower.
+
+`view_px4_sensors` opens the included RViz configuration with RGB/depth panels and both clouds. Its fixed frame is `base_link` (ROS FLU). Static TF connects that frame to `lidar_link`, `rgbd_link`, `rgbd_sensor` and `rgbd_optical_frame`; images, camera info and the RGB-D cloud use the optical frame (+Z forward, +X right, +Y down). This is a vehicle-relative view; no map/odometry TF, SLAM or obstacle-avoidance controller is provided. These sensors feed ROS perception and do not automatically change PX4 flight behaviour or stream camera video into QGC.
+
+Sensor timestamps and `/clock` use Gazebo simulation time. The sensor launch bridges the selected world's clock; RViz uses `use_sim_time:=true`. Keep the existing PX4 offboard control nodes on their documented wall-time setup. Do not launch a second clock bridge at the same time.
+
+To run the original lighter, sensor-free x500, stop the session and use `PX4_SENSOR_SUITE=none start_px4_dev`. The same selector works with standalone SITL. Sensor-free runs do not require the rendered sensor checks or publish these sensor topics. To record sensors alongside control telemetry, pass their topics explicitly, for example:
+
+```bash
+record_px4_rosbag /drone/rgbd/image /drone/rgbd/depth_image \
+  /drone/rgbd/camera_info /drone/lidar/points /tf_static /clock
+```
+
+Camera/lidar definitions, bridge YAML and RViz settings live under `Projects/ros2_workspace/src/px4_dev_examples/{simulation,config,launch}`. Rebuild that package after asset/config changes. The integration check `bash /opt/px4-tests/sensors.sh` starts and stops its own headless session; run it only when no development session is active.
+
 ## Networking, ROS topics and time
 
 Default Docker bridge networking works because all components run inside the same container:
@@ -165,7 +203,7 @@ No XRCE/MAVLink host port is published by default. Running host-side QGC or ROS 
 
 Message topics with a nonzero `MESSAGE_VERSION` have a `_vN` suffix. The provided nodes and bag recorder derive names from the installed definitions; `ros2 topic list` shows the actual names. Subscriptions use compatible best-effort QoS. Direct `ros2 topic echo` may need `--qos-reliability best_effort`.
 
-The baseline control examples use system time in microseconds and PX4's normal XRCE synchronization. They do not enable `use_sim_time`. An optional visualization clock bridge is available via `ros2 launch px4_dev_examples clock.launch.py`; use it only for nodes configured for that clock. A full conversion of PX4/ROS control to Gazebo time requires coordinated PX4 synchronization settings and has not been validated here.
+The baseline control examples use system time in microseconds and PX4's normal XRCE synchronization. They do not enable `use_sim_time`. For sensor-free sessions, an optional visualization clock bridge is available via `ros2 launch px4_dev_examples clock.launch.py`; use it only for nodes configured for that clock. A full conversion of PX4/ROS control to Gazebo time requires coordinated PX4 synchronization settings and has not been validated here.
 
 PX4 local positions use NED: positive X north, Y east, Z down. The demo sets a negative Z change for takeoff and does not interpret ROS ENU values as PX4 coordinates. ROS ENU → NED maps `(x,y,z)` to `(y,x,-z)`; body FLU → FRD flips Y and Z. For quaternion transforms, account for both world and body frames and ordering explicitly.
 
@@ -177,6 +215,7 @@ PX4 local positions use NED: positive X north, Y east, Z down. The demo sets a n
 ./tests/desktop.sh
 # Inside a built development container, with no other session/QGC running:
 bash /opt/px4-tests/flight.sh
+bash /opt/px4-tests/sensors.sh
 ```
 
 The flight test starts headless SITL and a local test GCS heartbeat, then asserts arm/takeoff/hold/land/disarm. It does not replace the manual QGC visual/flight test. The CI image job is opt-in through workflow dispatch because full builds are large. See `docs/implementation-status.md` for actual results.

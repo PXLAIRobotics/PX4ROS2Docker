@@ -8,6 +8,7 @@ Tested 2026-10-23 on Linux amd64 with Docker Engine 29.9.2. Host RAM: 30 GiB rep
 | Browser/VNC desktop | Xfce, TigerVNC RFB, noVNC HTTP/WebSocket, QGC + Gazebo rendering | Verified |
 | Native X11/Xwayland | Local `DISPLAY=:0`, scoped Xauthority, RViz, Mesa OpenGL 4.5 | Verified |
 | Software rendering | Mesa llvmpipe; graphical vehicle/flight state inspected | Verified |
+| RGB-D + 3D lidar, 2026-10-24 | EGL/software, no DISPLAY/network; payload dimensions, finite returns, TF, and complete flight with RViz subscribers | Verified |
 | Host UID/GID source writes | PX4/ROS build output and persistent Data owned by host user | Verified at 1000:1000 |
 | NVIDIA hardware rendering | Launcher implemented; actual renderer/performance not tested | Unverified |
 | Intel/AMD DRI hardware rendering | Device/GID forwarding implemented | Unverified |

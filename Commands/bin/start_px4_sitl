@@ -10,6 +10,17 @@ for argument in "$@"; do
 done
 export GZ_DISTRO=harmonic GZ_IP=127.0.0.1
 export PX4_SIM_MODEL=gz_x500 PX4_GZ_WORLD="${PX4_GZ_WORLD:-default}"
+export PX4_SENSOR_SUITE="${PX4_SENSOR_SUITE:-rgbd_lidar}"
+case "$PX4_SENSOR_SUITE" in
+    rgbd_lidar)
+        export PX4_SIM_MODEL=gz_x500_rgbd_lidar PX4_SYS_AUTOSTART=4001
+        export PX4_SENSOR_SHARE
+        PX4_SENSOR_SHARE=$(ros2 pkg prefix --share px4_dev_examples)
+        [[ -f "$PX4_SENSOR_SHARE/simulation/run_sitl.sh" ]] || { echo 'Run build_ros2_workspace to install the sensor model.' >&2; exit 1; }
+        ;;
+    none) ;;
+    *) echo 'PX4_SENSOR_SUITE must be rgbd_lidar or none.' >&2; exit 2 ;;
+esac
 # Approximate Corda Campus centre, Hasselt. PX4 applies these to Gazebo's
 # spherical world origin before spawning the vehicle; altitude is metres AMSL.
 export PX4_HOME_LAT="${PX4_HOME_LAT:-50.951737}"
@@ -31,4 +42,8 @@ mkdir -p "$HOME/Data/px4/logs" "$build_dir/rootfs"
 cd "$build_dir/rootfs"
 if [[ ! -e log && ! -L log ]]; then ln -s "$HOME/Data/px4/logs" log; fi
 # rootfs/parameters.bson persists in the host Projects mount; logs live under Data.
+if [[ $PX4_SENSOR_SUITE == rgbd_lidar ]]; then
+    export PX4_SENSOR_GZ_ENV="$build_dir/rootfs/gz_env.sh"
+    exec python3 /usr/local/lib/px4-supervise.py bash "$PX4_SENSOR_SHARE/simulation/run_sitl.sh" "$build_dir/bin/px4" "${px4_args[@]}"
+fi
 exec python3 /usr/local/lib/px4-supervise.py "$build_dir/bin/px4" "${px4_args[@]}"

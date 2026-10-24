@@ -181,7 +181,7 @@ Exit gate: ROS receives telemetry and executes a complete, observable simulated 
 - [x] G04 Handle rejected commands, stale telemetry, startup timeouts and loss of the offboard stream. Bound the mission duration and provide a documented interruption/landing path.
 - [x] G05 Document and test PX4 NED/FRD versus ROS ENU/FLU conventions, quaternion ordering and timestamp units. Do not pass ROS coordinates directly into PX4 fields without conversion.
 - [x] G06 Keep flight-triggering demos opt-in. Do not weaken PX4 safety parameters globally to make an example pass; document any simulation-specific parameter changes and reset behavior.
-- [ ] G07 Add a launch/config example for Gazebo-to-ROS sensor bridging and RViz if the selected model provides sensors. Verify topic names/types, frame IDs and clock settings against that model.
+- [x] G07 Add a launch/config example for Gazebo-to-ROS sensor bridging and RViz if the selected model provides sensors. Verify topic names/types, frame IDs and clock settings against that model. Implemented RGB-D + 16-channel 3D lidar with payload/TF checks and display-free EGL validation.
 - [x] G08 Add `record_px4_rosbag` with explicit topic selection and persistent output; document PX4 ULog collection and replay/inspection basics.
 - [x] G09 Replace the reference lesson content with concise PX4 walkthroughs: telemetry, QGC flight, ROS offboard flight, modifying/rebuilding PX4, and adding a ROS node. Do not import unrelated teaching assets.
 
