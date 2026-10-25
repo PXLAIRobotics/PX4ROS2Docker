@@ -40,6 +40,8 @@ for directory in Commands/bin ExampleCode Projects Data; do
     args+=(--mount "type=bind,src=$REPO_DIR/$directory,dst=/home/user/${directory##*/}")
 done
 args+=(-e "ROS_DOMAIN_ID=${ROS_DOMAIN_ID:-0}" -e TERM=xterm-256color)
+# The optional cockpit is maintained outside the repository and survives --rm.
+args+=(--mount "type=volume,src=px4-uav-cockpit,dst=/home/user/.local/share/uav-cockpit")
 if [[ $mode == vnc ]]; then
     args+=(-p "127.0.0.1:${WEB_PORT:-6901}:6901" -p "127.0.0.1:${VNC_PORT:-5901}:5901")
     args+=(-e "VNC_PW=${VNC_PW:-password}" -e "VNC_RESOLUTION=${VNC_RESOLUTION:-1280x800}")

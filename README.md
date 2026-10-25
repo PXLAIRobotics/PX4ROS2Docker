@@ -215,7 +215,7 @@ The default drone includes a level, forward-facing RGB-D camera and a roof-mount
 
 | Sensor | Configuration | ROS 2 topics |
 | --- | --- | --- |
-| RGB-D | 320 × 240, 87° horizontal FOV, 0.15–20 m, 10 Hz simulation time | `/drone/rgbd/image`, `/drone/rgbd/depth_image`, `/drone/rgbd/camera_info`, `/drone/rgbd/points` |
+| RGB-D | 320 × 240, 87° horizontal FOV, RGB view 0.15–500 m, depth 0.15–20 m, 10 Hz simulation time | `/drone/rgbd/image`, `/drone/rgbd/depth_image`, `/drone/rgbd/camera_info`, `/drone/rgbd/points` |
 | 3D lidar | 720 horizontal × 16 vertical samples, 360° × 30° FOV, 0.1–50 m, 10 Hz simulation time | `/drone/lidar/points` |
 
 RGB uses `sensor_msgs/Image` with `rgb8`; depth uses `32FC1` in metres. Both clouds use `sensor_msgs/PointCloud2`. The lidar cloud contains all 16 vertical channels; it is not a single-plane LaserScan. Update rates are configured simulation rates; actual throughput depends on rendering hardware and subscribers.

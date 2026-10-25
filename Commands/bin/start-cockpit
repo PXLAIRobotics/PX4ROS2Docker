@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+# Native ROS 2 cockpit; application source lives outside this repository.
+set -eo pipefail
+case "${1:-}" in
+    --help|-h)
+        echo 'Usage: start-cockpit [--check]'
+        echo 'Open the local PX4 simulator cockpit. Start start-px4.sh first.'
+        echo 'Application: ${UAV_COCKPIT_DIR:-$HOME/.local/share/uav-cockpit}'
+        exit 0 ;;
+    --check|'') ;;
+    *) echo 'Usage: start-cockpit [--check]' >&2; exit 2 ;;
+esac
+if (( $# > 1 )); then echo 'Usage: start-cockpit [--check]' >&2; exit 2; fi
+app_dir=${UAV_COCKPIT_DIR:-$HOME/.local/share/uav-cockpit}
+[[ -f "$app_dir/cockpit.py" ]] || {
+    echo "Cockpit is not installed at $app_dir/cockpit.py" >&2
+    echo 'Attach the px4-uav-cockpit Docker volume, or set UAV_COCKPIT_DIR to your external installation.' >&2
+    exit 1
+}
+source /opt/ros/jazzy/setup.bash
+[[ -f "$HOME/Projects/ros2_workspace/install/setup.bash" ]] || {
+    echo 'Build the ROS workspace first with build_ros2_workspace.' >&2; exit 1;
+}
+source "$HOME/Projects/ros2_workspace/install/setup.bash"
+python3 -c 'import rclpy; from PyQt5 import QtWidgets; from px4_dev_examples.offboard import Offboard'
+if [[ ${1:-} == --check ]]; then
+    python3 -m py_compile "$app_dir/cockpit.py"
+    echo "Cockpit ready: $app_dir"
+    exit 0
+fi
+[[ -n ${DISPLAY:-} || -n ${WAYLAND_DISPLAY:-} ]] || { echo 'Open this command in the container desktop (DISPLAY is unset).' >&2; exit 1; }
+# One cockpit controller per ROS domain; a second launch cannot compete in flight.
+exec flock -n "/tmp/uav-cockpit-${ROS_DOMAIN_ID:-0}.lock" python3 "$app_dir/cockpit.py" --sitl

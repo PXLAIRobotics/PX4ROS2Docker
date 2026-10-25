@@ -46,7 +46,8 @@
           <optical_frame_id>rgbd_optical_frame</optical_frame_id>
           <horizontal_fov>1.5184364492</horizontal_fov>
           <image><width>320</width><height>240</height><format>R8G8B8</format></image>
-          <clip><near>0.15</near><far>20</far></clip>
+          <!-- RGB must see across the campus; depth sensing stays short-range. -->
+          <clip><near>0.15</near><far>500</far></clip>
           <depth_camera><clip><near>0.15</near><far>20</far></clip></depth_camera>
         </camera>
       </sensor>
