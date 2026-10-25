@@ -76,4 +76,5 @@ while (( $# )); do
 done
 if [[ $mode == headless && ${#command_args[@]} == 0 ]]; then command_args=(bash); fi
 # Do not exec: native Xauthority cleanup must run after the foreground container exits.
-docker run "${args[@]}" "${run_options[@]}" "$image" "${command_args[@]}"
+# Bash 3.2 (macOS) requires guarding empty arrays when nounset is enabled.
+docker run "${args[@]}" ${run_options[@]+"${run_options[@]}"} "$image" ${command_args[@]+"${command_args[@]}"}

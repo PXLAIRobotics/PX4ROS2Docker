@@ -79,6 +79,20 @@ def main():
                     assert np.ptp(xyz[:, 2]) > 0.01, 'Lidar returns are flat, not 3D'
                 else:
                     assert msg.height == 240 and msg.width == 320
+                    assert msg.header.frame_id == 'rgbd_sensor', 'RGB-D cloud must use its FLU frame'
+                    # Harmonic's cloud contains +X forward, +Y left, +Z up.
+                    # Check the pixel rays against calibration: merely finding
+                    # a TF chain would miss a cloud labelled as an optical frame.
+                    organized = point_cloud2.read_points_numpy(
+                        msg, field_names=('x', 'y', 'z'), skip_nans=False).reshape(240, 320, 3)
+                    finite = np.isfinite(organized).all(axis=2)
+                    rays = organized[finite]
+                    assert np.all(rays[:, 0] > 0), 'RGB-D returns must be ahead of the camera'
+                    rows, cols = np.indices((240, 320))
+                    np.testing.assert_allclose(rays[:, 1] / rays[:, 0],
+                                               -(cols[finite] + 0.5 - info.k[2]) / info.k[0], atol=0.02)
+                    np.testing.assert_allclose(rays[:, 2] / rays[:, 0],
+                                               -(rows[finite] + 0.5 - info.k[5]) / info.k[4], atol=0.02)
             report['topics'][topic] = row
         print(json.dumps(report, indent=2))
         if args.save:

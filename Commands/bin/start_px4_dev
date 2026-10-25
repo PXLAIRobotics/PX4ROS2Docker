@@ -13,10 +13,28 @@ for argument in "$@"; do
     esac
 done
 session=px4-dev
+start_sensor_viewer() {
+    if (( headless )) || [[ $PX4_SENSOR_SUITE != rgbd_lidar ]]; then return; fi
+    local viewer_command
+    viewer_command='exec bash -lc "source /opt/ros/jazzy/setup.bash; source ~/Projects/ros2_workspace/install/setup.bash; exec view_px4_sensors"'
+    if tmux list-windows -t "$session" -F '#{window_name}' | grep -qx rviz; then
+        if [[ $(tmux display-message -p -t "$session:rviz" '#{pane_dead}') == 0 ]]; then return; fi
+        tmux respawn-window -k -t "$session:rviz" "$viewer_command"
+    else
+        tmux new-window -d -t "$session" -n rviz "$viewer_command"
+    fi
+    tmux set-option -t "$session:rviz" remain-on-exit on
+    if [[ -n ${run_dir:-} ]]; then
+        tmux pipe-pane -o -t "$session:rviz" "cat >> '$run_dir/rviz.log'"
+    fi
+}
 if tmux has-session -t "$session" 2>/dev/null; then
+    run_dir=$(tmux show-environment -t "$session" PX4_DEV_RUN_DIR 2>/dev/null || true)
+    run_dir=${run_dir#PX4_DEV_RUN_DIR=}
+    start_sensor_viewer
     if (( attach )) && [[ -t 0 ]]; then exec tmux attach -t "$session"; fi
-    echo 'px4-dev already exists. Use tmux attach -t px4-dev or stop_px4_dev.' >&2
-    exit 1
+    echo 'px4-dev is running. Use tmux attach -t px4-dev or stop_px4_dev.'
+    exit 0
 fi
 [[ -f "$HOME/Projects/ros2_workspace/install/setup.bash" ]] || { echo 'Run setup_px4_workspace and both build helpers first.' >&2; exit 1; }
 run_dir="$HOME/Data/sessions/$(date +%Y%m%d-%H%M%S)"
@@ -75,6 +93,7 @@ if (( !headless )); then
     tmux set-option -t "$session:qgc" remain-on-exit on
     tmux pipe-pane -o -t "$session:qgc" "cat >> '$run_dir/qgc.log'"
 fi
+start_sensor_viewer
 tmux new-window -t "$session" -n ros 'exec bash -l'
 tmux select-window -t "$session:sitl"
 failed=0

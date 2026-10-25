@@ -3,11 +3,41 @@
   <model name="x500_rgbd_lidar">
     <include merge="true"><uri>model://x500</uri></include>
     <link name="rgbd_link">
-      <pose relative_to="base_link">0.20 0 0.08 0 0.1745329252 0</pose>
+      <!-- Gazebo cameras look along +X. Keep the optical axis level with the body. -->
+      <pose relative_to="base_link">0.20 0 0.08 0 0 0</pose>
       <inertial><mass>0.07</mass><inertia><ixx>0.00004</ixx><iyy>0.00004</iyy><izz>0.00004</izz></inertia></inertial>
       <visual name="camera_body"><geometry><box><size>0.035 0.09 0.03</size></box></geometry>
         <material><ambient>0.08 0.08 0.08 1</ambient><diffuse>0.08 0.08 0.08 1</diffuse></material></visual>
       <collision name="camera_body"><geometry><box><size>0.035 0.09 0.03</size></box></geometry></collision>
+      <!-- An aluminium boom joins the camera's underside to the centre deck.
+           These solids belong to the fixed sensor link, not to the world. -->
+      <visual name="camera_mount_plate">
+        <pose>-0.16 0 -0.028 0 0 0</pose>
+        <geometry><box><size>0.10 0.07 0.012</size></box></geometry>
+        <material><ambient>0.55 0.58 0.62 1</ambient><diffuse>0.55 0.58 0.62 1</diffuse>
+          <pbr><metal><metalness>0.8</metalness><roughness>0.35</roughness></metal></pbr></material>
+      </visual>
+      <visual name="camera_mount_boom">
+        <pose>-0.10 0 -0.02 0 0 0</pose>
+        <geometry><box><size>0.22 0.018 0.014</size></box></geometry>
+        <material><ambient>0.55 0.58 0.62 1</ambient><diffuse>0.55 0.58 0.62 1</diffuse>
+          <pbr><metal><metalness>0.8</metalness><roughness>0.35</roughness></metal></pbr></material>
+      </visual>
+      <collision name="camera_mount_boom">
+        <pose>-0.10 0 -0.02 0 0 0</pose>
+        <geometry><box><size>0.22 0.018 0.014</size></box></geometry>
+      </collision>
+      <!-- Front lens windows make the camera's viewing direction visible. -->
+      <visual name="rgb_lens">
+        <pose>0.0175 -0.027 0 0 1.5707963268 0</pose>
+        <geometry><cylinder><radius>0.009</radius><length>0.004</length></cylinder></geometry>
+        <material><ambient>0.02 0.06 0.10 1</ambient><diffuse>0.02 0.06 0.10 1</diffuse></material>
+      </visual>
+      <visual name="depth_lens">
+        <pose>0.0175 0.027 0 0 1.5707963268 0</pose>
+        <geometry><cylinder><radius>0.009</radius><length>0.004</length></cylinder></geometry>
+        <material><ambient>0.02 0.06 0.10 1</ambient><diffuse>0.02 0.06 0.10 1</diffuse></material>
+      </visual>
       <sensor name="rgbd" type="rgbd_camera">
         <pose>0.02 0 0 0 0 0</pose>
         <gz_frame_id>rgbd_sensor</gz_frame_id>
@@ -28,6 +58,23 @@
       <visual name="lidar_body"><geometry><cylinder><radius>0.035</radius><length>0.05</length></cylinder></geometry>
         <material><ambient>0.15 0.3 0.3 1</ambient><diffuse>0.15 0.3 0.3 1</diffuse></material></visual>
       <collision name="lidar_body"><geometry><cylinder><radius>0.035</radius><length>0.05</length></cylinder></geometry></collision>
+      <!-- Mast spans body-top z=0.05 to housing-bottom z=0.175, in base_link. -->
+      <visual name="lidar_mount_plate">
+        <pose>0 0 -0.147 0 0 0</pose>
+        <geometry><box><size>0.065 0.065 0.01</size></box></geometry>
+        <material><ambient>0.55 0.58 0.62 1</ambient><diffuse>0.55 0.58 0.62 1</diffuse>
+          <pbr><metal><metalness>0.8</metalness><roughness>0.35</roughness></metal></pbr></material>
+      </visual>
+      <visual name="lidar_mount_mast">
+        <pose>0 0 -0.0875 0 0 0</pose>
+        <geometry><cylinder><radius>0.01</radius><length>0.125</length></cylinder></geometry>
+        <material><ambient>0.55 0.58 0.62 1</ambient><diffuse>0.55 0.58 0.62 1</diffuse>
+          <pbr><metal><metalness>0.8</metalness><roughness>0.35</roughness></metal></pbr></material>
+      </visual>
+      <collision name="lidar_mount_mast">
+        <pose>0 0 -0.0875 0 0 0</pose>
+        <geometry><cylinder><radius>0.01</radius><length>0.125</length></cylinder></geometry>
+      </collision>
       <sensor name="lidar_3d" type="gpu_lidar">
         <gz_frame_id>lidar_link</gz_frame_id>
         <topic>/drone/lidar</topic><always_on>true</always_on><update_rate>10</update_rate>

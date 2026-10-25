@@ -20,6 +20,10 @@
   ros_type_name: sensor_msgs/msg/PointCloud2
   gz_type_name: gz.msgs.PointCloudPacked
   direction: GZ_TO_ROS
+  # Harmonic generates XYZ in camera-body FLU axes even though its RGB-D
+  # sensor stamps the cloud with optical_frame_id. Correct the header only;
+  # images and CameraInfo retain their actual optical frame.
+  frame_id: rgbd_sensor
   qos_profile: SENSOR_DATA
   lazy: true
 - topic_name: /drone/lidar/points

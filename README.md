@@ -52,7 +52,15 @@ Open [the desktop](http://localhost:6901/vnc.html?autoconnect=true&resize=remote
 ./003_attach_bash_to_px4_ros2_container.sh
 ```
 
-Inside the container, initialize persistent source checkouts and compile:
+Inside the container, start the simulation with:
+
+```bash
+~/bin/start-px4.sh
+```
+
+The launcher initializes persistent source checkouts, builds PX4 and ROS 2, loads the ROS overlay and starts the development session. The first run downloads sources and compiles them; subsequent builds are incremental. An existing session is attached immediately. Use `BUILD_JOBS=2 ~/bin/start-px4.sh` to reduce build parallelism, or pass `--no-gazebo-gui`, `--headless` or `--no-attach` as needed.
+
+To run the setup and build steps individually:
 
 ```bash
 setup_px4_workspace
@@ -63,7 +71,7 @@ source ~/Projects/ros2_workspace/install/setup.bash
 start_px4_dev
 ```
 
-`start_px4_dev` creates a `px4-dev` tmux session: XRCE agent, PX4 console, sensor bridge, Gazebo GUI, QGroundControl and a ROS shell. It waits for valid PX4 ROS telemetry and rendered sensor data with TF before reporting readiness. In QGC, wait for vehicle connection and preflight readiness; use the normal Takeoff/Land actions for a manual simulated flight.
+`start_px4_dev` creates a `px4-dev` tmux session: XRCE agent, PX4 console, sensor bridge, Gazebo GUI, QGroundControl, RViz sensor viewer and a ROS shell. RViz opens with RGB/depth images and point clouds configured for the sensor bridge's Best Effort delivery. Running the launcher again restores a closed sensor viewer. `--headless` skips graphical applications; `PX4_SENSOR_SUITE=none` skips the sensor bridge and viewer. It waits for valid PX4 ROS telemetry and rendered sensor data with TF before reporting readiness. In QGC, wait for vehicle connection and preflight readiness; use the normal Takeoff/Land actions for a manual simulated flight.
 
 From the ROS tmux window (or a newly attached shell), try:
 
@@ -203,7 +211,7 @@ The integration check `bash /opt/px4-tests/campus.sh` starts and stops its own h
 
 ## RGB-D camera and 3D lidar
 
-The default drone includes a forward-facing RGB-D camera tilted 10° downward and a roof-mounted 3D lidar. The authored model extends the pinned upstream x500 without editing its source or Gazebo model repository. It adds 70 g camera mass and 150 g lidar mass with fixed mounts and visible sensor housings.
+The default drone includes a level, forward-facing RGB-D camera and a roof-mounted 3D lidar. The camera sits on an aluminium boom and mounting plate; the lidar has an aluminium mast and base plate. Front lens windows indicate the camera's +X viewing direction. Both assemblies are fixed to the UAV body. The authored model extends the pinned upstream x500 without editing its source or Gazebo model repository. The sensor assemblies use 70 g camera mass and 150 g lidar mass.
 
 | Sensor | Configuration | ROS 2 topics |
 | --- | --- | --- |
@@ -226,7 +234,7 @@ ros2 run px4_dev_examples sensor_check --save ~/Data/evidence/sensors
 
 The `sensors` tmux window runs `ros2 launch px4_dev_examples sensors.launch.py`. Standalone `start_px4_sitl` starts the model/server only; launch that bridge separately for ROS sensor topics. When choosing another world, give that bridge the matching `PX4_GZ_WORLD` environment value as well. The bridge uses best-effort sensor QoS and lazy subscriptions so unused streams avoid unnecessary transfers. For direct inspection, use `--qos-reliability best_effort`. Sensors also work without a display server using Gazebo's Ogre2 EGL headless rendering; software rendering can be slower.
 
-`view_px4_sensors` opens the included RViz configuration with RGB/depth panels and both clouds. Its fixed frame is `base_link` (ROS FLU). Static TF connects that frame to `lidar_link`, `rgbd_link`, `rgbd_sensor` and `rgbd_optical_frame`; images, camera info and the RGB-D cloud use the optical frame (+Z forward, +X right, +Y down). This is a vehicle-relative view; no map/odometry TF, SLAM or obstacle-avoidance controller is provided. These sensors feed ROS perception and do not automatically change PX4 flight behaviour or stream camera video into QGC.
+`view_px4_sensors` opens the included RViz configuration with RGB/depth panels and both clouds. Its fixed frame is `base_link` (ROS FLU). Static TF connects that frame to `lidar_link`, `rgbd_link`, `rgbd_sensor` and `rgbd_optical_frame`. Images and camera info use the optical frame (+Z forward, +X right, +Y down). The RGB-D cloud uses `rgbd_sensor` (+X forward, +Y left, +Z up), matching Harmonic's point coordinates; the bridge corrects its misleading optical frame label. This is a vehicle-relative view; no map/odometry TF, SLAM or obstacle-avoidance controller is provided. These sensors feed ROS perception and do not automatically change PX4 flight behaviour or stream camera video into QGC.
 
 Sensor timestamps and `/clock` use Gazebo simulation time. The sensor launch bridges the selected world's clock; RViz uses `use_sim_time:=true`. Keep the existing PX4 offboard control nodes on their documented wall-time setup. Do not launch a second clock bridge at the same time.
 
