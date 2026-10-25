@@ -4,28 +4,47 @@
     <include merge="true"><uri>model://x500</uri></include>
     <link name="rgbd_link">
       <!-- Gazebo cameras look along +X. Keep the optical axis level with the body. -->
-      <pose relative_to="base_link">0.20 0 0.08 0 0 0</pose>
+      <pose relative_to="base_link">0.33 0 0.019636 0 0 0</pose>
       <inertial><mass>0.07</mass><inertia><ixx>0.00004</ixx><iyy>0.00004</iyy><izz>0.00004</izz></inertia></inertial>
       <visual name="camera_body"><geometry><box><size>0.035 0.09 0.03</size></box></geometry>
         <material><ambient>0.08 0.08 0.08 1</ambient><diffuse>0.08 0.08 0.08 1</diffuse></material></visual>
-      <collision name="camera_body"><geometry><box><size>0.035 0.09 0.03</size></box></geometry></collision>
-      <!-- An aluminium boom joins the camera's underside to the centre deck.
-           These solids belong to the fixed sensor link, not to the world. -->
-      <visual name="camera_mount_plate">
-        <pose>-0.16 0 -0.028 0 0 0</pose>
-        <geometry><box><size>0.10 0.07 0.012</size></box></geometry>
-        <material><ambient>0.55 0.58 0.62 1</ambient><diffuse>0.55 0.58 0.62 1</diffuse>
-          <pbr><metal><metalness>0.8</metalness><roughness>0.35</roughness></metal></pbr></material>
+      <collision name="camera_body_collision"><geometry><box><size>0.035 0.09 0.03</size></box></geometry></collision>
+      <!-- Carbon extension overlaps the existing front platform from x=0.145
+           to 0.15935 and ends at x=0.350. Its top is z=0.000636.
+           The optical origin x=0.350 clears the full front rotor sweep
+           (maximum x=0.32077), not just one stationary blade orientation. -->
+      <visual name="camera_platform_extension">
+        <pose>-0.0825 0 -0.0205 0 0 0</pose>
+        <geometry><box><size>0.205 0.07 0.003</size></box></geometry>
+        <material>
+          <ambient>0.65 0.65 0.65 1</ambient><diffuse>0.65 0.65 0.65 1</diffuse>
+          <pbr><metal>
+            <albedo_map>model://x500_base/materials/textures/CF.png</albedo_map>
+            <metalness>0.0</metalness><roughness>0.42</roughness>
+          </metal></pbr>
+        </material>
       </visual>
-      <visual name="camera_mount_boom">
-        <pose>-0.10 0 -0.02 0 0 0</pose>
-        <geometry><box><size>0.22 0.018 0.014</size></box></geometry>
-        <material><ambient>0.55 0.58 0.62 1</ambient><diffuse>0.55 0.58 0.62 1</diffuse>
-          <pbr><metal><metalness>0.8</metalness><roughness>0.35</roughness></metal></pbr></material>
+      <collision name="camera_platform_extension_collision">
+        <pose>-0.0825 0 -0.0205 0 0 0</pose>
+        <geometry><box><size>0.205 0.07 0.003</size></box></geometry>
+      </collision>
+      <!-- Low shoe rests on the front platform at base_link z=0.000636,
+           measured from the transformed CarbonFiber mesh. Camera underside
+           is z=0.004636; shoe is 4 mm thick. -->
+      <visual name="camera_mount_shoe">
+        <pose>0 0 -0.017 0 0 0</pose>
+        <geometry><box><size>0.035 0.07 0.004</size></box></geometry>
+        <material>
+          <ambient>0.65 0.65 0.65 1</ambient><diffuse>0.65 0.65 0.65 1</diffuse>
+          <pbr><metal>
+            <albedo_map>model://x500_base/materials/textures/CF.png</albedo_map>
+            <metalness>0.0</metalness><roughness>0.42</roughness>
+          </metal></pbr>
+        </material>
       </visual>
-      <collision name="camera_mount_boom">
-        <pose>-0.10 0 -0.02 0 0 0</pose>
-        <geometry><box><size>0.22 0.018 0.014</size></box></geometry>
+      <collision name="camera_mount_shoe_collision">
+        <pose>0 0 -0.017 0 0 0</pose>
+        <geometry><box><size>0.035 0.07 0.004</size></box></geometry>
       </collision>
       <!-- Front lens windows make the camera's viewing direction visible. -->
       <visual name="rgb_lens">
@@ -36,7 +55,7 @@
       <visual name="depth_lens">
         <pose>0.0175 0.027 0 0 1.5707963268 0</pose>
         <geometry><cylinder><radius>0.009</radius><length>0.004</length></cylinder></geometry>
-        <material><ambient>0.02 0.06 0.10 1</ambient><diffuse>0.02 0.06 0.10 1</diffuse></material>
+        <material><ambient>0.65 0.025 0.02 1</ambient><diffuse>0.65 0.025 0.02 1</diffuse></material>
       </visual>
       <sensor name="rgbd" type="rgbd_camera">
         <pose>0.02 0 0 0 0 0</pose>
@@ -54,27 +73,89 @@
     </link>
     <joint name="rgbd_mount" type="fixed"><parent>base_link</parent><child>rgbd_link</child></joint>
     <link name="lidar_link">
-      <pose relative_to="base_link">0 0 0.20 0 0 0</pose>
+      <pose relative_to="base_link">0 0 0.14 0 0 0</pose>
       <inertial><mass>0.15</mass><inertia><ixx>0.0001</ixx><iyy>0.0001</iyy><izz>0.0001</izz></inertia></inertial>
       <visual name="lidar_body"><geometry><cylinder><radius>0.035</radius><length>0.05</length></cylinder></geometry>
         <material><ambient>0.15 0.3 0.3 1</ambient><diffuse>0.15 0.3 0.3 1</diffuse></material></visual>
-      <collision name="lidar_body"><geometry><cylinder><radius>0.035</radius><length>0.05</length></cylinder></geometry></collision>
-      <!-- Mast spans body-top z=0.05 to housing-bottom z=0.175, in base_link. -->
-      <visual name="lidar_mount_plate">
-        <pose>0 0 -0.147 0 0 0</pose>
-        <geometry><box><size>0.065 0.065 0.01</size></box></geometry>
-        <material><ambient>0.55 0.58 0.62 1</ambient><diffuse>0.55 0.58 0.62 1</diffuse>
-          <pbr><metal><metalness>0.8</metalness><roughness>0.35</roughness></metal></pbr></material>
+      <collision name="lidar_body_collision"><geometry><cylinder><radius>0.035</radius><length>0.05</length></cylinder></geometry></collision>
+      <!-- Inverted U across the deck: feet at z=0.018, side legs at
+           y=+/-0.055, and bridge underside at z=0.109 (base_link).
+           The controller top is about z=0.052: no central mast or plate.
+           Bridge top meets the lidar underside at z=0.115. -->
+      <visual name="lidar_arch_left_foot">
+        <pose>0 0.055 -0.12 0 0 0</pose>
+        <geometry><box><size>0.08 0.018 0.004</size></box></geometry>
+        <material>
+          <ambient>0.65 0.65 0.65 1</ambient><diffuse>0.65 0.65 0.65 1</diffuse>
+          <pbr><metal>
+            <albedo_map>model://x500_base/materials/textures/CF.png</albedo_map>
+            <metalness>0.0</metalness><roughness>0.42</roughness>
+          </metal></pbr>
+        </material>
       </visual>
-      <visual name="lidar_mount_mast">
-        <pose>0 0 -0.0875 0 0 0</pose>
-        <geometry><cylinder><radius>0.01</radius><length>0.125</length></cylinder></geometry>
-        <material><ambient>0.55 0.58 0.62 1</ambient><diffuse>0.55 0.58 0.62 1</diffuse>
-          <pbr><metal><metalness>0.8</metalness><roughness>0.35</roughness></metal></pbr></material>
+      <collision name="lidar_arch_left_foot_collision">
+        <pose>0 0.055 -0.12 0 0 0</pose>
+        <geometry><box><size>0.08 0.018 0.004</size></box></geometry>
+      </collision>
+      <visual name="lidar_arch_right_foot">
+        <pose>0 -0.055 -0.12 0 0 0</pose>
+        <geometry><box><size>0.08 0.018 0.004</size></box></geometry>
+        <material>
+          <ambient>0.65 0.65 0.65 1</ambient><diffuse>0.65 0.65 0.65 1</diffuse>
+          <pbr><metal>
+            <albedo_map>model://x500_base/materials/textures/CF.png</albedo_map>
+            <metalness>0.0</metalness><roughness>0.42</roughness>
+          </metal></pbr>
+        </material>
       </visual>
-      <collision name="lidar_mount_mast">
-        <pose>0 0 -0.0875 0 0 0</pose>
-        <geometry><cylinder><radius>0.01</radius><length>0.125</length></cylinder></geometry>
+      <collision name="lidar_arch_right_foot_collision">
+        <pose>0 -0.055 -0.12 0 0 0</pose>
+        <geometry><box><size>0.08 0.018 0.004</size></box></geometry>
+      </collision>
+      <visual name="lidar_arch_left_leg">
+        <pose>0 0.055 -0.0745 0 0 0</pose>
+        <geometry><box><size>0.07 0.006 0.087</size></box></geometry>
+        <material>
+          <ambient>0.65 0.65 0.65 1</ambient><diffuse>0.65 0.65 0.65 1</diffuse>
+          <pbr><metal>
+            <albedo_map>model://x500_base/materials/textures/CF.png</albedo_map>
+            <metalness>0.0</metalness><roughness>0.42</roughness>
+          </metal></pbr>
+        </material>
+      </visual>
+      <collision name="lidar_arch_left_leg_collision">
+        <pose>0 0.055 -0.0745 0 0 0</pose>
+        <geometry><box><size>0.07 0.006 0.087</size></box></geometry>
+      </collision>
+      <visual name="lidar_arch_right_leg">
+        <pose>0 -0.055 -0.0745 0 0 0</pose>
+        <geometry><box><size>0.07 0.006 0.087</size></box></geometry>
+        <material>
+          <ambient>0.65 0.65 0.65 1</ambient><diffuse>0.65 0.65 0.65 1</diffuse>
+          <pbr><metal>
+            <albedo_map>model://x500_base/materials/textures/CF.png</albedo_map>
+            <metalness>0.0</metalness><roughness>0.42</roughness>
+          </metal></pbr>
+        </material>
+      </visual>
+      <collision name="lidar_arch_right_leg_collision">
+        <pose>0 -0.055 -0.0745 0 0 0</pose>
+        <geometry><box><size>0.07 0.006 0.087</size></box></geometry>
+      </collision>
+      <visual name="lidar_arch_bridge">
+        <pose>0 0 -0.028 0 0 0</pose>
+        <geometry><box><size>0.07 0.116 0.006</size></box></geometry>
+        <material>
+          <ambient>0.65 0.65 0.65 1</ambient><diffuse>0.65 0.65 0.65 1</diffuse>
+          <pbr><metal>
+            <albedo_map>model://x500_base/materials/textures/CF.png</albedo_map>
+            <metalness>0.0</metalness><roughness>0.42</roughness>
+          </metal></pbr>
+        </material>
+      </visual>
+      <collision name="lidar_arch_bridge_collision">
+        <pose>0 0 -0.028 0 0 0</pose>
+        <geometry><box><size>0.07 0.116 0.006</size></box></geometry>
       </collision>
       <sensor name="lidar_3d" type="gpu_lidar">
         <gz_frame_id>lidar_link</gz_frame_id>
@@ -86,5 +167,31 @@
       </sensor>
     </link>
     <joint name="lidar_mount" type="fixed"><parent>base_link</parent><child>lidar_link</child></joint>
+    <!-- Rangefinder sits flush under the same front platform (bottom z=-0.001364).
+         Its +X beam points down; aperture is below the housing and frame. -->
+    <link name="rangefinder_link">
+      <pose relative_to="base_link">0.125 0 -0.009364 0 1.5707963268 0</pose>
+      <inertial><mass>0.015</mass><inertia><ixx>0.000002</ixx><iyy>0.000002</iyy><izz>0.000002</izz></inertia></inertial>
+      <visual name="rangefinder_body">
+        <geometry><box><size>0.016 0.024 0.022</size></box></geometry>
+        <material><ambient>0.06 0.06 0.06 1</ambient><diffuse>0.06 0.06 0.06 1</diffuse></material>
+      </visual>
+      <collision name="rangefinder_body_collision"><geometry><box><size>0.016 0.024 0.022</size></box></geometry></collision>
+      <visual name="rangefinder_window">
+        <pose>0.0085 0 0 0 1.5707963268 0</pose>
+        <geometry><cylinder><radius>0.007</radius><length>0.001</length></cylinder></geometry>
+        <material><ambient>0.1 0.025 0.025 1</ambient><diffuse>0.1 0.025 0.025 1</diffuse></material>
+      </visual>
+      <sensor name="ground_range" type="gpu_lidar">
+        <pose>0.010 0 0 0 0 0</pose>
+        <gz_frame_id>rangefinder_sensor</gz_frame_id>
+        <topic>/drone/height/scan</topic><always_on>true</always_on><update_rate>20</update_rate>
+        <lidar><scan>
+          <horizontal><samples>1</samples><resolution>1</resolution><min_angle>0</min_angle><max_angle>0</max_angle></horizontal>
+          <vertical><samples>1</samples><resolution>1</resolution><min_angle>0</min_angle><max_angle>0</max_angle></vertical>
+        </scan><range><min>0.05</min><max>100</max><resolution>0.005</resolution></range></lidar>
+      </sensor>
+    </link>
+    <joint name="rangefinder_mount" type="fixed"><parent>base_link</parent><child>rangefinder_link</child></joint>
   </model>
 </sdf>

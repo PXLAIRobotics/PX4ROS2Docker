@@ -21,8 +21,11 @@ def generate_launch_description():
         Node(package='ros_gz_bridge', executable='parameter_bridge', name='sensor_clock_bridge',
              arguments=[world_clock + '@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
              remappings=[(world_clock, '/clock')], output='screen'),
-        fixed('base_link', 'rgbd_link', (0.20, 0, 0.08), (0, 0, 0)),
+        Node(package='px4_dev_examples', executable='ground_clearance', output='screen'),
+        fixed('base_link', 'rangefinder_link', (0.125, 0, -0.009364), (0, 1.5707963268, 0)),
+        fixed('rangefinder_link', 'rangefinder_sensor', (0.010, 0, 0), (0, 0, 0)),
+        fixed('base_link', 'rgbd_link', (0.33, 0, 0.019636), (0, 0, 0)),
         fixed('rgbd_link', 'rgbd_sensor', (0.02, 0, 0), (0, 0, 0)),
         fixed('rgbd_sensor', 'rgbd_optical_frame', (0, 0, 0), (-1.5707963268, 0, -1.5707963268)),
-        fixed('base_link', 'lidar_link', (0, 0, 0.20), (0, 0, 0)),
+        fixed('base_link', 'lidar_link', (0, 0, 0.14), (0, 0, 0)),
     ])

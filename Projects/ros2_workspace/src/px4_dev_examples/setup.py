@@ -22,6 +22,7 @@ setup(
     description='PX4 SITL telemetry and offboard examples', license='MIT',
     entry_points={'console_scripts': [
         'telemetry = px4_dev_examples.telemetry:main',
+        'ground_clearance = px4_dev_examples.ground_clearance:main',
         'sensor_check = px4_dev_examples.sensors:main',
         'campus_check = px4_dev_examples.campus:main',
         'offboard_demo = px4_dev_examples.offboard:main',

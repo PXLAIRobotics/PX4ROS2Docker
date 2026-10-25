@@ -211,7 +211,7 @@ The integration check `bash /opt/px4-tests/campus.sh` starts and stops its own h
 
 ## RGB-D camera and 3D lidar
 
-The default drone includes a level, forward-facing RGB-D camera and a roof-mounted 3D lidar. The camera sits on an aluminium boom and mounting plate; the lidar has an aluminium mast and base plate. Front lens windows indicate the camera's +X viewing direction. Both assemblies are fixed to the UAV body. The authored model extends the pinned upstream x500 without editing its source or Gazebo model repository. The sensor assemblies use 70 g camera mass and 150 g lidar mass.
+The default drone includes a level, forward-facing RGB-D camera and a roof-mounted 3D lidar. The camera sits low on a carbon-fiber shoe on a carbon-fiber extension of the lower front platform. Its optical origin sits 35 cm ahead of the body center, beyond the entire front rotor sweep (about 32.1 cm), with the ROS transform matching the mount. The lidar sits on a slim, carbon-fiber inverted-U bridge with two side legs, leaving the flight controller clear underneath. Both mounts reuse the x500 frame’s carbon weave texture. The blue RGB and red depth windows indicate the camera's +X viewing direction. Both assemblies are fixed to the UAV body. The authored model extends the pinned upstream x500 without editing its source or Gazebo model repository. The sensor assemblies use 70 g camera mass and 150 g lidar mass.
 
 | Sensor | Configuration | ROS 2 topics |
 | --- | --- | --- |
@@ -244,6 +244,8 @@ To run without the rendered sensor suite, stop the session and use `PX4_SENSOR_S
 record_px4_rosbag /drone/rgbd/image /drone/rgbd/depth_image \
   /drone/rgbd/camera_info /drone/lidar/points /tf_static /clock
 ```
+
+A downward-facing rangefinder is mounted beneath the front platform. It measures the surface at the current location (roof, platform, or ground), independently of takeoff-relative altitude. `/drone/height/scan` carries the single Gazebo laser ray; `/drone/height/range` publishes `sensor_msgs/Range` (0.05–100 m, 20 Hz). `/drone/height/above_surface` publishes `std_msgs/Float32`: metres from the UAV body origin to the beam's surface hit, using PX4 attitude to correct tilt and sensor offset. Missing/stale data, no return, or tilt above 30° produces NaN; the cockpit displays “—”. The cockpit shows **ABOVE SURFACE** alongside **ABOVE TAKEOFF**. At nonzero tilt the beam hit is horizontally displaced, so this is not a terrain map or an exact measurement directly below the body at an edge. This ROS sensor does not change PX4 altitude control or enable terrain following.
 
 Camera/lidar definitions, bridge YAML and RViz settings live under `Projects/ros2_workspace/src/px4_dev_examples/{simulation,config,launch}`. Rebuild that package after asset/config changes. The integration check `bash /opt/px4-tests/sensors.sh` starts and stops its own headless session; run it only when no development session is active.
 

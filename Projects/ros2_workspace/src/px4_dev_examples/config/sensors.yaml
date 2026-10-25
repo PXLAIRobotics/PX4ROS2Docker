@@ -32,3 +32,9 @@
   direction: GZ_TO_ROS
   qos_profile: SENSOR_DATA
   lazy: true
+- topic_name: /drone/height/scan
+  ros_type_name: sensor_msgs/msg/LaserScan
+  gz_type_name: gz.msgs.LaserScan
+  direction: GZ_TO_ROS
+  qos_profile: SENSOR_DATA
+  lazy: true

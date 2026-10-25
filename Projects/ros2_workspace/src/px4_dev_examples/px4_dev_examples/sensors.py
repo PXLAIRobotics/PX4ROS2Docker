@@ -9,7 +9,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.qos import qos_profile_sensor_data
 from rclpy.time import Time
-from sensor_msgs.msg import CameraInfo, Image, PointCloud2
+from sensor_msgs.msg import CameraInfo, Image, PointCloud2, Range
 from sensor_msgs_py import point_cloud2
 from tf2_ros import Buffer, TransformListener
 
@@ -29,6 +29,7 @@ def main():
         '/drone/rgbd/camera_info': CameraInfo,
         '/drone/rgbd/points': PointCloud2,
         '/drone/lidar/points': PointCloud2,
+        '/drone/height/range': Range,
     }
     def received(topic, message):
         stamp = message.header.stamp.sec * 10**9 + message.header.stamp.nanosec
@@ -68,6 +69,10 @@ def main():
                   'depth_range_m': [float(valid.min()), float(valid.max())], 'topics': {}}
         for topic, msg in messages.items():
             row = {'frame': msg.header.frame_id, 'advancing_samples': counts[topic]}
+            if isinstance(msg, Range):
+                assert msg.header.frame_id == 'rangefinder_sensor'
+                assert np.isfinite(msg.range) and msg.min_range <= msg.range <= msg.max_range
+                row.update(range_m=msg.range, min_range_m=msg.min_range, max_range_m=msg.max_range)
             if isinstance(msg, PointCloud2):
                 xyz = point_cloud2.read_points_numpy(msg, field_names=('x', 'y', 'z'), skip_nans=True)
                 xyz = xyz.reshape(-1, 3)
