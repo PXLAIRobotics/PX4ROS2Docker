@@ -7,3 +7,6 @@ Projects/ros2_workspace/src/px4_msgs/
 Data/*
 !Data/.gitkeep
 *.log
+
+# Local distribution bundles; share separately from source.
+/releases/

@@ -4,7 +4,7 @@ set -eo pipefail
 for argument in "$@"; do
     case "$argument" in
         --help|-h)
-            echo 'Usage: start-px4.sh [--headless] [--no-gazebo-gui] [--no-attach]'
+            echo 'Usage: start-px4-corda-simulation.sh [--headless] [--no-gazebo-gui] [--no-attach]'
             echo 'Sets up sources, builds PX4 and ROS 2, then starts the simulation.'
             echo 'The first run downloads sources and can take a while. Later builds are incremental.'
             echo 'Set BUILD_JOBS to control build parallelism (default: 4).'

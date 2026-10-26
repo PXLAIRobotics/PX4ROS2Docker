@@ -3,14 +3,14 @@
 set -eo pipefail
 case "${1:-}" in
     --help|-h)
-        echo 'Usage: start-cockpit [--check]'
-        echo 'Open the local PX4 simulator cockpit. Start start-px4.sh first.'
+        echo 'Usage: start-px4-cockpit.sh [--check]'
+        echo 'Open the local PX4 simulator cockpit. Start start-px4-corda-simulation.sh first.'
         echo 'Application: ${UAV_COCKPIT_DIR:-$HOME/.local/share/uav-cockpit}'
         exit 0 ;;
     --check|'') ;;
-    *) echo 'Usage: start-cockpit [--check]' >&2; exit 2 ;;
+    *) echo 'Usage: start-px4-cockpit.sh [--check]' >&2; exit 2 ;;
 esac
-if (( $# > 1 )); then echo 'Usage: start-cockpit [--check]' >&2; exit 2; fi
+if (( $# > 1 )); then echo 'Usage: start-px4-cockpit.sh [--check]' >&2; exit 2; fi
 app_dir=${UAV_COCKPIT_DIR:-$HOME/.local/share/uav-cockpit}
 [[ -f "$app_dir/cockpit.py" ]] || {
     echo "Cockpit is not installed at $app_dir/cockpit.py" >&2

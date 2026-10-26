@@ -2,27 +2,40 @@
 
 PX4 SITL, Gazebo Harmonic, ROS 2 Jazzy and QGroundControl in a shared development image, with either an Xfce browser/VNC desktop or native Linux graphics. Source and builds stay in this repository's `Projects` folder; compilation and simulation run inside Docker.
 
+Use the browser desktop for Gazebo, QGroundControl and RViz, or add the optional Corda cockpit for keyboard flight with live camera video and a campus map. The student cockpit archive, shared separately by the instructor, includes source, checks and installation instructions; it runs inside this environment. See [bundle details](docs/cockpit-release.md).
+
 The Bash, tmux, Vim, Nerd Font and numbered-script workflow comes from `ROSLyricalDocker`. This repository has its own images, containers and PX4 examples. See [TODO.md](TODO.md) for implementation tasks and [implementation status](docs/implementation-status.md) for verified capabilities and remaining checks.
 
-## Python tutorial and screenshots
+## Start here
 
-New to PX4? Follow the [Python and ROS 2 tutorial](docs/tutorial/README.md): eleven lessons covering setup, QGroundControl, telemetry, coordinate frames, offboard takeoff/landing, waypoint control, recovery, RGB-D/lidar and flight evaluation. It includes runnable Python examples, exercises and an instructor answer guide. Start in the empty world before the Corda Campus project.
+1. Check the [host requirements](#versions-and-host-requirements), then [build and start the browser desktop](#browservnc-workflow).
+2. Run `~/bin/start-px4-corda-simulation.sh` inside the container. Allow the first source download and build to finish.
+3. Follow the [Python and ROS 2 tutorial](docs/tutorial/README.md) for guided exercises, or install the [student cockpit](#corda-flight-cockpit) for manual simulator flight.
+4. Keep work in `Projects` and recordings in `Data`; both persist when the container is recreated.
 
-![Corda Campus in Gazebo](docs/tutorial/images/campus.png)
+## Current screenshots
 
-The bundled campus world includes mapped building footprints, sloping and sawtooth roofs, parking, the Arena and water tower.
+![Corda Campus overview in Gazebo Harmonic](docs/images/gazebo-campus.png)
 
-![Rooftop landing deck](docs/tutorial/images/landing-deck.png)
+The live Corda Campus world in Gazebo, with the rooftop launch deck, Arena, water tower, campus buildings, roads and parking.
 
-A level six-metre deck supports the simulated rooftop takeoff and landing exercises.
+![Sensor-equipped x500 drone on the rooftop landing deck in Gazebo](docs/images/gazebo-drone.png)
 
-![RGB-D and lidar in RViz](docs/tutorial/images/rviz-sensors.png)
+The simulated x500 on Corda 1’s six-metre rooftop deck, fitted with the forward RGB-D camera and top-mounted 3D lidar.
 
-Inspect camera images and both point clouds through the prepared ROS bridge and RViz configuration. These streams are available for student perception work; obstacle avoidance is not enabled automatically.
+![QGroundControl connected to the simulated vehicle at Corda Campus](docs/images/qgroundcontrol.png)
 
-![QGroundControl observing an offboard flight](docs/tutorial/images/qgroundcontrol-flight.png)
+QGroundControl connected to PX4, showing Ready / Hold and the vehicle at its rooftop launch location. Its satellite basemap is a geographic reference; collisions come from the Gazebo world.
 
-QGroundControl remains connected while the Python ROS 2 controller flies the simulated vehicle.
+![Corda cockpit connected to the live simulator, with camera video and campus map](docs/images/cockpit.png)
+
+The Corda cockpit, captured on 26 October 2026: live front camera, PX4 preflight status, speed selection, flight controls and a geographic position marker. The vehicle is disarmed on the rooftop deck; takeoff-relative height and distance stay blank until control begins.
+
+![Current campus map rendered by the cockpit with the vehicle on Corda 1](docs/images/cockpit-campus-map.png)
+
+The cockpit map uses the installed Gazebo geometry, including campus buildings, roads, paths, parking and the water tower. Corda 7 is marked **C7**, with **PXL Digital** at its lower-left corner and **PXL Smart ICT** at its lower-right corner. Scroll to zoom, drag to pan and double-click to reset. These are real application captures; [capture notes](docs/images/README.md) record their context.
+
+The [tutorial](docs/tutorial/README.md) contains eleven lessons, runnable Python examples, exercises and an instructor answer guide covering setup, telemetry, coordinate frames, offboard flight, recovery, sensors and evaluation. Start in the empty world before the Corda Campus project. Its [screenshot gallery](docs/tutorial/images/README.md) also shows Gazebo, QGroundControl, RViz, sensor previews and measured flight plots.
 
 ## Versions and host requirements
 
@@ -55,10 +68,10 @@ Open [the desktop](http://localhost:6901/vnc.html?autoconnect=true&resize=remote
 Inside the container, start the simulation with:
 
 ```bash
-~/bin/start-px4.sh
+~/bin/start-px4-corda-simulation.sh
 ```
 
-The launcher initializes persistent source checkouts, builds PX4 and ROS 2, loads the ROS overlay and starts the development session. The first run downloads sources and compiles them; subsequent builds are incremental. An existing session is attached immediately. Use `BUILD_JOBS=2 ~/bin/start-px4.sh` to reduce build parallelism, or pass `--no-gazebo-gui`, `--headless` or `--no-attach` as needed.
+The launcher initializes persistent source checkouts, builds PX4 and ROS 2, loads the ROS overlay and starts the development session. The first run downloads sources and compiles them; subsequent builds are incremental. An existing session is attached immediately. Use `BUILD_JOBS=2 ~/bin/start-px4-corda-simulation.sh` to reduce build parallelism, or pass `--no-gazebo-gui`, `--headless` or `--no-attach` as needed.
 
 To run the setup and build steps individually:
 
@@ -98,6 +111,39 @@ From the host, the lifecycle commands are:
 ```
 
 The default run is foreground and `--rm`: stopping it removes the container, preserving bind-mounted sources/data. The `001c`, `002c`, `003c`, `997c`, `998c`, `999c` scripts explicitly select the same VNC image.
+
+## Corda flight cockpit
+
+The optional native PyQt5/ROS 2 cockpit provides live RGB video, vehicle status, keyboard flight, speed selection and an interactive campus map. The launcher is in this repository; the application is installed separately into the persistent `px4-uav-cockpit` Docker volume. A fresh volume is empty.
+
+Obtain the 26 October 2026 student bundle (`uav-cockpit-2026-10-26.tar.gz`) and its SHA-256 checksum from your instructor. Release archives are shared separately and kept out of Git; the instructor’s local copy is in the ignored `Data/releases` directory. It contains the latest saved cockpit source, including the map-drag fix, a launcher copy, control/map checks, attribution and `INSTALL.md`. It uses this repository's image and built ROS workspace; Docker images, PX4 sources and build outputs are separate. See [release details](docs/cockpit-release.md).
+
+With the browser container running, put the archive in the host repository's `Data` directory. Inside a container terminal:
+
+```bash
+mkdir -p /tmp/uav-cockpit-release
+tar -xzf ~/Data/uav-cockpit-2026-10-26.tar.gz -C /tmp/uav-cockpit-release
+# Close an existing cockpit and back up its installation before replacing it.
+mkdir -p ~/.local/share/uav-cockpit
+cp -a /tmp/uav-cockpit-release/uav-cockpit-2026-10-26/. ~/.local/share/uav-cockpit/
+~/bin/start-px4-corda-simulation.sh
+~/bin/start-px4-cockpit.sh --check
+~/bin/start-px4-cockpit.sh
+```
+
+Run `start-px4-cockpit.sh` from a terminal in the graphical container desktop. Keep QGroundControl connected and wait for preflight readiness. Stop any other offboard controller before taking control. The launcher permits one cockpit instance per ROS domain.
+
+| Input | Action |
+| --- | --- |
+| Take off / Take control | Climb to the selected takeoff height / adopt the current airborne position |
+| W / S, A / D | Move forward/back, strafe left/right relative to heading |
+| Q / E | Turn left/right |
+| Up / Down | Climb/descend |
+| Space / Escape / Hold | Brake, then hold position |
+| Land here | Request PX4 landing at the current location |
+| Flight speed | Select 0.5, 1.5 or 3 m/s horizontal speed |
+
+Releasing movement keys or leaving the window brakes to a hover. Takeoff height is relative to launch; airborne control acquisition uses the control-start position. Landing requires a suitable clear surface. Buildings have collisions and obstacle avoidance is not enabled. Stale telemetry disables movement; keep QGC available to intervene. The bundled cockpit shows takeoff-relative height and AMSL; the separate above-surface sensor is available over ROS but is not displayed in this saved application version.
 
 ## Native Linux display (without VNC)
 
@@ -247,11 +293,13 @@ record_px4_rosbag /drone/rgbd/image /drone/rgbd/depth_image \
   /drone/rgbd/camera_info /drone/lidar/points /tf_static /clock
 ```
 
-A downward-facing rangefinder is mounted beneath the front platform. It measures the surface at the current location (roof, platform, or ground), independently of takeoff-relative altitude. `/drone/height/scan` carries the single Gazebo laser ray; `/drone/height/range` publishes `sensor_msgs/Range` (0.05–100 m, 20 Hz). `/drone/height/above_surface` publishes `std_msgs/Float32`: metres from the UAV body origin to the beam's surface hit, using PX4 attitude to correct tilt and sensor offset. Missing/stale data, no return, or tilt above 30° produces NaN; the cockpit displays “—”. The cockpit shows **ABOVE SURFACE** alongside **ABOVE TAKEOFF**. At nonzero tilt the beam hit is horizontally displaced, so this is not a terrain map or an exact measurement directly below the body at an edge. This ROS sensor does not change PX4 altitude control or enable terrain following.
+A downward-facing rangefinder is mounted beneath the front platform. It measures the surface at the current location (roof, platform, or ground), independently of takeoff-relative altitude. `/drone/height/scan` carries the single Gazebo laser ray; `/drone/height/range` publishes `sensor_msgs/Range` (0.05–100 m, 20 Hz). `/drone/height/above_surface` publishes `std_msgs/Float32`: metres from the UAV body origin to the beam's surface hit, using PX4 attitude to correct tilt and sensor offset. Missing/stale data, no return, or tilt above 30° produces NaN. The student cockpit bundle currently displays **ABOVE TAKEOFF** and AMSL; a consumer can subscribe to `/drone/height/above_surface` for surface clearance. At nonzero tilt the beam hit is horizontally displaced, so this is not a terrain map or an exact measurement directly below the body at an edge. This ROS sensor does not change PX4 altitude control or enable terrain following.
 
 Camera/lidar definitions, bridge YAML and RViz settings live under `Projects/ros2_workspace/src/px4_dev_examples/{simulation,config,launch}`. Rebuild that package after asset/config changes. The integration check `bash /opt/px4-tests/sensors.sh` starts and stops its own headless session; run it only when no development session is active.
 
 ## Networking, ROS topics and time
+
+**MAVROS is not used.** The ROS 2 examples and cockpit use `px4_msgs` through PX4’s uXRCE-DDS client and the Micro XRCE-DDS Agent. QGroundControl uses a separate MAVLink connection.
 
 Default Docker bridge networking works because all components run inside the same container:
 
