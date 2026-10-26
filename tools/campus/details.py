@@ -207,7 +207,17 @@ def add_parking(parent,config,obstacles,meshes,exclusions=None):
 def add_landscape(parent,site,forward,meshes,report,source):
     report['landmarks']=[add_tower(parent,site['water_tower'],forward,meshes,source)]
     features=json.loads((source/'data/buildings.geojson').read_text())['features']
-    obstacles=unary_union([transform(forward.transform,shape(f['geometry'])) for f in features])
+    footprints=[]
+    for feature in features:
+        polygon=transform(forward.transform,shape(feature['geometry'])).simplify(
+            site['simplify_m'],preserve_topology=True)
+        config=site['buildings'].get(str(feature['properties']['OIDN']),{})
+        if config.get('detail')=='arena':
+            # Match add_arena's finished hall, not the survey's construction
+            # void. Historical lawn/path traces must never enter the hall.
+            polygon=Polygon(polygon.exterior).minimum_rotated_rectangle
+        footprints.append(polygon)
+    obstacles=unary_union(footprints)
     from landscape import surface_geometry, add_surfaces
     surfaces, reference = surface_geometry(source, site, obstacles)
     add_surfaces(parent, surfaces, reference, meshes, report)

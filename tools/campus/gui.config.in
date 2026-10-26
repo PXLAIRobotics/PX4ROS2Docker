@@ -166,40 +166,14 @@
   <iterations>true</iterations>
 </plugin>
 
-<!-- Insert simple shapes -->
-<plugin filename="Shapes" name="Shapes">
-  <gz-gui>
-    <property key="resizable" type="bool">false</property>
-    <property key="x" type="double">0</property>
-    <property key="y" type="double">0</property>
-    <property key="width" type="double">300</property>
-    <property key="height" type="double">50</property>
-    <property key="state" type="string">floating</property>
-    <property key="showTitleBar" type="bool">false</property>
-    <property key="cardBackground" type="string">#666666</property>
-  </gz-gui>
-</plugin>
 
-<!-- Insert lights -->
-<plugin filename="Lights" name="Lights">
-  <gz-gui>
-    <property key="resizable" type="bool">false</property>
-    <property key="x" type="double">300</property>
-    <property key="y" type="double">0</property>
-    <property key="width" type="double">150</property>
-    <property key="height" type="double">50</property>
-    <property key="state" type="string">floating</property>
-    <property key="showTitleBar" type="bool">false</property>
-    <property key="cardBackground" type="string">#666666</property>
-  </gz-gui>
-</plugin>
 
 <!-- Translate / rotate -->
 <plugin filename="TransformControl" name="Transform control">
   <gz-gui>
     <property key="resizable" type="bool">false</property>
     <property key="x" type="double">0</property>
-    <property key="y" type="double">50</property>
+    <property key="y" type="double">0</property>
     <property key="width" type="double">250</property>
     <property key="height" type="double">50</property>
     <property key="state" type="string">floating</property>
@@ -213,7 +187,7 @@
   <gz-gui>
     <property key="resizable" type="bool">false</property>
     <property key="x" type="double">250</property>
-    <property key="y" type="double">50</property>
+    <property key="y" type="double">0</property>
     <property key="width" type="double">50</property>
     <property key="height" type="double">50</property>
     <property key="state" type="string">floating</property>
@@ -227,7 +201,7 @@
   <gz-gui>
     <property key="resizable" type="bool">false</property>
     <property key="x" type="double">300</property>
-    <property key="y" type="double">50</property>
+    <property key="y" type="double">0</property>
     <property key="width" type="double">100</property>
     <property key="height" type="double">50</property>
     <property key="state" type="string">floating</property>
@@ -236,18 +210,6 @@
   </gz-gui>
 </plugin>
 
-<!-- Inspector -->
-<plugin filename="ComponentInspector" name="Component inspector">
-  <gz-gui>
-    <property type="bool" key="showTitleBar">false</property>
-    <property type="string" key="state">docked</property>
-  </gz-gui>
-</plugin>
 
-<!-- Entity tree -->
-<plugin filename="EntityTree" name="Entity tree">
-  <gz-gui>
-    <property type="bool" key="showTitleBar">false</property>
-    <property type="string" key="state">docked</property>
-  </gz-gui>
-</plugin>
+
+<!-- Component Inspector and Entity Tree can be opened from the top-right plugin menu. -->

@@ -363,10 +363,10 @@
       "height_source": "Official mobility map and winter orthophoto identify the repeated shed/sawtooth roof; nine teeth and 8/10.5 m valley/peak heights are approximate visual dimensions",
       "roof": "sawtooth",
       "roof_teeth": 9,
-      "pitch_m": 10.941482717648638,
+      "pitch_m": 10.941482717511288,
       "axis_enu": [
-        -0.3009400223564537,
-        0.953643068943563
+        -0.3009400223452647,
+        0.9536430689470938
       ],
       "covered_area_m2": 3338.353,
       "roof_colour": "0.76 0.77 0.72 1"
@@ -394,10 +394,10 @@
       "door_width_m": 8,
       "door_height_m": 3.625,
       "door_centre_enu_m": [
-        95.24932950722152,
-        76.13761008115894
+        95.24932950714945,
+        76.13761008148845
       ],
-      "local_yaw_rad": -0.1817715355871892,
+      "local_yaw_rad": -0.18177153559437603,
       "survey_courtyard_replaced_by_roof": 1,
       "interior_layout": "approximate empty hall with three gallery levels; simulation doors held open"
     },
@@ -745,8 +745,8 @@
   "landmarks": [
     {
       "name": "philips_water_tower",
-      "east_m": 99.9289308844227,
-      "north_m": 23.42897372583014,
+      "east_m": 99.9289308846412,
+      "north_m": 23.428973725731815,
       "height_m": 35,
       "grb_knw_oidn": 9709,
       "dimensions": "approximate photo-based tank, supports and stairs",
@@ -755,22 +755,22 @@
   ],
   "landscape": {
     "source": "https://geo.api.vlaanderen.be/OMWRGBMRVL/wms?service=WMS&version=1.1.1&request=GetMap&layers=Ortho&styles=&srs=EPSG%3A3857&bbox=595319.8215257684%2C6612507.014575145%2C596351.6088367845%2C6613332.444423958&width=1625&height=1300&format=image%2Fpng",
-    "method": "Manual tracing of official winter orthophoto, checked against official 2024 mobility map. Routes and widths simplified; mixed-date scene, not survey or access guidance. Pixel positions transformed EPSG:3857 to world AEQD.",
-    "feature_count": 66,
+    "method": "Manual ground-level tracing of the recorded official winter orthophoto. Central paths and gardens retraced 2026-10-26 to exclude green roofs/parapets; QGroundControl screenshot supplied by user confirms the older central layout but predates the Arena. Arena location and completed hall are retained. Routes/widths are approximations; mixed-date scene, not survey or access guidance. Pixel positions transformed EPSG:3857 to world AEQD. Remaining frontage, office and courtyard crossings corrected against native footprints; full-width walking routes validated before clipping. Roof displacement in aerial imagery is not treated as a ground-wall position.",
+    "feature_count": 64,
     "surfaces": {
       "road": {
-        "area_m2": 21857.41,
-        "polygons": 6,
+        "area_m2": 21706.03,
+        "polygons": 5,
         "visual_only": true
       },
       "path": {
-        "area_m2": 6734.7,
-        "polygons": 28,
+        "area_m2": 7920.31,
+        "polygons": 17,
         "visual_only": true
       },
       "green": {
-        "area_m2": 22617.9,
-        "polygons": 43,
+        "area_m2": 22477.93,
+        "polygons": 32,
         "visual_only": true
       }
     }
@@ -830,7 +830,7 @@
     },
     {
       "name": "parking_southeast",
-      "area_m2": 5745.68,
+      "area_m2": 5745.56,
       "marked_bays": 227,
       "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated; row-axis sign corrected against orthophoto on 2026-10-25 (parallel to campus grid, not mirrored)",
       "outline_enu_m": [
@@ -856,8 +856,8 @@
     },
     {
       "name": "parking_corda_1",
-      "area_m2": 3490.8,
-      "marked_bays": 139,
+      "area_m2": 3551.45,
+      "marked_bays": 144,
       "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated; row-axis sign corrected against orthophoto on 2026-10-25 (parallel to campus grid, not mirrored)",
       "outline_enu_m": [
         [
@@ -882,8 +882,8 @@
     },
     {
       "name": "parking_corda_4",
-      "area_m2": 2133.93,
-      "marked_bays": 52,
+      "area_m2": 2174.52,
+      "marked_bays": 40,
       "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated",
       "outline_enu_m": [
         [
@@ -1000,22 +1000,22 @@
     "east_m": -11,
     "north_m": -10,
     "latitude": 50.95164711011486,
-    "longitude": 5.352255462304735,
-    "roof_height_m": 22.83206179075145,
-    "platform_top_m": 23.97396927870313,
-    "model_spawn_z_m": 24.25396927870313,
+    "longitude": 5.352255462304736,
+    "roof_height_m": 22.832061790466355,
+    "platform_top_m": 23.97396927841248,
+    "model_spawn_z_m": 24.25396927841248,
     "world_ground_altitude_m": 50.0,
     "yaw_rad": 0,
     "synthetic_level_platform": true
   },
   "input_sha256": {
     "site.json": "ea6611b9afa08b4ffbfbce87933dc1b921815c6e6caf4877550615ac680b5e46",
-    "gui.config.in": "deb29ba9051999d7405bd7d2bc8963ef1a7cf0957e0102f493ccf02876b44ed4",
-    "SOURCES.md": "0da9c8d4490f2a3fcd0642e099e18da7bd259d5d74f5e6391a321053779f9e69",
+    "gui.config.in": "da5c030bbfcbb28b5f5ec23de37a5a6ce92cc3348ee97122fcdc05c08e4c8ffb",
+    "SOURCES.md": "cf994be7c2639ecb9916b9a94d3333c95dbe4d379975c25530e4094255afb454",
     "data/buildings.geojson": "8fbeb882d79ad2cc6d0855f61b9cc205e9582bdbfe8131d74e173375dc95541e",
     "data/heights.json": "d694f4c3da6576146f2483e0b5972d5552fb5e2fde1eb384f20500bde37beb87",
     "data/landmarks.geojson": "7206806c0ba7d145b187c289cee4a9ca4b96ac1d3a389f1dbb509dabbdb23e93",
     "data/reference-requests.json": "7f8c95f889fc6948f1790ec651f5b5595446093ed5cdc6c51aa19a7d38263c7f",
-    "data/landscape.json": "85ecc2405e1b9c162d8ed5f5fab16a3f7909e7e73e3a3a246093132a188270b7"
+    "data/landscape.json": "441a2afaa96c0747cbc6e48f6be7a490ab77bae5ee2e754a9db41bbd61297ea5"
   }
 }

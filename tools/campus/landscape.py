@@ -11,13 +11,22 @@ def surface_geometry(source, site, obstacles):
         raise ValueError('Landscape and world origins differ')
     groups = {'road': [], 'path': [], 'green': []}
     boundary = box(*site['bounds_m'])
+    exclusion = obstacles.buffer(.15)
     for feature in data['features']:
         geom = shape(feature['geometry'])
         if not geom.is_valid:
             raise ValueError(f'Invalid landscape trace: {feature["name"]}')
         if geom.geom_type == 'LineString':
             geom = geom.buffer(feature['width_m']/2, cap_style=1, join_style=1, resolution=4)
-        geom = geom.intersection(boundary).difference(obstacles.buffer(.15))
+        # Clipping a misplaced route produces plausible-looking fragments
+        # ending at walls. Reject the source route instead, before any clipping
+        # can hide the mistake. Include its full width and the facade margin.
+        if feature['kind'] == 'path':
+            overlap = geom.intersection(exclusion).area
+            if overlap > .01:
+                raise ValueError(f'Walking route {feature["name"]} intersects building '
+                                 f'clearance by {overlap:.3f} m2; correct the source trace')
+        geom = geom.intersection(boundary).difference(exclusion)
         groups[feature['kind']].append(geom)
     groups = {kind: unary_union(parts) for kind, parts in groups.items()}
     groups['path'] = groups['path'].difference(groups['road'])

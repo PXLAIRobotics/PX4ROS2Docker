@@ -54,4 +54,46 @@ for kind,name in [('road','landscape_roads'),('path','landscape_walkways'),('gre
  assert geoms[name].bounds[0]<-100 and geoms[name].bounds[2]>150
  assert geoms[name].bounds[1]<0 and geoms[name].bounds[3]>200
 assert report['performance']['after_batching']['visual']<100
+# Test final triangle projections, not just the source clipping operations.
+buildings=unary_union([geoms[b['name']] for b in report['buildings']])
+for feature in data['features']:
+ if feature['kind'] in ('road','path','green','parking'):
+  assert geoms[feature['name']].intersection(buildings).area<.02,feature['name']
+
+landscape=json.loads((SOURCE/'data/landscape.json').read_text())
+# Source routes must work before masking. A zero-overlap final mesh alone can
+# conceal a route through a building by deleting its middle section.
+for feature in landscape['features']:
+ if feature['kind']!='path':continue
+ route=shape(feature['geometry'])
+ full_width=route.buffer(feature['width_m']/2,cap_style=1,join_style=1,resolution=4)
+ assert full_width.intersection(buildings.buffer(.10)).area<.01,feature['name']
+ # Every interior station must survive export as a path or shared roadway.
+ traversable=geoms['landscape_walkways'].union(geoms['landscape_roads']).buffer(.05)
+ for distance in np.linspace(0,route.length,max(2,int(route.length*2))):
+  assert traversable.covers(route.interpolate(distance)),(feature['name'],distance)
+bbox=landscape['reference_bbox_epsg3857'];width,height=landscape['reference_image_size_px']
+pixel_to_world=Transformer.from_crs(3857,projection,always_xy=True)
+def pixel_point(x,y):
+ return Point(*pixel_to_world.transform(bbox[0]+x/width*(bbox[2]-bbox[0]),
+                                      bbox[3]-y/height*(bbox[3]-bbox[1])))
+# Keep the accepted eastern tower approach and extend it as one straight line.
+tower_route=next(f for f in landscape['features'] if f['name']=='tower_approach')
+tower_line=shape(tower_route['geometry'])
+assert len(tower_line.coords)==2
+for pixel in [(1105,847),(1204,815)]:
+ assert tower_line.distance(pixel_point(*pixel))<.002
+tower=report['landmarks'][0]
+assert tower_line.distance(Point(tower['east_m'],tower['north_m']))>5
+# The corridor between Corda 2/3 must be continuous at ground level, rather
+# than following Corda 3's pale roof edge and disappearing into its footprint.
+for x,y in [(619,783),(575,853),(553,889),(531,925),(514,960)]:
+ assert geoms['landscape_walkways'].covers(pixel_point(x,y)),(x,y)
+assert 'west_office_garden' not in {f['name'] for f in landscape['features']}
+for feature in landscape['features']:
+ if 'reference_pixels' not in feature:continue
+ points=feature['geometry']['coordinates']
+ if feature['geometry']['type']=='Polygon':points=points[0][:-1]
+ for pixel,world in zip(feature['reference_pixels'],points):
+  assert pixel_point(*pixel).distance(Point(world))<.001
 print('PASS: source hashes, all 29 buildings, concave footprints, rotated Arena boxes, landmarks, WGS84 alignment, straight parking rows and campus-wide surfaces')
