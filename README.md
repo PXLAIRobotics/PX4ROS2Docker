@@ -27,6 +27,10 @@ The simulated x500 on Corda 1’s six-metre rooftop deck, fitted with the forwar
 
 QGroundControl connected to PX4, showing Ready / Hold and the vehicle at its rooftop launch location. Its satellite basemap is a geographic reference; collisions come from the Gazebo world.
 
+![RViz2 displaying RGB and depth images, sensor frames and point clouds](docs/tutorial/images/rviz-sensors.png)
+
+RViz2 shows the RGB/depth camera panels, sensor frames and RGB-D/lidar point clouds through the prepared ROS 2 bridge. Open this view with `view_px4_sensors` inside the container. This is the existing tutorial capture; see the [screenshot notes](docs/tutorial/images/README.md) for context.
+
 ![Corda cockpit connected to the live simulator, with camera video and campus map](docs/images/cockpit.png)
 
 The Corda cockpit, captured on 26 October 2026: live front camera, PX4 preflight status, speed selection, flight controls and a geographic position marker. The vehicle is disarmed on the rooftop deck; takeoff-relative height and distance stay blank until control begins.
