@@ -196,8 +196,8 @@
           -121.2
         ]
       ],
-      "yaw_rad": -0.28,
-      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated"
+      "yaw_rad": 0.28,
+      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated; row-axis sign corrected against orthophoto on 2026-10-25 (parallel to campus grid, not mirrored)"
     },
     {
       "name": "parking_southeast",
@@ -219,8 +219,8 @@
           -102.0
         ]
       ],
-      "yaw_rad": -0.28,
-      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated"
+      "yaw_rad": 0.28,
+      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated; row-axis sign corrected against orthophoto on 2026-10-25 (parallel to campus grid, not mirrored)"
     },
     {
       "name": "parking_corda_1",
@@ -242,8 +242,8 @@
           -20.0
         ]
       ],
-      "yaw_rad": -0.28,
-      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated"
+      "yaw_rad": 0.28,
+      "source": "Manually traced from Digitaal Vlaanderen latest winter orthophoto (reviewed 2026-10-24), cross-checked against official 2024 mobility map; bay layout approximated; row-axis sign corrected against orthophoto on 2026-10-25 (parallel to campus grid, not mirrored)"
     },
     {
       "name": "parking_corda_4",

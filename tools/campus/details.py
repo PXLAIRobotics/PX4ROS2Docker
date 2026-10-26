@@ -170,9 +170,10 @@ def flat_mesh(polygons,path,z):
     write_stl(path,np.asarray(vertices),faces)
 
 
-def add_parking(parent,config,obstacles,meshes):
+def add_parking(parent,config,obstacles,meshes,exclusions=None):
     polygon=Polygon(config['outline_enu_m'])
     surface=polygon.difference(obstacles.buffer(1.5))
+    if exclusions is not None: surface=surface.difference(exclusions)
     if surface.is_empty:raise ValueError(f'Parking inside buildings: {config["name"]}')
     model=static_model(parent,config['name'])
     for i,p in enumerate(components(surface)):
@@ -200,14 +201,18 @@ def add_parking(parent,config,obstacles,meshes):
         flat_mesh(world_marks,path,.035)
         mesh_part(model,'bay_markings',path,(0,0),'0.93 0.92 0.84 1',False)
     return {'name':config['name'],'area_m2':round(surface.area,2),'marked_bays':len(stalls),
-            'source':config['source'],'outline_enu_m':config['outline_enu_m'],'layout':'approximate 2.6 x 5 m bays with 6 m aisles'}
+            'source':config['source'],'outline_enu_m':config['outline_enu_m'],'yaw_rad':angle,'layout':'approximate 2.6 x 5 m bays with 6 m aisles'}
 
 
 def add_landscape(parent,site,forward,meshes,report,source):
     report['landmarks']=[add_tower(parent,site['water_tower'],forward,meshes,source)]
     features=json.loads((source/'data/buildings.geojson').read_text())['features']
     obstacles=unary_union([transform(forward.transform,shape(f['geometry'])) for f in features])
-    report['parking']=[add_parking(parent,p,obstacles,meshes) for p in site['parking']]
+    from landscape import surface_geometry, add_surfaces
+    surfaces, reference = surface_geometry(source, site, obstacles)
+    add_surfaces(parent, surfaces, reference, meshes, report)
+    exclusions = surfaces['green'].union(surfaces['road']).union(surfaces['path'])
+    report['parking']=[add_parking(parent,p,obstacles,meshes,exclusions) for p in site['parking']]
 
 
 def add_corda5(parent,polygon,meshes,config,oid):

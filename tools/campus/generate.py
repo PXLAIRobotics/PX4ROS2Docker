@@ -106,7 +106,7 @@ def generate(output):
     # This directory contains generated meshes; remove obsolete generated parts
     # so in-place regeneration matches a fresh output folder.
     for path in meshes.glob('*.stl'):
-        if path.name.startswith(('building_','parking_','water_tower_','batch_','platform_')) and path.name not in referenced:
+        if path.name.startswith(('building_','parking_','water_tower_','batch_','platform_','landscape_')) and path.name not in referenced:
             path.unlink()
     save_xml(models/'model.sdf',sdf)
     config=ET.Element('model');element(config,'name','corda_campus');element(config,'version','1.0')
@@ -134,7 +134,9 @@ def generate(output):
         'model_spawn_z_m':pad_top+.28,'world_ground_altitude_m':origin['ground_altitude_m'],
         'yaw_rad':launch['yaw_rad'],'synthetic_level_platform':True}
     report['input_sha256']={str(p.relative_to(SOURCE)):hashlib.sha256(p.read_bytes()).hexdigest()
-                           for p in [SOURCE/'site.json',SOURCE/'gui.config.in',SOURCE/'SOURCES.md',SOURCE/'data/buildings.geojson',SOURCE/'data/heights.json',SOURCE/'data/landmarks.geojson',SOURCE/'data/reference-requests.json']}
+                           for p in [SOURCE/'site.json',SOURCE/'gui.config.in',SOURCE/'SOURCES.md',SOURCE/'data/buildings.geojson',SOURCE/'data/heights.json',SOURCE/'data/landmarks.geojson',SOURCE/'data/reference-requests.json',SOURCE/'data/landscape.json']}
+    from overview import export_overview
+    export_overview(models/'model.sdf', report, output/'campus-map.json')
     (output/'campus.json').write_text(json.dumps(report,indent=2)+'\n')
     (output/'campus.env').write_text('# Generated; metres ENU, z above flat campus ground.\n'+
         f'export PX4_GZ_MODEL_POSE="{x},{y},{pad_top+.28:.6f},0,0,{launch["yaw_rad"]}"\n')
