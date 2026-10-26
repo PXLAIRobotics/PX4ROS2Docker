@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 set -eo pipefail
+# Docker's --group-add preserves host device/socket permissions, but numeric
+# supplementary groups may not exist in this image's /etc/group. Name them
+# before starting shells (Ubuntu's bashrc invokes groups).
+for gid in $(id -G); do
+    if ! getent group "$gid" >/dev/null; then
+        group_name="host-group-$gid"
+        while getent group "$group_name" >/dev/null; do
+            group_name="${group_name}-extra"
+        done
+        sudo -n groupadd --gid "$gid" "$group_name"
+    fi
+done
 export ROS_DOMAIN_ID="${ROS_DOMAIN_ID:-0}"
 export RMW_IMPLEMENTATION="${RMW_IMPLEMENTATION:-rmw_fastrtps_cpp}"
 export GZ_DISTRO=harmonic
