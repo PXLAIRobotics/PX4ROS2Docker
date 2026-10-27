@@ -67,7 +67,7 @@ tmux set-option -t "$session" remain-on-exit on
 tmux pipe-pane -o -t "$session:agent" "cat >> '$run_dir/agent.log'"
 # Start the world/vehicle first; attaching the GUI afterward avoids an initial
 # empty scene snapshot and keeps GUI diagnostics in their own pane/log.
-sim_command='start_px4_sitl --headless'
+sim_command='source /opt/ros/jazzy/setup.bash && source "$HOME/Projects/ros2_workspace/install/setup.bash" && exec start_px4_sitl --headless'
 if (( !headless )); then sim_command+=' --console'; fi
 tmux new-window -t "$session" -n sitl "exec bash -lc '$sim_command'"
 tmux set-option -t "$session:sitl" remain-on-exit on
@@ -78,7 +78,7 @@ for window in agent sitl; do
     [[ $(tmux display-message -p -t "$session:$window" '#{pane_dead}') == 0 ]] || { echo "$window exited" >&2; exit 1; }
 done
 if [[ $PX4_SENSOR_SUITE == rgbd_lidar ]]; then
-    tmux new-window -t "$session" -n sensors 'exec bash -lc "ros2 launch px4_dev_examples sensors.launch.py"'
+    tmux new-window -t "$session" -n sensors 'exec bash -lc '\''source /opt/ros/jazzy/setup.bash && source "$HOME/Projects/ros2_workspace/install/setup.bash" && exec ros2 launch px4_dev_examples sensors.launch.py'\'''
     tmux set-option -t "$session:sensors" remain-on-exit on
     tmux pipe-pane -o -t "$session:sensors" "cat >> '$run_dir/sensors.log'"
     ros2 run px4_dev_examples sensor_check --timeout 45 > "$run_dir/sensor-check.json"
