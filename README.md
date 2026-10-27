@@ -118,7 +118,7 @@ The default run is foreground and `--rm`: stopping it removes the container, pre
 
 ## Corda flight cockpit
 
-The optional native PyQt5/ROS 2 cockpit provides live RGB video, vehicle status, keyboard flight, speed selection and an interactive campus map. The launcher is in this repository; the application is installed separately into the persistent `px4-uav-cockpit` Docker volume. A fresh volume is empty.
+The optional native PyQt5/ROS 2 cockpit provides live RGB video, vehicle status, keyboard flight, speed selection and an interactive campus map. The launcher is in this repository; the application is installed into the persistent `px4-uav-cockpit` Docker volume. A fresh volume is empty. Put `UAVCockpit.tar.gz` in the host repository's `Data` directory and run `~/bin/start-px4-cockpit.sh --check` inside the container to extract it automatically into `~/.local/share/uav-cockpit` (or `UAV_COCKPIT_DIR`, if set) when `cockpit.py` is missing. The archive must contain `cockpit.py` at its root. An existing installation is left untouched.
 
 Obtain the 26 October 2026 student bundle (`uav-cockpit-2026-10-26.tar.gz`) and its SHA-256 checksum from your instructor. Release archives are shared separately and kept out of Git; the instructor’s local copy is in the ignored `Data/releases` directory. It contains the latest saved cockpit source, including the map-drag fix, a launcher copy, control/map checks, attribution and `INSTALL.md`. It uses this repository's image and built ROS workspace; Docker images, PX4 sources and build outputs are separate. See [release details](docs/cockpit-release.md).
 

@@ -6,15 +6,32 @@ case "${1:-}" in
         echo 'Usage: start-px4-cockpit.sh [--check]'
         echo 'Open the local PX4 simulator cockpit. Start start-px4-corda-simulation.sh first.'
         echo 'Application: ${UAV_COCKPIT_DIR:-$HOME/.local/share/uav-cockpit}'
+        echo 'If missing, install automatically from ~/Data/UAVCockpit.tar.gz.'
         exit 0 ;;
     --check|'') ;;
     *) echo 'Usage: start-px4-cockpit.sh [--check]' >&2; exit 2 ;;
 esac
 if (( $# > 1 )); then echo 'Usage: start-px4-cockpit.sh [--check]' >&2; exit 2; fi
 app_dir=${UAV_COCKPIT_DIR:-$HOME/.local/share/uav-cockpit}
+archive="$HOME/Data/UAVCockpit.tar.gz"
+if [[ ! -f "$app_dir/cockpit.py" && -f "$archive" ]]; then
+    # Check the extracted bundle before copying into the persistent installation.
+    (
+        staging_dir=$(mktemp -d)
+        trap 'rm -rf "$staging_dir"' EXIT
+        tar -xzf "$archive" -C "$staging_dir"
+        [[ -f "$staging_dir/cockpit.py" ]] || {
+            echo "Cockpit archive does not contain cockpit.py at its root: $archive" >&2
+            exit 1
+        }
+        mkdir -p "$app_dir"
+        cp -a "$staging_dir/." "$app_dir/"
+    )
+    echo "Installed cockpit from $archive into $app_dir"
+fi
 [[ -f "$app_dir/cockpit.py" ]] || {
     echo "Cockpit is not installed at $app_dir/cockpit.py" >&2
-    echo 'Attach the px4-uav-cockpit Docker volume, or set UAV_COCKPIT_DIR to your external installation.' >&2
+    echo 'Put UAVCockpit.tar.gz in ~/Data, attach the px4-uav-cockpit Docker volume, or set UAV_COCKPIT_DIR to your external installation.' >&2
     exit 1
 }
 source /opt/ros/jazzy/setup.bash
