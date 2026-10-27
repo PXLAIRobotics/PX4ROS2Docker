@@ -25,6 +25,15 @@ if [[ ! -f "$app_dir/cockpit.py" && -f "$archive" ]]; then
             exit 1
         }
         mkdir -p "$app_dir"
+        # Docker creates an empty named volume as root on its first mount.
+        # Repair only the standard volume directory, not an external install.
+        if [[ ! -w "$app_dir" && "$app_dir" == "$HOME/.local/share/uav-cockpit" && $(stat -c %u "$app_dir") == 0 ]]; then
+            sudo -n chown -- "$(id -u):$(id -g)" "$app_dir"
+        fi
+        [[ -w "$app_dir" ]] || {
+            echo "Cockpit installation directory is not writable: $app_dir" >&2
+            exit 1
+        }
         cp -a "$staging_dir/." "$app_dir/"
     )
     echo "Installed cockpit from $archive into $app_dir"
